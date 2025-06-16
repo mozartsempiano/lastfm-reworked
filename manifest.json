@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Last.fm Reworked",
+  "version": "1.0",
+  "description": "Altera o layout do site Last.fm.",
+  "permissions": ["storage", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["*://www.last.fm/*", "*://last.fm/*"],
+      "css": ["content.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
