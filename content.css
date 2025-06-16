@@ -1,3 +1,14 @@
+/* Quero fazer:
+2. Hide "Scrobble" count
+Esconde o número de scrobbles exibido em listas e perfis.
+9. Hide "Shoutbox" panel
+Mas para esconder shoutboxes no geral.
+
+
+Talvez:
+12. Compact mode
+Reduz espaços/paddings para mostrar mais conteúdo na tela. */
+
 @import url("variables.css");
 
 /* ========== RESET & BASE ========== */
@@ -36,7 +47,7 @@ h6 {
 }
 
 h1.header-new-title {
-  font-size: 42px !important;
+  font-size: 46px !important;
   font-weight: bold !important;
 }
 
@@ -91,7 +102,8 @@ h2,
   border-radius: var(--borda-arredondada) !important;
 }
 
-.cover-art img {
+.cover-art img,
+.personal-stats-listener-avatar img {
   border-radius: var(--borda-arredondada-menor) !important;
 }
 
@@ -259,8 +271,7 @@ body:not(.square-avatars) .user-list-avatar img {
 }
 
 .chartlist-row {
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
+  padding: 6px 10px 6px 0 !important;
   min-height: 0 !important;
 }
 
@@ -535,6 +546,10 @@ footer.footer,
 
 .big-artist-list-avatar-desktop img {
   border-radius: 0 !important;
+}
+
+.events-list-item-date-icon-day {
+  color: var(--cinza-claro);
 }
 
 /* ========== SEARCH ========== */
@@ -872,6 +887,23 @@ footer.footer,
 #stylerules {
   background-color: var(--cinza);
   color: var(--branco);
+}
+
+.wiki-author {
+  color: var(--cinza-claro);
+  border-top: 1px solid var(--cinza);
+  padding-top: 24px;
+}
+
+.factbox {
+  border: 1px solid var(--cinza);
+  border-radius: var(--borda-arredondada) !important;
+  padding: 12px 16px !important;
+}
+
+.wiki-content,
+.wiki-block-inner-2 {
+  text-align: justify;
 }
 
 /* ========== OBSESSIONS ========== */
