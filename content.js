@@ -1,8 +1,13 @@
 // Remove elementos de propaganda
 document.querySelectorAll(".advert, .ad").forEach((el) => el.remove());
 
+// Observers
 let chartlistObserver = null;
 let bodyObserver = null;
+
+// ===================
+// Funções de formatação e observação
+// ===================
 
 function formatArtistTrackRows() {
   const rows = document.getElementsByClassName("chartlist-row--with-artist chartlist-row");
@@ -24,43 +29,14 @@ function observeChartlist() {
   if (chartlist) {
     chartlistObserver = new MutationObserver(() => {
       formatArtistTrackRows();
-      // Reaplica esconder play/buy buttons, sidebar, ads conforme opções salvas
-      chrome.storage.local.get(
-        {
-          hidePlayButtons: null,
-          hideBuyButtons: null,
-          hideSidebarContent: null,
-          hideAds: null,
-        },
-        (localData) => {
-          setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-          setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-          setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-          setHideAds(localData.hideAds !== null ? localData.hideAds : true);
-        }
-      );
+      applyAllHides();
     });
     chartlistObserver.observe(chartlist, { childList: true, subtree: true });
     formatArtistTrackRows();
-    // Também aplica ao carregar
-    chrome.storage.local.get(
-      {
-        hidePlayButtons: null,
-        hideBuyButtons: null,
-        hideSidebarContent: null,
-        hideAds: null,
-      },
-      (localData) => {
-        setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-        setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-        setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-        setHideAds(localData.hideAds !== null ? localData.hideAds : true);
-      }
-    );
+    applyAllHides();
   }
 }
 
-// Observa o body para detectar quando .chartlist aparece
 function observeBodyForChartlist() {
   if (bodyObserver) bodyObserver.disconnect();
   bodyObserver = new MutationObserver(() => {
@@ -74,27 +50,17 @@ function observeBodyForChartlist() {
 function onPageChange() {
   observeChartlist();
   observeBodyForChartlist();
+  observeSecondaryNav();
 }
 
-// Intercepta pushState e replaceState
-["pushState", "replaceState"].forEach((type) => {
-  const orig = history[type];
-  history[type] = function () {
-    orig.apply(this, arguments);
-    onPageChange();
-  };
-});
-window.addEventListener("popstate", onPageChange);
+// ===================
+// Funções de configuração visual
+// ===================
 
-// Roda ao carregar
-onPageChange();
-
-// Função para alternar avatares quadrados
 function setSquareAvatars(enabled) {
   document.body.classList.toggle("square-avatars", enabled);
 }
 
-// Função para alternar bordas arredondadas
 function setRoundedBorders(enabled) {
   document.body.classList.toggle("no-radius", !enabled);
 }
@@ -102,52 +68,6 @@ function setRoundedBorders(enabled) {
 function setCircularAvatars(enabled) {
   document.body.classList.toggle("circular-avatars", enabled);
 }
-
-// Primeiro tenta carregar do local, se não achar, tenta do sync
-chrome.storage.local.get(
-  {
-    roundedBorders: null,
-    squareAvatars: null,
-    hidePlayButtons: null,
-    hideBuyButtons: null,
-    hideSidebarContent: null,
-    hideAds: null,
-  },
-  (localData) => {
-    setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
-    setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : false);
-    setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-    setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-    setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-    setHideAds(localData.hideAds !== null ? localData.hideAds : true);
-    setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
-    setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
-    setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
-    setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
-    setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
-    setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
-    setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
-    setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
-  }
-);
-
-// Escuta mensagens do popup normalmente
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === "setSquareAvatars") setSquareAvatars(msg.enabled);
-  if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
-  if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
-  if (msg.type === "setHideBuyButtons") setHideBuyButtons(msg.enabled);
-  if (msg.type === "setHideSidebarContent") setHideSidebarContent(msg.enabled);
-  if (msg.type === "setHideAds") setHideAds(msg.enabled);
-  if (msg.type === "setHideNavReports") setHideNavReports(msg.enabled);
-  if (msg.type === "setHideNavPlaylists") setHideNavPlaylists(msg.enabled);
-  if (msg.type === "setHideNavLoved") setHideNavLoved(msg.enabled);
-  if (msg.type === "setHideNavObsessions") setHideNavObsessions(msg.enabled);
-  if (msg.type === "setHideNavEvents") setHideNavEvents(msg.enabled);
-  if (msg.type === "setHideNavNeighbours") setHideNavNeighbours(msg.enabled);
-  if (msg.type === "setHideNavTags") setHideNavTags(msg.enabled);
-  if (msg.type === "setHideNavShouts") setHideNavShouts(msg.enabled);
-});
 
 function setHidePlayButtons(enabled) {
   document.querySelectorAll("table td.chartlist-play").forEach((el) => {
@@ -177,12 +97,57 @@ function setHideAds(enabled) {
     });
 }
 
+function setHideActions(enabled) {
+  document.querySelectorAll(".header-new-actions").forEach((el) => {
+    el.style.display = enabled ? "none" : "";
+  });
+  document.querySelectorAll(".header-metadata-tnew").forEach((el) => {
+    el.style.margin = enabled ? "0" : "";
+  });
+}
+
+function setLargerStats(enabled) {
+  document.querySelectorAll(".header-metadata-tnew-title").forEach((el) => {
+    el.style.fontSize = enabled ? "16px" : "";
+    el.style.gap = enabled ? "8px" : "";
+  });
+  document.querySelectorAll(".header-metadata-tnew-display").forEach((el) => {
+    el.style.fontSize = enabled ? "32px" : "";
+    el.style.marginTop = enabled ? "8px" : "";
+  });
+}
+
+function setUseHelvetica(enabled) {
+  document.body.classList.toggle("use-helvetica", enabled);
+}
+
+function setCompactMode(enabled) {
+  document.body.classList.toggle("compact-mode", enabled);
+}
+
+function setUseSofterRed(enabled) {
+  const root = document.documentElement;
+  if (enabled) {
+    root.style.setProperty("--vermelho", "#BE3144");
+    root.style.setProperty("--vermelho-escuro", "#872341");
+  } else {
+    root.style.setProperty("--vermelho", "#ba0000");
+    root.style.setProperty("--vermelho-escuro", "#8e0000");
+  }
+}
+
+function setCompactTags(enabled) {
+  document.body.classList.toggle("compact-tags", enabled);
+}
+
+// ===================
+// Funções de navegação (navbar)
+// ===================
+
 function hideNavItemByHref(hrefEndsWith, enabled) {
-  // Navbar principal
   document.querySelectorAll(`.secondary-nav a[href$="${hrefEndsWith}"]`).forEach((a) => {
     if (a.closest("li")) a.closest("li").style.display = enabled ? "none" : "";
   });
-  // Menu More...
   document.querySelectorAll(`.navlist-hidden-list a[href$="${hrefEndsWith}"]`).forEach((a) => {
     if (a.closest("li")) a.closest("li").style.display = enabled ? "none" : "";
   });
@@ -221,6 +186,14 @@ function setHideNavShouts(enabled) {
   updateMoreButtonVisibility();
 }
 
+function updateMoreButtonVisibility() {
+  const hiddenList = document.querySelector(".navlist-hidden-list");
+  const moreButton = document.querySelector(".navlist-more");
+  if (!hiddenList || !moreButton) return;
+  const hasVisible = Array.from(hiddenList.querySelectorAll("li")).some((li) => li.style.display !== "none");
+  moreButton.style.display = hasVisible ? "" : "none";
+}
+
 function applyAllNavHides() {
   chrome.storage.local.get(
     {
@@ -253,25 +226,123 @@ function observeSecondaryNav() {
     applyAllNavHides();
   });
   navObserver.observe(nav, { childList: true, subtree: true });
-  // Aplica imediatamente ao iniciar
   applyAllNavHides();
 }
 
-// Chame observeSecondaryNav() sempre que a página mudar:
-onPageChange();
-observeSecondaryNav();
+// ===================
+// Função para aplicar todas as hides principais
+// ===================
 
-function updateMoreButtonVisibility() {
-  // Seleciona a lista de itens ocultos
-  const hiddenList = document.querySelector(".navlist-hidden-list");
-  const moreButton = document.querySelector(".navlist-more");
-  if (!hiddenList || !moreButton) return;
-
-  // Verifica se há pelo menos um <li> visível
-  const hasVisible = Array.from(hiddenList.querySelectorAll("li")).some((li) => li.style.display !== "none");
-
-  // Esconde o botão se não houver itens visíveis
-  moreButton.style.display = hasVisible ? "" : "none";
+function applyAllHides() {
+  chrome.storage.local.get(
+    {
+      hidePlayButtons: null,
+      hideBuyButtons: null,
+      hideSidebarContent: null,
+      hideAds: null,
+    },
+    (localData) => {
+      setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
+      setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+      setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
+      setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+    }
+  );
 }
 
-// setInterval(updateMoreButtonVisibility, 500);
+// ===================
+// Carregar configurações ao iniciar
+// ===================
+
+chrome.storage.local.get(
+  {
+    roundedBorders: null,
+    squareAvatars: null,
+    hidePlayButtons: null,
+    hideBuyButtons: null,
+    hideSidebarContent: null,
+    hideAds: null,
+    hideNavReports: null,
+    hideNavPlaylists: null,
+    hideNavLoved: null,
+    hideNavObsessions: null,
+    hideNavEvents: null,
+    hideNavNeighbours: null,
+    hideNavTags: null,
+    hideNavShouts: null,
+    hideActions: null,
+    largerStats: null,
+    useHelvetica: null,
+    compactMode: null,
+    useSofterRed: null,
+    compactTags: null,
+  },
+  (localData) => {
+    setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
+    setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
+    setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
+    setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+    setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
+    setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+    setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
+    setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
+    setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
+    setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
+    setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
+    setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
+    setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
+    setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
+    setHideActions(localData.hideActions !== null ? localData.hideActions : false);
+    setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
+    setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
+    setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
+    setUseSofterRed(localData.useSofterRed !== null ? localData.useSofterRed : true);
+    setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
+  }
+);
+
+// ===================
+// Listeners de mensagens do popup
+// ===================
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.type === "setSquareAvatars") setSquareAvatars(msg.enabled);
+  if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
+  if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
+  if (msg.type === "setHideBuyButtons") setHideBuyButtons(msg.enabled);
+  if (msg.type === "setHideSidebarContent") setHideSidebarContent(msg.enabled);
+  if (msg.type === "setHideAds") setHideAds(msg.enabled);
+  if (msg.type === "setHideNavReports") setHideNavReports(msg.enabled);
+  if (msg.type === "setHideNavPlaylists") setHideNavPlaylists(msg.enabled);
+  if (msg.type === "setHideNavLoved") setHideNavLoved(msg.enabled);
+  if (msg.type === "setHideNavObsessions") setHideNavObsessions(msg.enabled);
+  if (msg.type === "setHideNavEvents") setHideNavEvents(msg.enabled);
+  if (msg.type === "setHideNavNeighbours") setHideNavNeighbours(msg.enabled);
+  if (msg.type === "setHideNavTags") setHideNavTags(msg.enabled);
+  if (msg.type === "setHideNavShouts") setHideNavShouts(msg.enabled);
+  if (msg.type === "setHideActions") setHideActions(msg.enabled);
+  if (msg.type === "setLargerStats") setLargerStats(msg.enabled);
+  if (msg.type === "setUseHelvetica") setUseHelvetica(msg.enabled);
+  if (msg.type === "setCompactMode") setCompactMode(msg.enabled);
+  if (msg.type === "setUseSofterRed") setUseSofterRed(msg.enabled);
+  if (msg.type === "setCompactTags") setCompactTags(msg.enabled);
+});
+
+// ===================
+// Intercepta pushState e replaceState
+// ===================
+
+["pushState", "replaceState"].forEach((type) => {
+  const orig = history[type];
+  history[type] = function () {
+    orig.apply(this, arguments);
+    onPageChange();
+  };
+});
+window.addEventListener("popstate", onPageChange);
+
+// ===================
+// Inicialização
+// ===================
+
+onPageChange();

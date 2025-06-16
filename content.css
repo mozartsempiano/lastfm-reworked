@@ -16,8 +16,14 @@ Reduz espaços/paddings para mostrar mais conteúdo na tela. */
 *::before,
 *::after {
   transition: background-color 0.3s ease, color 0.3s ease !important;
-  font-family: Helvetica, sans-serif !important;
+  /* font-family: Helvetica, sans-serif !important; */
   border-color: var(--cinza) !important;
+}
+
+.use-helvetica *,
+.use-helvetica *::before,
+.use-helvetica *::after {
+  font-family: Helvetica, sans-serif !important;
 }
 
 body {
@@ -117,7 +123,8 @@ h2,
 .no-radius textarea,
 .no-radius input,
 .no-radius select,
-.no-radius textarea.js-shout-input {
+.no-radius textarea.js-shout-input,
+.no-radius .chartlist-count-bar-slug {
   border-radius: 0 !important;
 }
 
@@ -127,6 +134,7 @@ h2,
 
 /* ========== BUTTONS ========== */
 .btn-primary {
+  background-color: var(--vermelho) !important;
   padding: 8px 16px !important;
   border: 1px solid var(--cinza) !important;
   border-radius: var(--borda-arredondada) !important;
@@ -270,9 +278,13 @@ body:not(.square-avatars) .user-list-avatar img {
   margin-bottom: inherit !important;
 }
 
-.chartlist-row {
+/* .chartlist-row {
   padding: 6px 10px 6px 0 !important;
   min-height: 0 !important;
+} */
+
+.compact-mode .chartlist-row {
+  padding: 6px 10px 6px 0 !important;
 }
 
 .chartlist-row--highlight,
@@ -552,6 +564,63 @@ footer.footer,
   color: var(--cinza-claro);
 }
 
+.header-new-info-desktop button {
+  background-color: var(--branco);
+  /* border: 1px solid var(--branco); */
+  border-radius: var(--borda-arredondada);
+}
+
+.compact-tags .catalogue-tags .tag a,
+.compact-tags .catalogue-tags .tags-add,
+.compact-tags .catalogue-tags .tags-add-cta {
+  border-radius: var(--borda-arredondada);
+  box-shadow: inset 0 0 0 0px var(--cinza-claro);
+  padding: 5px 5px 6px;
+}
+
+.compact-tags .catalogue-tags .tag a,
+.compact-tags .catalogue-tags .tags-add-cta,
+.compact-tags .catalogue-tags .tags-view-all {
+  letter-spacing: 0;
+  text-transform: lowercase;
+  font-size: 13px;
+}
+
+.compact-tags .catalogue-tags .tag a,
+.compact-tags .tags,
+.compact-tags .catalogue-tags .tags-view-all {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.25s ease !important;
+}
+
+.compact-tags .catalogue-tags .tag a:hover,
+.compact-tags .catalogue-tags .tags-add:hover,
+.compact-tags .catalogue-tags .tags-add-cta:hover,
+.compact-tags .tags:hover,
+.compact-tags .catalogue-tags .tags-view-all:hover {
+  border-radius: var(--borda-arredondada);
+  box-shadow: inset 0 0 0 0 var(--cinza-claro) !important;
+  text-decoration-color: currentColor;
+}
+
+.compact-tags .tag:nth-child(n + 2)::before {
+  content: " ·";
+  font-weight: 400;
+  margin-right: 0.25em;
+  color: var(--branco) !important;
+  filter: none !important;
+}
+
+/* Preview de vídeos */
+.track-overview-new .video-preview,
+.album-overview-cover-art {
+  box-shadow: none;
+}
+.track-overview-video-column .video-preview-playlink {
+  border-radius: var(--borda-arredondada);
+}
+
 /* ========== SEARCH ========== */
 .artist-result-heading,
 .album-result-heading {
@@ -765,6 +834,15 @@ footer.footer,
   color: var(--cinza);
 }
 
+.secondary-nav-item-link--active::after,
+a.secondary-nav-item-link:focus::after,
+a.secondary-nav-item-link:hover::after {
+  background-color: var(--vermelho) !important;
+  content: "";
+  display: block;
+  position: absolute;
+  /* width: 100%; */
+}
 /* ========== SIMILAR ARTISTS ========== */
 .similar-artists-item-name {
   color: var(--branco);
@@ -1141,7 +1219,7 @@ tspan {
 }
 
 .listening-report-promo-date {
-  color: var(--vermelho-escuro);
+  color: var(--vermelho);
 }
 
 .listening-report-promo-date::after {

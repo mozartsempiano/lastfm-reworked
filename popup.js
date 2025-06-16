@@ -13,6 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const hideNavNeighbours = document.getElementById("hideNavNeighbours");
   const hideNavTags = document.getElementById("hideNavTags");
   const hideNavShouts = document.getElementById("hideNavShouts");
+  const hideActions = document.getElementById("hideActions");
+  const largerStats = document.getElementById("largerStats");
+  const useHelvetica = document.getElementById("useHelvetica");
+  const compactMode = document.getElementById("compactMode");
+  const useSofterRed = document.getElementById("useSofterRed");
+  const compactTags = document.getElementById("compactTags");
 
   chrome.storage.local.get(
     {
@@ -30,10 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavNeighbours: null,
       hideNavTags: null,
       hideNavShouts: null,
+      hideActions: null,
+      largerStats: null,
+      useHelvetica: null,
+      compactMode: null,
+      useSofterRed: null,
+      compactTags: null,
     },
     (localData) => {
       roundedCheckbox.checked = localData.roundedBorders !== null ? localData.roundedBorders : true;
-      squareCheckbox.checked = localData.squareAvatars !== null ? localData.squareAvatars : false;
+      squareCheckbox.checked = localData.squareAvatars !== null ? localData.squareAvatars : true;
       hidePlayButtons.checked = localData.hidePlayButtons !== null ? localData.hidePlayButtons : true;
       hideBuyButtons.checked = localData.hideBuyButtons !== null ? localData.hideBuyButtons : true;
       hideSidebarContent.checked = localData.hideSidebarContent !== null ? localData.hideSidebarContent : true;
@@ -46,6 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavNeighbours.checked = localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false;
       hideNavTags.checked = localData.hideNavTags !== null ? localData.hideNavTags : false;
       hideNavShouts.checked = localData.hideNavShouts !== null ? localData.hideNavShouts : false;
+      hideActions.checked = localData.hideActions !== null ? localData.hideActions : false;
+      largerStats.checked = localData.largerStats !== null ? localData.largerStats : false;
+      useHelvetica.checked = localData.useHelvetica !== null ? localData.useHelvetica : true;
+      compactMode.checked = localData.compactMode !== null ? localData.compactMode : true;
+      useSofterRed.checked = localData.useSofterRed !== null ? localData.useSofterRed : true;
+      compactTags.checked = localData.compactTags !== null ? localData.compactTags : true;
     }
   );
 
@@ -66,6 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavNeighbours: hideNavNeighbours.checked,
       hideNavTags: hideNavTags.checked,
       hideNavShouts: hideNavShouts.checked,
+      hideActions: hideActions.checked,
+      largerStats: largerStats.checked,
+      useHelvetica: useHelvetica.checked,
+      compactMode: compactMode.checked,
+      useSofterRed: useSofterRed.checked,
+      compactTags: compactTags.checked,
     };
     console.log("Options data:", data);
     chrome.storage.local.set(data);
@@ -129,6 +153,30 @@ document.addEventListener("DOMContentLoaded", () => {
           type: "setHideNavShouts",
           enabled: hideNavShouts.checked,
         });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setHideActions",
+          enabled: hideActions.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setLargerStats",
+          enabled: largerStats.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setUseHelvetica",
+          enabled: useHelvetica.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setCompactMode",
+          enabled: compactMode.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setUseSofterRed",
+          enabled: useSofterRed.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setCompactTags",
+          enabled: compactTags.checked,
+        });
       }
     });
   }
@@ -147,4 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
   hideNavNeighbours.addEventListener("change", saveOptions);
   hideNavTags.addEventListener("change", saveOptions);
   hideNavShouts.addEventListener("change", saveOptions);
+  hideActions.addEventListener("change", saveOptions);
+  largerStats.addEventListener("change", saveOptions);
+  useHelvetica.addEventListener("change", saveOptions);
+  compactMode.addEventListener("change", saveOptions);
+  useSofterRed.addEventListener("change", saveOptions);
+  compactTags.addEventListener("change", saveOptions);
 });
