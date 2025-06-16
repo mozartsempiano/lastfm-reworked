@@ -1,4 +1,27 @@
-// Remove elementos de propaganda
+const defaultSettings = {
+  roundedBorders: true,
+  squareAvatars: true,
+  hidePlayButtons: true,
+  hideBuyButtons: true,
+  hideSidebarContent: true,
+  hideAds: true,
+  hideNavReports: false,
+  hideNavPlaylists: false,
+  hideNavLoved: false,
+  hideNavObsessions: false,
+  hideNavEvents: false,
+  hideNavNeighbours: false,
+  hideNavTags: false,
+  hideNavShouts: false,
+  hideActions: false,
+  largerStats: false,
+  useHelvetica: true,
+  compactMode: true,
+  compactTags: true,
+  mainColor: "default",
+};
+
+// Remove ad elements
 document.querySelectorAll(".advert, .ad").forEach((el) => el.remove());
 
 // Observers
@@ -6,7 +29,7 @@ let chartlistObserver = null;
 let bodyObserver = null;
 
 // ===================
-// Funções de formatação e observação
+// Formatting and observation functions
 // ===================
 
 function formatArtistTrackRows() {
@@ -54,7 +77,7 @@ function onPageChange() {
 }
 
 // ===================
-// Funções de configuração visual
+// Visual configuration functions
 // ===================
 
 function setSquareAvatars(enabled) {
@@ -109,11 +132,17 @@ function setHideActions(enabled) {
 function setLargerStats(enabled) {
   document.querySelectorAll(".header-metadata-tnew-title").forEach((el) => {
     el.style.fontSize = enabled ? "16px" : "";
-    el.style.gap = enabled ? "8px" : "";
+    // el.style.gap = enabled ? "8px" : "";
   });
   document.querySelectorAll(".header-metadata-tnew-display").forEach((el) => {
     el.style.fontSize = enabled ? "32px" : "";
     el.style.marginTop = enabled ? "8px" : "";
+  });
+  document.querySelectorAll(".header-metadata-tnew-item").forEach((el) => {
+    el.style.marginBottom = enabled ? "21px" : "";
+  });
+  document.querySelectorAll(".header-metadata-tnew").forEach((el) => {
+    el.style.gap = enabled ? "16px" : "";
   });
 }
 
@@ -125,14 +154,21 @@ function setCompactMode(enabled) {
   document.body.classList.toggle("compact-mode", enabled);
 }
 
-function setUseSofterRed(enabled) {
+function setMainColor(value) {
   const root = document.documentElement;
-  if (enabled) {
-    root.style.setProperty("--vermelho", "#BE3144");
-    root.style.setProperty("--vermelho-escuro", "#872341");
-  } else {
-    root.style.setProperty("--vermelho", "#ba0000");
-    root.style.setProperty("--vermelho-escuro", "#8e0000");
+  switch (value) {
+    case "softer-red":
+      root.style.setProperty("--red", "#BE3144");
+      root.style.setProperty("--red-dark", "#872341");
+      break;
+    case "blue":
+      root.style.setProperty("--red", "#5C809E");
+      root.style.setProperty("--red-dark", "#3282B8");
+      break;
+    default: // Default
+      root.style.setProperty("--red", "#BA0000");
+      root.style.setProperty("--red-dark", "#8E0000");
+      break;
   }
 }
 
@@ -141,7 +177,7 @@ function setCompactTags(enabled) {
 }
 
 // ===================
-// Funções de navegação (navbar)
+// Navigation functions (navbar)
 // ===================
 
 function hideNavItemByHref(hrefEndsWith, enabled) {
@@ -230,7 +266,7 @@ function observeSecondaryNav() {
 }
 
 // ===================
-// Função para aplicar todas as hides principais
+// Function to apply all main hides
 // ===================
 
 function applyAllHides() {
@@ -251,61 +287,61 @@ function applyAllHides() {
 }
 
 // ===================
-// Carregar configurações ao iniciar
+// Load settings on startup
 // ===================
 
-chrome.storage.local.get(
-  {
-    roundedBorders: null,
-    squareAvatars: null,
-    hidePlayButtons: null,
-    hideBuyButtons: null,
-    hideSidebarContent: null,
-    hideAds: null,
-    hideNavReports: null,
-    hideNavPlaylists: null,
-    hideNavLoved: null,
-    hideNavObsessions: null,
-    hideNavEvents: null,
-    hideNavNeighbours: null,
-    hideNavTags: null,
-    hideNavShouts: null,
-    hideActions: null,
-    largerStats: null,
-    useHelvetica: null,
-    compactMode: null,
-    useSofterRed: null,
-    compactTags: null,
-  },
-  (localData) => {
-    setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
-    setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
-    setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-    setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-    setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-    setHideAds(localData.hideAds !== null ? localData.hideAds : true);
-    setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
-    setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
-    setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
-    setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
-    setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
-    setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
-    setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
-    setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
-    setHideActions(localData.hideActions !== null ? localData.hideActions : false);
-    setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
-    setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
-    setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
-    setUseSofterRed(localData.useSofterRed !== null ? localData.useSofterRed : true);
-    setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
-  }
-);
+// chrome.storage.local.get(
+//   {
+//     roundedBorders: null,
+//     squareAvatars: null,
+//     hidePlayButtons: null,
+//     hideBuyButtons: null,
+//     hideSidebarContent: null,
+//     hideAds: null,
+//     hideNavReports: null,
+//     hideNavPlaylists: null,
+//     hideNavLoved: null,
+//     hideNavObsessions: null,
+//     hideNavEvents: null,
+//     hideNavNeighbours: null,
+//     hideNavTags: null,
+//     hideNavShouts: null,
+//     hideActions: null,
+//     largerStats: null,
+//     useHelvetica: null,
+//     compactMode: null,
+//     compactTags: null,
+//     mainColor: "default",
+//   },
+//   (localData) => {
+//     setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
+//     setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
+//     setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
+//     setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+//     setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
+//     setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+//     setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
+//     setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
+//     setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
+//     setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
+//     setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
+//     setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
+//     setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
+//     setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
+//     setHideActions(localData.hideActions !== null ? localData.hideActions : false);
+//     setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
+//     setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
+//     setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
+//     setMainColor(localData.mainColor || "default");
+//     setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
+//   }
+// );
 
 // ===================
-// Listeners de mensagens do popup
+// Popup message listeners
 // ===================
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setSquareAvatars") setSquareAvatars(msg.enabled);
   if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
   if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
@@ -324,12 +360,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "setLargerStats") setLargerStats(msg.enabled);
   if (msg.type === "setUseHelvetica") setUseHelvetica(msg.enabled);
   if (msg.type === "setCompactMode") setCompactMode(msg.enabled);
-  if (msg.type === "setUseSofterRed") setUseSofterRed(msg.enabled);
+  if (msg.type === "setMainColor") setMainColor(msg.value);
   if (msg.type === "setCompactTags") setCompactTags(msg.enabled);
 });
 
 // ===================
-// Intercepta pushState e replaceState
+// Intercept pushState and replaceState
 // ===================
 
 ["pushState", "replaceState"].forEach((type) => {
@@ -342,7 +378,70 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 window.addEventListener("popstate", onPageChange);
 
 // ===================
-// Inicialização
+// Initialization
 // ===================
 
 onPageChange();
+
+// Function to reapply all settings
+function applyAllSettings() {
+  chrome.storage.local.get(
+    {
+      roundedBorders: null,
+      squareAvatars: null,
+      hidePlayButtons: null,
+      hideBuyButtons: null,
+      hideSidebarContent: null,
+      hideAds: null,
+      hideNavReports: null,
+      hideNavPlaylists: null,
+      hideNavLoved: null,
+      hideNavObsessions: null,
+      hideNavEvents: null,
+      hideNavNeighbours: null,
+      hideNavTags: null,
+      hideNavShouts: null,
+      hideActions: null,
+      largerStats: null,
+      useHelvetica: null,
+      compactMode: null,
+      compactTags: null,
+      mainColor: "default",
+    },
+    (localData) => {
+      setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
+      setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
+      setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
+      setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+      setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
+      setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+      setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
+      setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
+      setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
+      setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
+      setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
+      setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
+      setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
+      setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
+      setHideActions(localData.hideActions !== null ? localData.hideActions : false);
+      setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
+      setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
+      setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
+      setMainColor(localData.mainColor || "default");
+      setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
+    }
+  );
+}
+
+// Function to monitor DOM changes
+function observeDOMChanges() {
+  const observer = new MutationObserver(() => {
+    applyAllSettings(); // Reapply settings whenever the DOM changes
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// Initialization
+applyAllSettings(); // Apply settings when the page loads
+observeDOMChanges(); // Monitor DOM changes

@@ -5,186 +5,248 @@
     <title>Last.fm Reworked</title>
     <style>
       @import url("variables.css");
+
+      :root {
+        --gray-lighter: #aaa;
+        --light-blue: #13b0d4;
+      }
+
       body {
         font-family: Helvetica, sans-serif !important;
-        background: var(--preto);
-        color: var(--branco);
+        background: var(--black);
+        color: var(--white);
         margin: 0;
         padding: 0;
-        min-width: 320px;
-        word-break: break-word;
-        white-space: normal;
-        overflow-x: hidden;
+        width: 360px; /* Largura fixa para o popup */
+        overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+        overflow-x: hidden; /* Esconde a barra de rolagem horizontal */
+        box-sizing: border-box; /* Inclui padding no tamanho total */
+        cursor: default;
+        user-select: none;
       }
+
       .section {
-        padding: 16px 16px 0 16px;
+        margin: 16px 26px 0 16px; /* Espaço interno */
+        box-sizing: border-box; /* Inclui padding no tamanho total */
       }
+
       .section-title {
         font-size: 15px;
         font-weight: bold;
         margin-bottom: 8px;
         margin-top: 0;
-        color: var(--branco);
+        color: var(--white);
       }
+
       .option {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
       }
+
       .option label {
-        flex: 1;
-        cursor: pointer;
-        color: var(--branco);
+        display: flex;
+        justify-content: space-between; /* Alinha os elementos horizontalmente */
+        align-items: center;
+        width: 100%; /* Faz o label ocupar toda a linha */
+        padding: 4px 8px; /* Adiciona espaço interno para facilitar o clique */
+        cursor: pointer; /* Exibe o cursor pointer em toda a linha */
+        color: var(--gray-lighter);
         font-size: 14px;
-        margin-left: 8px;
       }
+
       .option input[type="checkbox"] {
-        accent-color: #ba0000;
-        width: 18px;
-        height: 18px;
+        margin-left: 12px; /* Espaço entre o texto e a checkbox */
+        flex-shrink: 0; /* Garante que a checkbox não encolha */
+        accent-color: var(--red);
       }
+
+      input[type="checkbox"],
+      select {
+        cursor: pointer;
+      }
+
+      select {
+        background-color: var(--black);
+        color: var(--white);
+        border: 1px solid var(--gray-lighter);
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+      select:hover {
+        background-color: var(--gray-light);
+      }
+
       hr {
         border: none;
         border-top: 1px solid #333;
         margin: 16px 0 0 0;
       }
-      .desc {
-        font-size: 12px;
-        color: #aaa;
-        margin-left: 26px;
-        margin-top: -8px;
-        margin-bottom: 8px;
-      }
+
       .footer {
         text-align: center;
-        padding: 16px;
+        margin: 16px;
         font-size: 12px;
         color: #aaa;
-        margin-bottom: 0;
       }
     </style>
   </head>
   <body>
-    <div class="section">
-      <div class="section-title">Appearance</div>
-      <div class="option">
-        <input type="checkbox" id="roundedBorders" checked />
-        <label for="roundedBorders">Rounded borders</label>
-      </div>
-      <!-- <div class="desc">
-        Deixa botões, capas e outros elementos com cantos arredondados.
-      </div> -->
-      <div class="option">
-        <input type="checkbox" id="squareAvatars" />
-        <label for="squareAvatars">Square avatars</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="useHelvetica" checked />
-        <label for="useHelvetica">Use Helvetica</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="compactMode" checked />
-        <label for="compactMode">Compact Mode</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="hideAds" checked />
-        <label for="hideAds">Hide ads</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="useSofterRed" />
-        <label for="useSofterRed">Use softer red</label>
-      </div>
-      </div>
-      <hr />
-
-      <!-- <div class="section-title">Options</div>
-      <div class="option">
-        <input type="checkbox" id="hideBuyButtons" checked />
-        <label for="hideBuyButtons">Hide buy buttons</label>
-      </div>
-      <hr /> -->
-
-    <div class="section">
-      <div class="section-title">User profile</div>
-      <div class="option">
-        <input type="checkbox" id="hidePlayButtons" checked />
-        <label for="hidePlayButtons">Hide Play buttons on Recent Tracks</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="hideBuyButtons" checked />
-        <label for="hideBuyButtons">Hide Buy buttons on Recent Tracks</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="hideSidebarContent" checked />
-        <label for="hideSidebarContent">Hide sidebar content</label>
-      </div>
+    <form>
+      <div class="section">
+        <div class="section-title">Appearance</div>
+        <div class="option">
+          <label for="roundedBorders">
+            Rounded borders
+            <input type="checkbox" id="roundedBorders" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="squareAvatars">
+            Square avatars
+            <input type="checkbox" id="squareAvatars" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="useHelvetica">
+            Use Helvetica
+            <input type="checkbox" id="useHelvetica" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="compactMode">
+            Compact Mode
+            <input type="checkbox" id="compactMode" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideAds">
+            Hide ads
+            <input type="checkbox" id="hideAds" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="mainColor">
+            Main color
+            <select id="mainColor">
+              <option value="default">Default</option>
+              <option value="softer-red">Softer Red</option>
+              <option value="blue">Blue</option>
+            </select>
+          </label>
+        </div>
       </div>
       <hr />
 
-    <div class="section">
-      <div class="section-title">Profile navbar</div>
-      <div class="option">
-        <input type="checkbox" id="hideNavReports" />
-        <label for="hideNavReports">Hide Reports</label>
+      <div class="section">
+        <div class="section-title">User profile</div>
+        <div class="option">
+          <label for="hidePlayButtons">
+            Hide Play buttons on Recent Tracks
+            <input type="checkbox" id="hidePlayButtons" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideBuyButtons">
+            Hide Buy buttons on Recent Tracks
+            <input type="checkbox" id="hideBuyButtons" checked />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideSidebarContent">
+            Hide sidebar content
+            <input type="checkbox" id="hideSidebarContent" checked />
+          </label>
+        </div>
       </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavPlaylists" />
-        <label for="hideNavPlaylists">Hide Playlists</label>
+      <hr />
+
+      <div class="section">
+        <div class="section-title">Profile navbar</div>
+        <div class="option">
+          <label for="hideNavReports">
+            Hide Reports
+            <input type="checkbox" id="hideNavReports" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavPlaylists">
+            Hide Playlists
+            <input type="checkbox" id="hideNavPlaylists" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavLoved">
+            Hide Loved Tracks
+            <input type="checkbox" id="hideNavLoved" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavObsessions">
+            Hide Obsessions
+            <input type="checkbox" id="hideNavObsessions" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavEvents">
+            Hide Events
+            <input type="checkbox" id="hideNavEvents" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavNeighbours">
+            Hide Neighbours
+            <input type="checkbox" id="hideNavNeighbours" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavTags">
+            Hide Tags
+            <input type="checkbox" id="hideNavTags" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideNavShouts">
+            Hide Shouts
+            <input type="checkbox" id="hideNavShouts" />
+          </label>
+        </div>
       </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavLoved" />
-        <label for="hideNavLoved">Hide Loved Tracks</label>
+      <hr />
+
+      <div class="section">
+        <div class="section-title">Artist, Album, and Track Pages</div>
+        <div class="option">
+          <label for="hideActions">
+            Hide Actions
+            <input type="checkbox" id="hideActions" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="largerStats">
+            Larger Stats
+            <input type="checkbox" id="largerStats" />
+          </label>
+        </div>
       </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavObsessions" />
-        <label for="hideNavObsessions">Hide Obsessions</label>
+      <hr />
+      <div class="section">
+        <div class="section-title">Tags</div>
+        <div class="option">
+          <label for="compactTags">
+            Compact Tags
+            <input type="checkbox" id="compactTags" />
+          </label>
+        </div>
       </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavEvents" />
-        <label for="hideNavEvents">Hide Events</label>
+      <hr />
+      <div class="section footer">
+        <div style="font-size: 12px">
+          Last.fm Reworked<br />
+          <a href="https://github.com/mozartsempiano/lastfm-reworked" target="_blank" style="color: var(--light-blue)">GitHub</a>
+        </div>
       </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavNeighbours" />
-        <label for="hideNavNeighbours">Hide Neighbours</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavTags" />
-        <label for="hideNavTags">Hide Tags</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="hideNavShouts" />
-        <label for="hideNavShouts">Hide Shouts</label>
-      </div>
-      </div>
-    </div>
-    <hr />
-    <div class="section">
-      <div class="section-title">Artist, Album, and Track Pages</div>
-      <div class="option">
-        <input type="checkbox" id="hideActions" />
-        <label for="hideActions">Hide Actions</label>
-      </div>
-      <div class="option">
-        <input type="checkbox" id="largerStats" />
-        <label for="largerStats">Larger Stats</label>
-      </div>
-    </div>
-    <hr />
-    <div class="section">
-      <div class="section-title">Tags</div>
-      <div class="option">
-        <input type="checkbox" id="compactTags" />
-        <label for="compactTags">Compact Tags</label>
-      </div>
-    </div>
-    <hr />
-    <div class="section footer">
-      <!-- <div class="section-title">Sobre</div> -->
-      <div style="font-size: 12px; color: #aaa">
-        Last.fm Reworked<br />
-        <a href="https://github.com/seuusuario/Lastfm-Reworked" target="_blank" style="color: #13b0d4">GitHub</a>
-      </div>
-    </div>
+    </form>
     <script src="popup.js"></script>
   </body>
 </html>

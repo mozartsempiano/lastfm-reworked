@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Last.fm Reworked",
   "version": "1.0",
-  "description": "Altera o layout do site Last.fm.",
+  "description": "Enhances the Last.fm layout and user interface.",
   "permissions": ["storage", "activeTab"],
   "content_scripts": [
     {

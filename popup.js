@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const largerStats = document.getElementById("largerStats");
   const useHelvetica = document.getElementById("useHelvetica");
   const compactMode = document.getElementById("compactMode");
-  const useSofterRed = document.getElementById("useSofterRed");
   const compactTags = document.getElementById("compactTags");
+  const mainColor = document.getElementById("mainColor");
 
   chrome.storage.local.get(
     {
@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
       largerStats: null,
       useHelvetica: null,
       compactMode: null,
-      useSofterRed: null,
       compactTags: null,
+      mainColor: "default",
     },
     (localData) => {
       roundedCheckbox.checked = localData.roundedBorders !== null ? localData.roundedBorders : true;
@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
       largerStats.checked = localData.largerStats !== null ? localData.largerStats : false;
       useHelvetica.checked = localData.useHelvetica !== null ? localData.useHelvetica : true;
       compactMode.checked = localData.compactMode !== null ? localData.compactMode : true;
-      useSofterRed.checked = localData.useSofterRed !== null ? localData.useSofterRed : true;
       compactTags.checked = localData.compactTags !== null ? localData.compactTags : true;
+      mainColor.value = localData.mainColor || "default";
     }
   );
 
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
       largerStats: largerStats.checked,
       useHelvetica: useHelvetica.checked,
       compactMode: compactMode.checked,
-      useSofterRed: useSofterRed.checked,
       compactTags: compactTags.checked,
+      mainColor: mainColor.value,
     };
     console.log("Options data:", data);
     chrome.storage.local.set(data);
@@ -170,12 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: compactMode.checked,
         });
         chrome.tabs.sendMessage(tabs[0].id, {
-          type: "setUseSofterRed",
-          enabled: useSofterRed.checked,
-        });
-        chrome.tabs.sendMessage(tabs[0].id, {
           type: "setCompactTags",
           enabled: compactTags.checked,
+        });
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setMainColor",
+          value: mainColor.value,
         });
       }
     });
@@ -199,6 +199,19 @@ document.addEventListener("DOMContentLoaded", () => {
   largerStats.addEventListener("change", saveOptions);
   useHelvetica.addEventListener("change", saveOptions);
   compactMode.addEventListener("change", saveOptions);
-  useSofterRed.addEventListener("change", saveOptions);
   compactTags.addEventListener("change", saveOptions);
+  mainColor.addEventListener("change", () => {
+    const data = {
+      mainColor: mainColor.value,
+    };
+    chrome.storage.local.set(data);
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          type: "setMainColor",
+          value: mainColor.value,
+        });
+      }
+    });
+  });
 });
