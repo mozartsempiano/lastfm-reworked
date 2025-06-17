@@ -96,6 +96,11 @@ function setHidePlayButtons(enabled) {
   document.querySelectorAll("table td.chartlist-play").forEach((el) => {
     el.style.display = enabled ? "none" : "";
   });
+
+  // Esconde as divs com id="tracks-play-all"
+  // document.querySelectorAll("#tracks-play-all").forEach((el) => {
+  //   el.style.display = enabled ? "none" : "";
+  // });
 }
 
 function setHideBuyButtons(enabled) {
@@ -438,7 +443,6 @@ function observeDOMChanges() {
   const observer = new MutationObserver(() => {
     applyAllSettings(); // Reapply settings whenever the DOM changes
   });
-
   observer.observe(document.body, { childList: true, subtree: true });
 }
 

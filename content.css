@@ -12,8 +12,7 @@ But to hide shoutboxes in general.
 *,
 *::before,
 *::after {
-  transition: background-color 0.3s ease, color 0.3s ease !important;
-  /* font-family: Helvetica, sans-serif !important; */
+  /* transition: background-color 0.3s ease, color 0.3s ease !important; */
   border-color: var(--gray) !important;
 }
 
@@ -140,6 +139,15 @@ textarea {
   border-radius: var(--borda-arredondada) !important;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: transparent !important;
+}
+
 textarea.js-shout-input {
   background-color: var(--gray-dark) !important;
   color: var(--white) !important;
@@ -167,15 +175,6 @@ textarea.js-shout-input {
   border-color: var(--red);
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-color: transparent !important;
-}
-
 .bulleted-list,
 .more-link {
   color: var(--gray-light) !important;
@@ -187,6 +186,16 @@ textarea:focus {
 
 .api-session::after {
   background: var(--gray);
+}
+
+.btn-shortcut {
+  border-color: var(--gray-light);
+  color: var(--white);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.btn-shortcut:hover {
+  color: var(--white) !important;
+  background-color: var(--gray);
 }
 
 /* ========== BUTTONS ========== */
@@ -380,6 +389,10 @@ table td.chartlist-buylinks {
 
 table tr:not(.chartlist-row--now-scrobbling):hover {
   background-color: var(--gray) !important;
+}
+
+.section-playlink {
+  color: var(--white);
 }
 
 /* ========== SIDEBAR ========== */
@@ -590,6 +603,18 @@ footer.footer,
   border-radius: var(--borda-arredondada);
 }
 
+/* Featured On */
+.album-and-lyrics-row {
+  padding: 20px 14px 10px 14px;
+  border: 1px solid var(--gray);
+  border-radius: var(--borda-arredondada);
+}
+/* X more albums featuring this track */
+.more-link-fullwidth-right {
+  /* text-align: left; */
+  margin-right: 26px;
+}
+
 .compact-tags .catalogue-tags .tag a,
 .compact-tags .catalogue-tags .tags-add,
 .compact-tags .catalogue-tags .tags-add-cta {
@@ -631,7 +656,78 @@ footer.footer,
   filter: none !important;
 }
 
-/* Preview de vídeos */
+.compact-tags .catalogue-tags .tag,
+.compact-tags .catalogue-tags .tags-add,
+.compact-tags .catalogue-tags .tags-add-cta {
+  margin-bottom: 0;
+  margin-left: 3px;
+}
+
+.compact-mode .header-new-info-desktop {
+  /* padding: 0 !important; */
+  margin-top: 24px !important;
+}
+
+.compact-mode .page-content {
+  padding-top: 25px;
+  padding-bottom: 16px;
+}
+
+.compact-mode .section-with-separator {
+  padding-bottom: 16px;
+}
+
+/* Similar artists section */
+.artist-similar-artists-sidebar-item-wrap {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.resource-external-link,
+.play-this-track-playlinks li {
+  color: var(--white);
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.resource-external-link:hover,
+.play-this-track-playlinks li:hover {
+  color: var(--gray-light);
+  text-decoration: none !important;
+}
+
+.compact-mode .resource-external-link,
+.compact-mode .play-this-track-playlink {
+  padding: 6px 0 7px 32px;
+  font-size: 12px;
+}
+
+.compact-mode .source-album,
+.compact-mode .source-album-nodata,
+.compact-mode .track-similar-tracks,
+.compact-mode .buffer-4\@sm {
+  margin-top: 14px;
+}
+
+/* .compact-mode .buffer-standard {
+  margin-top: 7px;
+} */
+
+/* Photos section on Artist page */
+.compact-mode .sidebar-image-list {
+  margin-top: 0;
+  margin-left: -2px;
+}
+.compact-mode .sidebar-image-list-item {
+  padding-left: 0;
+  padding-right: 0;
+}
+.compact-mode .sidebar-image-list-item {
+  margin-top: 7px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+/* Video preview */
 .track-overview-new .video-preview,
 .album-overview-cover-art {
   box-shadow: none;
@@ -812,13 +908,18 @@ footer.footer,
   color: var(--white);
 }
 
-.resource-external-link,
-.resource-external-link:hover {
+.shout-user a {
   color: var(--white);
 }
 
-.shout-user a {
-  color: var(--white);
+.shout-timestamp,
+.shout-permalink {
+  color: var(--gray-light) !important;
+  transition: color 0.2s ease !important;
+}
+.shout-timestamp:hover,
+.shout-permalink:hover {
+  color: var(--white) !important;
 }
 
 .chartlist-index {
@@ -847,6 +948,11 @@ footer.footer,
 .navlist-hidden-list {
   background-color: var(--gray);
   color: var(--white);
+}
+
+.navlist-hidden-list a {
+  color: var(--white);
+  /* padding: 13px 15px 14px; */
 }
 
 .dropdown-menu-clickable-item:hover {
