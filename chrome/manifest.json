@@ -1,9 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Last.fm Reworked",
   "version": "1.0",
   "description": "Enhances the Last.fm layout and user interface.",
   "permissions": ["storage", "activeTab"],
+  "host_permissions": ["*://www.last.fm/*", "*://last.fm/*"],
   "content_scripts": [
     {
       "matches": ["*://www.last.fm/*", "*://last.fm/*"],
@@ -11,13 +12,7 @@
       "js": ["content.js"]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
-  },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "lastfm-reworked@mozartsempiano",
-      "strict_min_version": "91.0"
-    }
   }
 }

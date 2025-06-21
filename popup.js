@@ -1,10 +1,12 @@
+const browserAPI = typeof chrome !== "undefined" ? chrome : browser;
+
 document.addEventListener("DOMContentLoaded", () => {
   const roundedCheckbox = document.getElementById("roundedBorders");
   const squareCheckbox = document.getElementById("squareAvatars");
   const hidePlayButtons = document.getElementById("hidePlayButtons");
   const hideBuyButtons = document.getElementById("hideBuyButtons");
   const hideSidebarContent = document.getElementById("hideSidebarContent");
-  const hideAds = document.getElementById("hideAds");
+  const hideUpsells = document.getElementById("hideUpsells");
   const hideNavReports = document.getElementById("hideNavReports");
   const hideNavPlaylists = document.getElementById("hideNavPlaylists");
   const hideNavLoved = document.getElementById("hideNavLoved");
@@ -20,14 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const compactTags = document.getElementById("compactTags");
   const mainColor = document.getElementById("mainColor");
 
-  chrome.storage.local.get(
+  browserAPI.storage.local.get(
     {
       roundedBorders: null,
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
       hideSidebarContent: null,
-      hideAds: null,
+      hideUpsells: null,
       hideNavReports: null,
       hideNavPlaylists: null,
       hideNavLoved: null,
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hidePlayButtons.checked = localData.hidePlayButtons !== null ? localData.hidePlayButtons : true;
       hideBuyButtons.checked = localData.hideBuyButtons !== null ? localData.hideBuyButtons : true;
       hideSidebarContent.checked = localData.hideSidebarContent !== null ? localData.hideSidebarContent : true;
-      hideAds.checked = localData.hideAds !== null ? localData.hideAds : true;
+      hideUpsells.checked = localData.hideUpsells !== null ? localData.hideUpsells : true;
       hideNavReports.checked = localData.hideNavReports !== null ? localData.hideNavReports : false;
       hideNavPlaylists.checked = localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false;
       hideNavLoved.checked = localData.hideNavLoved !== null ? localData.hideNavLoved : false;
@@ -75,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hidePlayButtons: hidePlayButtons.checked,
       hideBuyButtons: hideBuyButtons.checked,
       hideSidebarContent: hideSidebarContent.checked,
-      hideAds: hideAds.checked,
+      hideUpsells: hideUpsells.checked,
       hideNavReports: hideNavReports.checked,
       hideNavPlaylists: hideNavPlaylists.checked,
       hideNavLoved: hideNavLoved.checked,
@@ -92,88 +94,88 @@ document.addEventListener("DOMContentLoaded", () => {
       mainColor: mainColor.value,
     };
     console.log("Options data:", data);
-    chrome.storage.local.set(data);
-    chrome.storage.sync.set(data);
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    browserAPI.storage.local.set(data);
+    browserAPI.storage.sync.set(data);
+    browserAPI.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
         console.log("Sending messages to content script...");
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setRoundedBorders",
           enabled: roundedCheckbox.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setSquareAvatars",
           enabled: squareCheckbox.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHidePlayButtons",
           enabled: hidePlayButtons.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideBuyButtons",
           enabled: hideBuyButtons.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideSidebarContent",
           enabled: hideSidebarContent.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
-          type: "setHideAds",
-          enabled: hideAds.checked,
+        browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "sethideUpsells",
+          enabled: hideUpsells.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavReports",
           enabled: hideNavReports.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavPlaylists",
           enabled: hideNavPlaylists.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavLoved",
           enabled: hideNavLoved.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavObsessions",
           enabled: hideNavObsessions.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavEvents",
           enabled: hideNavEvents.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavNeighbours",
           enabled: hideNavNeighbours.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavTags",
           enabled: hideNavTags.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideNavShouts",
           enabled: hideNavShouts.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideActions",
           enabled: hideActions.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setLargerStats",
           enabled: largerStats.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setUseHelvetica",
           enabled: useHelvetica.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setCompactMode",
           enabled: compactMode.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setCompactTags",
           enabled: compactTags.checked,
         });
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setMainColor",
           value: mainColor.value,
         });
@@ -186,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
   hidePlayButtons.addEventListener("change", saveOptions);
   hideBuyButtons.addEventListener("change", saveOptions);
   hideSidebarContent.addEventListener("change", saveOptions);
-  hideAds.addEventListener("change", saveOptions);
+  hideUpsells.addEventListener("change", saveOptions);
   hideNavReports.addEventListener("change", saveOptions);
   hideNavPlaylists.addEventListener("change", saveOptions);
   hideNavLoved.addEventListener("change", saveOptions);
@@ -204,10 +206,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
       mainColor: mainColor.value,
     };
-    chrome.storage.local.set(data);
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    browserAPI.storage.local.set(data);
+    browserAPI.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, {
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setMainColor",
           value: mainColor.value,
         });

@@ -1,10 +1,12 @@
+const browserAPI = typeof chrome !== "undefined" ? chrome : browser;
+
 const defaultSettings = {
   roundedBorders: true,
   squareAvatars: true,
   hidePlayButtons: true,
   hideBuyButtons: true,
   hideSidebarContent: true,
-  hideAds: true,
+  hideUpsells: true,
   hideNavReports: false,
   hideNavPlaylists: false,
   hideNavLoved: false,
@@ -115,10 +117,10 @@ function setHideSidebarContent(enabled) {
   });
 }
 
-function setHideAds(enabled) {
+function sethideUpsells(enabled) {
   document
     .querySelectorAll(
-      ".subscribe-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2"
+      ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta"
     )
     .forEach((el) => {
       el.style.display = enabled ? "none" : "";
@@ -236,7 +238,7 @@ function updateMoreButtonVisibility() {
 }
 
 function applyAllNavHides() {
-  chrome.storage.local.get(
+  browserAPI.storage.local.get(
     {
       hideNavReports: null,
       hideNavPlaylists: null,
@@ -275,18 +277,18 @@ function observeSecondaryNav() {
 // ===================
 
 function applyAllHides() {
-  chrome.storage.local.get(
+  browserAPI.storage.local.get(
     {
       hidePlayButtons: null,
       hideBuyButtons: null,
       hideSidebarContent: null,
-      hideAds: null,
+      hideUpsells: null,
     },
     (localData) => {
       setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
       setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
       setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-      setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+      sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
     }
   );
 }
@@ -295,14 +297,14 @@ function applyAllHides() {
 // Load settings on startup
 // ===================
 
-// chrome.storage.local.get(
+// browserAPI.storage.local.get(
 //   {
 //     roundedBorders: null,
 //     squareAvatars: null,
 //     hidePlayButtons: null,
 //     hideBuyButtons: null,
 //     hideSidebarContent: null,
-//     hideAds: null,
+//     hideUpsells: null,
 //     hideNavReports: null,
 //     hideNavPlaylists: null,
 //     hideNavLoved: null,
@@ -324,7 +326,7 @@ function applyAllHides() {
 //     setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
 //     setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
 //     setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-//     setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+//     sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
 //     setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
 //     setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
 //     setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
@@ -346,13 +348,13 @@ function applyAllHides() {
 // Popup message listeners
 // ===================
 
-chrome.runtime.onMessage.addListener((msg) => {
+browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setSquareAvatars") setSquareAvatars(msg.enabled);
   if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
   if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
   if (msg.type === "setHideBuyButtons") setHideBuyButtons(msg.enabled);
   if (msg.type === "setHideSidebarContent") setHideSidebarContent(msg.enabled);
-  if (msg.type === "setHideAds") setHideAds(msg.enabled);
+  if (msg.type === "sethideUpsells") sethideUpsells(msg.enabled);
   if (msg.type === "setHideNavReports") setHideNavReports(msg.enabled);
   if (msg.type === "setHideNavPlaylists") setHideNavPlaylists(msg.enabled);
   if (msg.type === "setHideNavLoved") setHideNavLoved(msg.enabled);
@@ -390,14 +392,14 @@ onPageChange();
 
 // Function to reapply all settings
 function applyAllSettings() {
-  chrome.storage.local.get(
+  browserAPI.storage.local.get(
     {
       roundedBorders: null,
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
       hideSidebarContent: null,
-      hideAds: null,
+      hideUpsells: null,
       hideNavReports: null,
       hideNavPlaylists: null,
       hideNavLoved: null,
@@ -419,7 +421,7 @@ function applyAllSettings() {
       setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
       setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
       setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-      setHideAds(localData.hideAds !== null ? localData.hideAds : true);
+      sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
       setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
       setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
       setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
