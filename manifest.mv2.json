@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Last.fm Reworked",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Enhances the Last.fm layout and user interface.",
   "permissions": ["storage", "activeTab"],
   "content_scripts": [
@@ -16,7 +16,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "lastfm-reworked@mozartsempiano",
+      "id": "{1c52c611-5d1c-4cc4-91f2-2ac2f3da5d70}",
       "strict_min_version": "91.0"
     }
   }
