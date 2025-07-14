@@ -19,7 +19,7 @@ But to hide shoutboxes in general.
 .use-helvetica *,
 .use-helvetica *::before,
 .use-helvetica *::after {
-  font-family: "Helvetica", "Arial", sans-serif !important;
+  font-family: "Helvetica", "Verdana", "Trebuchet MS", "Arial", sans-serif !important;
 }
 
 body {
@@ -44,7 +44,7 @@ p a,
 .context a,
 .view-full-wiki a,
 .charts-nav-item a {
-  color: #13b0d4;
+  color: var(--blue-link);
 }
 
 label {
@@ -58,12 +58,65 @@ h4,
 h5,
 h6 {
   color: var(--white);
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 h2,
 .text-colour-link {
   color: var(--red);
+}
+
+h1 {
+  font-size: 2em !important;
+}
+
+h2 {
+  font-size: 1.5em !important;
+}
+
+h3 {
+  font-size: 1.2em !important;
+}
+
+h3.shout-user,
+h2.footer-heading,
+.user-events-sidebar h3,
+h3.artist-top-albums-item-name,
+h3.listeners-section-item-name,
+h3.catalogue-overview-similar-artists-full-width-item-name,
+h3.trending-tracks-item-name,
+h3.artist-similar-artists-sidebar-item-name,
+h2.metadata-title {
+  font-size: 1em !important;
+  font-weight: none !important;
+}
+
+.listeners-section-track {
+  color: var(--white);
+}
+.listeners-section-track a {
+  color: var(--blue-link) !important;
+}
+
+h4.header-metadata-title {
+  font-size: 0.9em !important;
+}
+
+h4 {
+  font-size: 1.1em !important;
+}
+
+h5 {
+  font-size: 1em !important;
+}
+
+h6 {
+  font-size: 0.9em !important;
+}
+
+.masthead-nav,
+.masthead-search-field {
+  font-size: 1.05em;
 }
 
 /* ========== VARIABLES ========== */
@@ -189,10 +242,6 @@ textarea.js-shout-input {
 .bulleted-list,
 .more-link {
   color: var(--gray-light) !important;
-}
-
-.change-username-upsell {
-  color: var(--gray) !important;
 }
 
 .api-session::after,
@@ -358,12 +407,17 @@ button.dropdown-menu-clickable-button {
 
 .chartlist-count-bar-slug {
   border-radius: var(--borda-arredondada-menor) !important;
-  background-image: linear-gradient(to right, var(--red), var(--red-dark));
+  /* background-image: linear-gradient(to right, var(--red), var(--red-dark)); */
+  background-color: var(--red);
 }
 
 a:focus .chartlist-count-bar-slug,
 a:hover .chartlist-count-bar-slug {
   background-color: var(--red-dark);
+}
+
+.compact-mode .chartlist-count-bar {
+  line-height: 28px;
 }
 
 .chartlist-break::after,
@@ -399,6 +453,10 @@ table tr:not(.chartlist-row--now-scrobbling):hover {
   flex-shrink: 0 !important;
 }
 
+/* .col-sidebar {
+  border-left: 1px solid var(--gray);
+} */
+
 /* ========== PAGE LAYOUT ========== */
 
 section::after,
@@ -419,7 +477,7 @@ section::after,
 
 /* ========== HOME PAGE ========== */
 .main-content,
-.container:not(.footer .container),
+.container:not(.footer .container):not(:has(.listening-report-row)),
 .content-top-has-nav .content-top,
 .two-column-layout .content-top {
   background-color: var(--black) !important;
@@ -509,13 +567,21 @@ section::after,
 
 footer.footer,
 .footer .row,
-.footer .container {
+.footer .container,
+.user-dashboard-layout--version-4 .footer {
   background-color: var(--gray-dark);
 }
 
 /* ========== MUSIC ========== */
-.content-top-header {
+.content-top-header,
+.pagination-page[aria-current],
+.js .date-range-picker-button {
   color: var(--red);
+}
+
+.pagination-page[aria-current],
+.pagination-page:hover {
+  box-shadow: inset 0 -2px var(--red);
 }
 
 .minimal-navigation-item-link,
@@ -576,10 +642,15 @@ footer.footer,
   border-radius: var(--borda-arredondada);
 }
 
+a {
+  color: var(--blue-link);
+  text-decoration: none;
+}
+
 /* Featured On */
 .album-and-lyrics-row {
-  padding: 20px 14px 10px 14px;
-  border: 1px solid var(--gray);
+  padding: 14px 8px 6px 8px;
+  background-color: var(--gray);
   border-radius: var(--borda-arredondada);
 }
 /* X more albums featuring this track */
@@ -601,7 +672,7 @@ footer.footer,
 .compact-tags .catalogue-tags .tags-view-all {
   letter-spacing: 0;
   text-transform: lowercase;
-  font-size: 13px;
+  font-size: 1em;
   transition: filter 0.25s ease !important;
 }
 
@@ -650,6 +721,10 @@ footer.footer,
   padding-bottom: 16px;
 }
 
+.section-with-separator {
+  padding-bottom: 26px;
+}
+
 /* Similar artists section */
 .artist-similar-artists-sidebar-item-wrap {
   padding-left: 7px;
@@ -671,7 +746,7 @@ footer.footer,
 .compact-mode .resource-external-link,
 .compact-mode .play-this-track-playlink {
   padding: 6px 0 7px 32px;
-  font-size: 12px;
+  font-size: 0.92em;
 }
 
 .compact-mode .source-album,
@@ -693,7 +768,7 @@ footer.footer,
 
 h1.header-new-title {
   /* font-size: 46px !important; */
-  font-size: 56px !important;
+  font-size: 3.5em !important;
   font-weight: bold !important;
   line-height: 1.15;
   text-overflow: ellipsis;
@@ -830,6 +905,45 @@ h1.header-new-title {
   color: var(--white);
 }
 
+.link-block a,
+.link-block button,
+.link-block a:hover {
+  color: var(--white);
+}
+
+.event-metadata {
+  color: var(--gray-light);
+}
+
+.attendance-btn {
+  display: block;
+  color: var(--white) !important;
+  background-color: var(--black);
+  border: 1px solid var(--gray-light) !important;
+  border-radius: var(--borda-arredondada);
+}
+
+.attendance-btn:hover {
+  color: var(--white) !important;
+  background-color: var(--gray-dark) !important;
+  border-color: var(--gray-light) !important;
+}
+
+.attendance-btn--turn-off.attendance-btn--attending {
+  background-color: #096 !important;
+  color: var(--white) !important;
+  border-radius: var(--borda-arredondada);
+}
+
+.compact-mode section.share-desktop {
+  margin-top: 16px;
+}
+
+.events-list-sidebar .events-list-item-date-icon-month,
+.events-list .events-list-item-date-icon-month {
+  color: var(--red);
+}
+
 /* ========== FEATURES ========== */
 .features-header .features-teaser-body,
 .features-teaser-wrap--promoted .features-teaser-body {
@@ -860,6 +974,10 @@ h1.header-new-title {
 }
 
 /* ========== PROFILE ========== */
+.wiki-legal p {
+  color: var(--gray-light);
+}
+
 .header-title .wiki-block-inner,
 .catalogue-metadata-heading,
 .catalogue-metadata-description {
@@ -932,28 +1050,37 @@ h1.header-new-title {
   color: var(--white);
 }
 
-.header-follower-btn {
-  color: var(--gray-light) !important;
-}
-
 .dropdown-menu-clickable::before,
 #share-library-artist::before,
-.navlist-hidden-list::before {
+.navlist-hidden-list::before,
+.date-range-picker-content::before {
   display: none !important;
 }
 
 .dropdown-menu-clickable,
 #share-library-artist,
-.navlist-hidden-list {
+.navlist-hidden-list,
+.date-range-picker-content {
   border-radius: var(--borda-arredondada) 0 var(--borda-arredondada) var(--borda-arredondada);
 }
 
 .dropdown-menu-clickable,
 .dropdown-menu-clickable-item,
 #share-library-artist,
-.navlist-hidden-list {
+.navlist-hidden-list,
+.date-range-picker-content {
   background-color: var(--gray);
   color: var(--white);
+}
+
+.date-range-picker-presets a {
+  color: var(--white);
+}
+
+.date-range-picker-preset--selected a,
+.date-range-picker-preset--selected a:focus,
+.date-range-picker-preset--selected a:hover {
+  color: var(--red);
 }
 
 .header-metadata-item {
@@ -992,14 +1119,26 @@ a.secondary-nav-item-link:hover::after {
   border-radius: 0 !important;
 }
 
+.about-me-sidebar p {
+  color: var(--gray-light);
+  margin: 0;
+}
+
 .about-me-sidebar {
-  border: 1px solid var(--gray);
+  /* border: 1px solid var(--gray); */
+  background-color: var(--gray);
   border-radius: var(--borda-arredondada) 25px var(--borda-arredondada) 25px;
   padding: 14px 19px;
 }
 .about-me-sidebar h2 {
-  border-bottom: 1px solid var(--gray);
-  padding-bottom: 8px;
+  /* border-bottom: 1px solid var(--gray);
+  padding-bottom: 8px; */
+  display: none;
+}
+
+.chartlist-timestamp {
+  color: var(--gray-light);
+  font-size: 0.9em;
 }
 
 /* Labs */
@@ -1024,6 +1163,53 @@ a.secondary-nav-item-link:hover::after {
 
 .btn-file {
   padding: 6px 13px !important;
+}
+
+.grid-items-item-main-text {
+  font-size: 1em;
+  font-weight: 700;
+}
+.grid-items-item-details {
+  font-size: 0.92em;
+}
+
+@media (min-width: 768px) {
+  .header-follower-btn::before {
+    display: none !important;
+  }
+
+  .header--with-avatar .header-follower-btn,
+  .header--with-avatar .header-follower-btn:focus,
+  .header--with-avatar .header-follower-btn:hover {
+    margin-left: -115px;
+    margin-top: -24px;
+    border-radius: var(--borda-arredondada);
+    box-shadow: 0;
+    /* border: 1px solid var(--gray-light); */
+    color: var(--white);
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 32px;
+    padding: 0px 12px;
+    background-color: var(--gray);
+    color: var(--white);
+    width: 110px;
+    transition: scale 0.2s ease, background-color 0.2s ease, color 0.2s ease, filter 0.2s ease;
+  }
+
+  .header--with-avatar .header-follower-btn:hover {
+    filter: brightness(1.2);
+  }
+
+  [data-toggle-button-current-state="unfollowed"] .header-follower-btn {
+    background-color: var(--red) !important;
+    color: var(--white) !important;
+  }
+}
+
+.tasteometer-donut-base {
+  fill: var(--gray);
 }
 
 /* ========== SIMILAR ARTISTS ========== */
@@ -1059,7 +1245,7 @@ a.secondary-nav-item-link:hover::after {
 
 .navlist-more::after {
   content: "⋮";
-  font-size: 21px;
+  font-size: 1.62em;
   letter-spacing: 2px;
   color: var(--white);
   position: absolute;
@@ -1127,6 +1313,17 @@ a.secondary-nav-item-link:hover::after {
   background: var(--black);
 }
 
+.header-new-on-tour {
+  border-radius: var(--borda-arredondada);
+  box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0.6);
+  color: var(--white);
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 32px;
+  padding: 4px 12px;
+}
+
 /* ========== WIKI ========== */
 .factbox-item,
 #factbox-more-members,
@@ -1138,9 +1335,29 @@ a.secondary-nav-item-link:hover::after {
   color: var(--red);
 }
 
-.alert-warning {
-  background-color: var(--gray) !important;
-  border-radius: var(--borda-arredondada) 0 var(--borda-arredondada) 0;
+.alert-warning,
+.gallery-upload-rules,
+.change-username-upsell {
+  background-color: transparent !important;
+  border-radius: var(--borda-arredondada);
+  border: 1px solid var(--gray-light);
+}
+.gallery-upload-rules h1,
+.gallery-upload-rules h2,
+.gallery-upload-rules h3,
+.gallery-upload-rules h4,
+.gallery-upload-rules h5,
+.gallery-upload-rules h6,
+.gallery-upload-rules p,
+.alert-warning h1,
+.alert-warning h2,
+.alert-warning h3,
+.alert-warning h4,
+.alert-warning h5,
+.alert-warning h6,
+.alert-warning p,
+.change-username-upsell {
+  color: var(--gray-light);
 }
 
 .control-label {
@@ -1165,7 +1382,8 @@ a.secondary-nav-item-link:hover::after {
 .factbox,
 .metadata-column,
 .wiki-column {
-  border: 1px solid var(--gray);
+  background-color: var(--gray);
+  /* border: 1px solid var(--gray); */
   border-radius: var(--borda-arredondada) !important;
   padding: 12px 16px !important;
 }
@@ -1174,6 +1392,20 @@ a.secondary-nav-item-link:hover::after {
 .wiki-block-inner-2 {
   text-align: justify;
   color: var(--white) !important;
+}
+
+.wiki-content {
+  font-size: 1.15em;
+  line-height: 22px;
+}
+
+.alert-info {
+  background-color: var(--gray);
+  color: var(--gray-light);
+  border-radius: var(--borda-arredondada);
+  padding-left: 46px;
+  position: relative;
+  text-align: left;
 }
 
 /* ========== OBSESSIONS ========== */
@@ -1249,9 +1481,47 @@ body:not([data-whatinput="touch"]) .inbox-notifications .inbox-notifications__it
   background-color: var(--red);
 }
 
+.inbox-notifications .inbox-notifications__item--hover {
+  box-shadow: inset 0 -1px var(--gray);
+}
+
+.shout-container--active {
+  background-color: var(--gray);
+}
+
 /* ========== LISTENING REPORT ========== */
+.user-dashboard-layout--version-4 .main-content,
+.user-dashboard-layout--version-4 .user-dashboard .container:not(:has(.report-headline-content)) {
+  background: var(--black);
+}
+
+.report-box-container {
+  color: var(--white);
+}
+
+.report-box-container--overview {
+  background: var(--red-dark);
+}
+
 .user-dashboard-heading {
   color: var(--red);
+}
+
+.user-dashboard-layout--version-4 {
+  color: var(--gray-light) !important;
+}
+
+.report-box-container--charts,
+.user-dashboard-module {
+  background: transparent !important;
+  color: var(--white) !important;
+  /* padding: 10px; */
+}
+
+.report-box-container--quick-fact,
+.report-box-container--with-background {
+  background-color: var(--gray-dark) !important;
+  color: var(--white) !important;
 }
 
 .duration-data,

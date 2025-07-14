@@ -1,5 +1,5 @@
 :root {
-  --black: #111;
+  --black: #121214;
   --white: #fafbfb;
   --gray-dark: #181818;
   --gray: #1d1d1d;
@@ -8,6 +8,7 @@
   --color-link-hover: #ff0000; */
   --red: #ba0000;
   --red-dark: #8e0000;
+  --blue-link: #13b0d4;
 
   --borda-arredondada: 8px;
   --borda-arredondada-menor: 4px;

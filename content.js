@@ -115,16 +115,43 @@ function setHideSidebarContent(enabled) {
   document.querySelectorAll(".col-sidebar .stationlinks, .col-sidebar .your-progress, .col-sidebar .labs-cta").forEach((el) => {
     el.style.display = enabled ? "none" : "";
   });
+
+  // Adiciona/remover margin-top: 0 para .mpu-subscription-upsell
+  // document.querySelectorAll(".mpu-subscription-upsell").forEach((el) => {
+  //   if (enabled) {
+  //     el.style.setProperty("margin-top", "0", "important");
+  //   } else {
+  //     el.style.removeProperty("margin-top");
+  //   }
+  // });
 }
 
 function sethideUpsells(enabled) {
   document
     .querySelectorAll(
-      ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta"
+      ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta, .listening-report-row--upsell"
     )
     .forEach((el) => {
       el.style.display = enabled ? "none" : "";
     });
+
+  // Also set margin-top: 0 !important for section.share-desktop only if hideSidebarContent is also enabled
+  browserAPI.storage.local.get({ hideSidebarContent: null }, (data) => {
+    if (data.hideSidebarContent !== null ? data.hideSidebarContent : true) {
+      document.querySelectorAll("section.share-desktop").forEach((el) => {
+        if (enabled) {
+          el.style.setProperty("margin-top", "0", "important");
+        } else {
+          el.style.removeProperty("margin-top");
+        }
+      });
+    } else {
+      // If hideSidebarContent is not enabled, always remove margin-top
+      document.querySelectorAll("section.share-desktop").forEach((el) => {
+        el.style.removeProperty("margin-top");
+      });
+    }
+  });
 }
 
 function setHideActions(enabled) {
