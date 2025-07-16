@@ -4,12 +4,13 @@
 
 **Last.fm Reworked** is a browser extension that enhances the Last.fm layout and user interface. It provides customization options to improve usability and aesthetics, making your experience more enjoyable.
 
-| ![User Profile](https://i.imgur.com/2dc50SK.png) | ![Artist Page](https://i.imgur.com/5Ll8jsB.png) | ![Song Page](https://i.imgur.com/va6qc0h.png) |
+| ![User Profile](https://i.imgur.com/SV6g9NU.jpeg) | ![Artist Page](https://i.imgur.com/TNZyXAS.jpeg) | ![Song Page](https://i.imgur.com/HU7zXh3.jpeg) |
 | :----------------------------------------------: | :---------------------------------------------: | :-------------------------------------------: |
 
 ## Installation
 
 - [Firefox Extension](https://addons.mozilla.org/firefox/addon/last-fm-reworked/)
+- [Chrome Extension](https://chromewebstore.google.com/detail/lastfm-reworked/jihcknccokongmfklnodojmpkjdgihlf)
 
 ## Features
 
