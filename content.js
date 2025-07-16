@@ -19,7 +19,7 @@ const defaultSettings = {
   largerStats: false,
   useHelvetica: true,
   compactMode: true,
-  compactTags: true,
+  compactTags: false,
   mainColor: "default",
 };
 
@@ -115,16 +115,43 @@ function setHideSidebarContent(enabled) {
   document.querySelectorAll(".col-sidebar .stationlinks, .col-sidebar .your-progress, .col-sidebar .labs-cta").forEach((el) => {
     el.style.display = enabled ? "none" : "";
   });
+
+  // Adiciona/remover margin-top: 0 para .mpu-subscription-upsell
+  // document.querySelectorAll(".mpu-subscription-upsell").forEach((el) => {
+  //   if (enabled) {
+  //     el.style.setProperty("margin-top", "0", "important");
+  //   } else {
+  //     el.style.removeProperty("margin-top");
+  //   }
+  // });
 }
 
 function sethideUpsells(enabled) {
   document
     .querySelectorAll(
-      ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta"
+      ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta, .listening-report-row--upsell"
     )
     .forEach((el) => {
       el.style.display = enabled ? "none" : "";
     });
+
+  // Also set margin-top: 0 !important for section.share-desktop only if hideSidebarContent is also enabled
+  browserAPI.storage.local.get({ hideSidebarContent: null }, (data) => {
+    if (data.hideSidebarContent !== null ? data.hideSidebarContent : true) {
+      document.querySelectorAll("section.share-desktop").forEach((el) => {
+        if (enabled) {
+          el.style.setProperty("margin-top", "0", "important");
+        } else {
+          el.style.removeProperty("margin-top");
+        }
+      });
+    } else {
+      // If hideSidebarContent is not enabled, always remove margin-top
+      document.querySelectorAll("section.share-desktop").forEach((el) => {
+        el.style.removeProperty("margin-top");
+      });
+    }
+  });
 }
 
 function setHideActions(enabled) {
@@ -292,57 +319,6 @@ function applyAllHides() {
     }
   );
 }
-
-// ===================
-// Load settings on startup
-// ===================
-
-// browserAPI.storage.local.get(
-//   {
-//     roundedBorders: null,
-//     squareAvatars: null,
-//     hidePlayButtons: null,
-//     hideBuyButtons: null,
-//     hideSidebarContent: null,
-//     hideUpsells: null,
-//     hideNavReports: null,
-//     hideNavPlaylists: null,
-//     hideNavLoved: null,
-//     hideNavObsessions: null,
-//     hideNavEvents: null,
-//     hideNavNeighbours: null,
-//     hideNavTags: null,
-//     hideNavShouts: null,
-//     hideActions: null,
-//     largerStats: null,
-//     useHelvetica: null,
-//     compactMode: null,
-//     compactTags: null,
-//     mainColor: "default",
-//   },
-//   (localData) => {
-//     setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
-//     setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
-//     setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-//     setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-//     setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-//     sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
-//     setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
-//     setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
-//     setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
-//     setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
-//     setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
-//     setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
-//     setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
-//     setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
-//     setHideActions(localData.hideActions !== null ? localData.hideActions : false);
-//     setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
-//     setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
-//     setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
-//     setMainColor(localData.mainColor || "default");
-//     setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
-//   }
-// );
 
 // ===================
 // Popup message listeners

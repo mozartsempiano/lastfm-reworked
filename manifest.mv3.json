@@ -1,8 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Last.fm Reworked",
-  "version": "1.1",
+  "version": "1.2.0",
   "description": "Enhances the Last.fm layout and user interface.",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
   "permissions": ["storage", "activeTab"],
   "host_permissions": ["*://www.last.fm/*", "*://last.fm/*"],
   "content_scripts": [

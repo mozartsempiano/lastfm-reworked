@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       largerStats.checked = localData.largerStats !== null ? localData.largerStats : false;
       useHelvetica.checked = localData.useHelvetica !== null ? localData.useHelvetica : true;
       compactMode.checked = localData.compactMode !== null ? localData.compactMode : true;
-      compactTags.checked = localData.compactTags !== null ? localData.compactTags : true;
+      compactTags.checked = localData.compactTags !== null ? localData.compactTags : false;
       mainColor.value = localData.mainColor || "default";
     }
   );
