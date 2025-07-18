@@ -629,7 +629,7 @@ ul.dropdown-menu-clickable {
 }
 
 .chartlist-count-bar-value {
-  color: var(--black) !important;
+  color: var(--gray-light) !important;
 }
 
 /* .chartlist-count-bar-link {
