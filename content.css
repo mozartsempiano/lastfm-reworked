@@ -496,7 +496,6 @@ select {
 
 .btn-shortcut,
 ul:not(.navlist-items) {
-  background-color: var(--gray-dark) !important;
   border-radius: var(--borda-arredondada) !important;
 }
 
@@ -530,6 +529,10 @@ button.dropdown-menu-clickable-button {
 .dropdown-menu-clickable-item:hover {
   color: var(--red) !important;
   background-color: rgba(186, 0, 0, 0.1) !important;
+}
+
+ul.dropdown-menu-clickable {
+  background-color: var(--gray-dark) !important; 
 }
 
 /* ========== AVATARS & IMAGES ========== */
@@ -626,7 +629,7 @@ button.dropdown-menu-clickable-button {
 }
 
 .chartlist-count-bar-value {
-  color: var(--red-dark) !important;
+  color: var(--black) !important;
 }
 
 /* .chartlist-count-bar-link {
