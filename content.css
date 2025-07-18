@@ -529,6 +529,7 @@ button.dropdown-menu-clickable-button {
 
 .dropdown-menu-clickable-item:hover {
   color: var(--red) !important;
+  background-color: rgba(186, 0, 0, 0.1) !important;
 }
 
 /* ========== AVATARS & IMAGES ========== */
