@@ -522,6 +522,14 @@ button.dropdown-menu-clickable-button {
   border: 0 !important;
 }
 
+.dropdown-menu-clickable-item {
+  color: #999 !important;
+}
+
+.dropdown-menu-clickable-item:hover {
+  color: var(--red) !important;
+}
+
 /* ========== AVATARS & IMAGES ========== */
 .avatar::after {
   border-radius: var(--borda-arredondada) !important;
