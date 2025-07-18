@@ -496,6 +496,7 @@ select {
 
 .btn-shortcut,
 ul:not(.navlist-items) {
+  background-color: var(--gray-dark) !important;
   border-radius: var(--borda-arredondada) !important;
 }
 
@@ -624,7 +625,7 @@ button.dropdown-menu-clickable-button {
 }
 
 .chartlist-count-bar-value {
-  color: var(--white) !important;
+  color: var(--red-dark) !important;
 }
 
 /* .chartlist-count-bar-link {
