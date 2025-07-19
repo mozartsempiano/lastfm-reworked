@@ -58,14 +58,14 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--white);
-  font-weight: bold;
+  color: var(--white) !important;
+  font-weight: bold !important;
 }
 
 h2,
 .text-colour-link,
 .group-heading {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 h1 {
@@ -90,10 +90,10 @@ h2.event-section-date-heading,
 .content-form h2,
 .page-content h2:not(.metadata-title) {
   border-bottom: 1px solid var(--gray-light);
-  padding-bottom: 4px;
+  padding-bottom: 4px !important;
   /* margin-bottom: -13px; */
   font-size: 1.2em !important;
-  font-weight: normal;
+  font-weight: normal !important;
   /* text-transform: uppercase; */
 }
 legend,
@@ -141,10 +141,10 @@ h2.footer-heading,
 }
 
 .user-events-sidebar h3 {
-  color: var(--gray-light);
-  font-size: 1em;
-  font-weight: normal;
-  text-transform: uppercase;
+  color: var(--gray-light) !important;
+  font-size: 1em !important;
+  font-weight: normal !important;
+  text-transform: uppercase !important;
 }
 
 .listeners-section-track {
@@ -194,7 +194,7 @@ h6 {
 
 .masthead-nav,
 .masthead-search-field {
-  font-size: 1.05em;
+  font-size: 1.05em !important;
 }
 
 /* ========== VARIABLES ========== */
@@ -403,8 +403,8 @@ select {
 .header--with-avatar .header-follower-btn,
 .btn-add-sm,
 .attendance-btn--turn-off {
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2);
-  letter-spacing: 0.075em;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2) !important;
+  letter-spacing: 0.075em !important;
 }
 .btn-primary,
 .btn-add,
@@ -443,10 +443,10 @@ select {
 .attendance-btn {
   display: block;
   color: var(--white) !important;
-  background-color: var(--black);
+  background-color: var(--black) !important;
   border: 1px solid var(--gray-light) !important;
-  border-radius: var(--borda-arredondada);
-  height: 40px;
+  border-radius: var(--borda-arredondada) !important;
+  height: 40px !important;
 }
 
 .attendance-btn:not(.attendance-btn--turn-off):hover {
@@ -458,7 +458,7 @@ select {
 .attendance-btn--turn-off.attendance-btn--attending,
 .attendance-btn--turn-off.attendance-btn--maybe {
   color: var(--white) !important;
-  border-radius: var(--borda-arredondada);
+  border-radius: var(--borda-arredondada) !important;
   /* border: 0 !important; */
 }
 .attendance-btn--turn-off.attendance-btn--attending,
@@ -632,7 +632,7 @@ button.dropdown-menu-clickable-button {
 .chartlist-count-bar-slug {
   border-radius: var(--borda-arredondada-menor) !important;
   /* background-image: linear-gradient(to right, var(--red), var(--red-dark)); */
-  background-color: var(--red);
+  background-color: var(--red) !important;
 }
 
 a:focus .chartlist-count-bar-slug,
@@ -793,14 +793,22 @@ footer.footer,
 .footer .row,
 .footer .container,
 .user-dashboard-layout--version-4 .footer {
-  background-color: var(--gray-dark);
+  background-color: var(--gray-dark) !important;
+}
+.footer .footer-heading {
+  color: var(--gray-light) !important;
+  font-size: 1em !important;
+  font-weight: normal !important;
+  line-height: normal !important;
+  margin-bottom: 0 !important;
+  text-transform: uppercase !important;
 }
 
 /* ========== MUSIC ========== */
 .content-top-header,
 .pagination-page[aria-current],
 .js .date-range-picker-button {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .pagination-page[aria-current],
@@ -815,6 +823,25 @@ footer.footer,
 .navlist-item:focus,
 .navlist-item:hover {
   color: var(--white);
+}
+
+.about-section .secondary-nav-item-link--active::after,
+.about-section a.secondary-nav-item-link:focus::after,
+.about-section a.secondary-nav-item-link:hover::after,
+.header .secondary-nav-item-link--active::after,
+.header a.secondary-nav-item-link:focus::after,
+.header a.secondary-nav-item-link:hover::after,
+.homefeed .secondary-nav-item-link--active::after,
+.homefeed a.secondary-nav-item-link:focus::after,
+.homefeed a.secondary-nav-item-link:hover::after,
+.listening-report-top .secondary-nav-item-link--active::after,
+.listening-report-top a.secondary-nav-item-link:focus::after,
+.listening-report-top a.secondary-nav-item-link:hover::after,
+.whats-new .secondary-nav-item-link--active::after,
+.whats-new a.secondary-nav-item-link:focus::after,
+.whats-new a.secondary-nav-item-link:hover::after {
+  bottom: -1px !important;
+  height: 1px !important;
 }
 
 .minimal-navigation-item-link--active,
@@ -890,10 +917,11 @@ a {
   margin-right: 26px;
 }
 
+/* Tags */
 .catalogue-tags .tag,
 .catalogue-tags .tags-add,
 .catalogue-tags .tags-add-cta {
-  margin-left: 7px;
+  margin-left: 7px !important;
 }
 .catalogue-tags .tag {
   font-size: 1em;
@@ -901,11 +929,11 @@ a {
 .catalogue-tags .tag a,
 .catalogue-tags .tags-add,
 .catalogue-tags .tags-add-cta {
-  border-radius: 32px;
-  box-shadow: inset 0 0 0 1px var(--gray);
-  color: var(--red);
-  letter-spacing: 0px;
-  text-transform: lowercase;
+  border-radius: 32px !important;
+  box-shadow: inset 0 0 0 1px var(--gray) !important;
+  color: var(--red) !important;
+  letter-spacing: 0px !important;
+  text-transform: lowercase !important;
   transition: box-shadow ease 0.2s, color ease 0.2s !important;
 }
 .catalogue-tags .tag a::before {
@@ -921,8 +949,53 @@ body:not([data-whatinput="touch"]) .catalogue-tags .tags-add-cta .focus-visible,
 body:not([data-whatinput="touch"]) .catalogue-tags .tags-add-cta:hover,
 body:not([data-whatinput="touch"]) .catalogue-tags .tags-add .focus-visible,
 body:not([data-whatinput="touch"]) .catalogue-tags .tags-add:hover {
-  box-shadow: inset 0 0 0 1px var(--red);
-  color: var(--red);
+  box-shadow: inset 0 0 0 1px var(--red) !important;
+  color: var(--red) !important;
+}
+
+/* Compact Tags */
+.compact-tags .catalogue-tags .tag a,
+.compact-tags .catalogue-tags .tags-add,
+.compact-tags .catalogue-tags .tags-add-cta {
+  box-shadow: 0 0 0 0px !important;
+  border-radius: var(--borda-arredondada);
+  box-shadow: inset 0 0 0 0px var(--gray-light);
+  /* padding: 5px 5px 6px; */
+}
+.compact-tags .catalogue-tags .tag a,
+.compact-tags .catalogue-tags .tags-add-cta,
+.compact-tags .catalogue-tags .tags-view-all {
+  letter-spacing: 0;
+  text-transform: lowercase;
+  font-size: 0.9em;
+  transition: filter 0.25s ease !important;
+}
+.compact-tags .catalogue-tags .tag a:hover,
+.compact-tags .tags:hover,
+.compact-tags .catalogue-tags .tags-view-all:hover {
+  filter: brightness(1.75) !important;
+  text-decoration: none;
+}
+.compact-tags .catalogue-tags .tag a:hover,
+.compact-tags .catalogue-tags .tags-add:hover,
+.compact-tags .catalogue-tags .tags-add-cta:hover,
+.compact-tags .tags:hover,
+.compact-tags .catalogue-tags .tags-view-all:hover {
+  border-radius: var(--borda-arredondada);
+  box-shadow: inset 0 0 0 0 var(--gray-light) !important;
+}
+.compact-tags .tag:nth-child(n + 2)::before {
+  content: " ·";
+  font-weight: 400;
+  margin-right: 0.25em;
+  color: var(--white) !important;
+  filter: none !important;
+}
+.compact-tags .catalogue-tags .tag,
+.compact-tags .catalogue-tags .tags-add,
+.compact-tags .catalogue-tags .tags-add-cta {
+  margin-bottom: 0;
+  margin-left: 3px;
 }
 
 /* Inverter ícones pra deixar monocromáticos */
@@ -936,60 +1009,12 @@ body:not([data-whatinput="touch"]) .catalogue-tags .tags-add:hover {
 .more-item--track::before,
 .more-item--artist::before,
 .more-item--obsession::before,
-.buylink.buylink--amazon::before,
+.buylink.buylink-amazon::before,
 .buylink.buylink--itunes::before {
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) !important;
 }
 .share-option a {
   border-color: var(--white) !important;
-}
-
-.compact-tags .catalogue-tags .tag a,
-.compact-tags .catalogue-tags .tags-add,
-.compact-tags .catalogue-tags .tags-add-cta {
-  border-radius: var(--borda-arredondada);
-  box-shadow: inset 0 0 0 0px var(--gray-light);
-  /* padding: 5px 5px 6px; */
-}
-
-.compact-tags .catalogue-tags .tag a,
-.compact-tags .catalogue-tags .tags-add-cta,
-.compact-tags .catalogue-tags .tags-view-all {
-  letter-spacing: 0;
-  text-transform: lowercase;
-  font-size: 1em;
-  transition: filter 0.25s ease !important;
-}
-
-.compact-tags .catalogue-tags .tag a:hover,
-.compact-tags .tags:hover,
-.compact-tags .catalogue-tags .tags-view-all:hover {
-  filter: brightness(1.75) !important;
-  text-decoration: none;
-}
-
-.compact-tags .catalogue-tags .tag a:hover,
-.compact-tags .catalogue-tags .tags-add:hover,
-.compact-tags .catalogue-tags .tags-add-cta:hover,
-.compact-tags .tags:hover,
-.compact-tags .catalogue-tags .tags-view-all:hover {
-  border-radius: var(--borda-arredondada);
-  box-shadow: inset 0 0 0 0 var(--gray-light) !important;
-}
-
-.compact-tags .tag:nth-child(n + 2)::before {
-  content: " ·";
-  font-weight: 400;
-  margin-right: 0.25em;
-  color: var(--white) !important;
-  filter: none !important;
-}
-
-.compact-tags .catalogue-tags .tag,
-.compact-tags .catalogue-tags .tags-add,
-.compact-tags .catalogue-tags .tags-add-cta {
-  margin-bottom: 0;
-  margin-left: 3px;
 }
 
 .compact-mode .header-new-info-desktop {
@@ -1081,7 +1106,7 @@ h1.header-new-title {
 /* Video preview */
 .track-overview-new .video-preview,
 .album-overview-cover-art {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 .track-overview-video-column .video-preview-playlink {
   border-radius: var(--borda-arredondada);
@@ -1097,29 +1122,29 @@ h1.header-new-title {
 .header-new-chart-position,
 .header-new-chart-position-desktop .header-new-chart-position-number,
 .trending-tracks-item-index {
-  font-size: 4em;
+  font-size: 4em !important;
 }
 .header-new-chart-position,
 .header-new-chart-position-desktop .header-new-chart-position-number,
 .trending-tracks-item-index,
 .trending-tracks-item-index::before,
 .trending-tracks .trending-tracks-item-index {
-  font-weight: bold;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: var(--white);
+  font-weight: bold !important;
+  -webkit-text-stroke-width: 1px !important;
+  -webkit-text-stroke-color: var(--white) !important;
   /* -webkit-text-stroke: 1px var(--white);
   paint-order: stroke fill; */
-  color: transparent;
+  color: transparent !important;
 }
 .trending-tracks-item-index::before {
   content: "#" !important;
   margin-right: -3px;
 }
 .trending-tracks .trending-tracks-item-index {
-  margin-left: -6px;
-  z-index: 100;
-  margin-bottom: -32px;
-  font-size: 2.6em;
+  margin-left: -6px !important;
+  z-index: 100 !important;
+  margin-bottom: -32px !important;
+  font-size: 2.6em !important;
   /* text-shadow: 1px 1px 4px var(--gray); */
 }
 
@@ -1181,19 +1206,19 @@ h1.header-new-title {
 
 ._buffer-reset,
 .sidebar-heading {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .sidebar-group-heading {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .resource-list--sidebar-item-name {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .js-link-block.globalchart-item {
-  background-color: black;
+  background-color: var(--black);
   box-shadow: 0 1px var(--black), inset 0 -1px var(--black);
 }
 
@@ -1208,7 +1233,7 @@ h1.header-new-title {
 .events-filter-recommended,
 .dropdown-menu-clickable-button:focus,
 .dropdown-menu-clickable-button:hover {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .events-filters {
@@ -1239,7 +1264,7 @@ h1.header-new-title {
 .link-block a,
 .link-block button,
 .link-block a:hover {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .event-metadata {
@@ -1252,7 +1277,7 @@ h1.header-new-title {
 
 .events-list-sidebar .events-list-item-date-icon-month,
 .events-list .events-list-item-date-icon-month {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .events-list-item-venue--city,
@@ -1322,7 +1347,7 @@ td.events-list-item-art {
 }
 
 .text-18 {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .artist-similar-artists-sidebar-item-name a,
@@ -1398,13 +1423,12 @@ td.events-list-item-art {
 }
 
 .date-range-picker-presets a {
-  color: var(--white);
+  color: var(--white) !important;
 }
-
 .date-range-picker-preset--selected a,
 .date-range-picker-preset--selected a:focus,
 .date-range-picker-preset--selected a:hover {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .header-metadata-item {
@@ -1434,13 +1458,13 @@ body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed
 body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover:hover,
 body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:focus,
 [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn {
-  background-color: var(--red);
-  color: var(--white);
+  background-color: var(--red) !important;
+  color: var(--white) !important;
 }
 [data-toggle-button-current-state="followed"] .user-list-follower-btn,
 [data-toggle-button-current-state="followed"] .user-list-follower-btn:focus {
   background-color: var(--green) !important;
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .dropdown-menu-clickable-item:hover,
@@ -1518,7 +1542,7 @@ a.secondary-nav-item-link:hover::after {
     background-color: var(--gray);
     color: var(--white);
     width: 96px;
-    transition: scale 0.2s ease, background-color 0.2s ease, color 0.2s ease, filter 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, filter 0.2s ease;
   }
 
   .header--with-avatar .header-follower-btn:hover {
@@ -1532,7 +1556,7 @@ a.secondary-nav-item-link:hover::after {
 }
 
 .tasteometer-donut-base {
-  fill: var(--gray);
+  fill: var(--gray) !important;
 }
 
 /* ========== SIMILAR ARTISTS ========== */
@@ -1753,8 +1777,8 @@ a.secondary-nav-item-link:hover::after {
 .scrobble-stats-info-tooltip,
 .events-filter-location-dropdown,
 .date-picker-content {
-  background-color: var(--gray-dark);
-  color: var(--white);
+  background-color: var(--gray-dark) !important;
+  color: var(--white) !important;
 }
 
 .shout-user a,
@@ -1766,8 +1790,13 @@ a.secondary-nav-item-link:hover::after {
 }
 .navlist-hidden-list a:active,
 body:not([data-whatinput="touch"]) .navlist-hidden-list a:focus,
-body:not([data-whatinput="touch"]) .navlist-hidden-list a:hover {
-  background: var(--white);
+body:not([data-whatinput="touch"]) .navlist-hidden-list a:hover,
+.dropdown-menu-clickable-item:active,
+body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:focus,
+body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:hover,
+.date-range-picker-presets a:focus,
+.date-range-picker-presets a:hover {
+  background: var(--white) !important;
   color: var(--black) !important;
 }
 
@@ -1810,12 +1839,16 @@ table.table th,
 .responsive-table th,
 .events-list-anhv1 td,
 .events-list-anhv1 th {
-  box-shadow: inset 0 -1px var(--gray);
+  box-shadow: inset 0 -1px var(--gray) !important;
 }
 .responsive-table tr:nth-child(2n) td,
 table.table tr:nth-child(2n) td {
-  background-color: var(--gray);
-  color: var(--white);
+  background-color: var(--gray) !important;
+  color: var(--white) !important;
+}
+.content-form.ignore-list-form .ignore-list,
+.responsive-table {
+  color: var(--white) !important;
 }
 
 .api-session-app-description {
@@ -1981,7 +2014,7 @@ tspan {
 }
 
 .user-dashboard-catalogue-item-name.user-dashboard-catalogue-item-link.link-block-target {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .user-dashboard-catalogue-item-artist-name.user-dashboard-catalogue-item-link {
