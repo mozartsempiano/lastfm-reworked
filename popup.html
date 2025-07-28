@@ -120,6 +120,12 @@
           </label>
         </div>
         <div class="option">
+          <label for="compactButtons">
+            Compact buttons
+            <input type="checkbox" id="compactButtons" checked />
+          </label>
+        </div>
+        <div class="option">
           <label for="hideUpsells">
             Hide upsells
             <input type="checkbox" id="hideUpsells" checked />
@@ -130,8 +136,9 @@
             Main color
             <select id="mainColor">
               <option value="default">Default</option>
-              <option value="softer-red">Softer Red</option>
+              <option value="brighter-red">Brighter Red</option>
               <option value="blue">Blue</option>
+              <option value="pink">Pink</option>
             </select>
           </label>
         </div>
@@ -152,11 +159,26 @@
             <input type="checkbox" id="hideBuyButtons" checked />
           </label>
         </div>
-        <div class="option">
-          <label for="hideSidebarContent">
-            Hide sidebar content
-            <input type="checkbox" id="hideSidebarContent" checked />
-          </label>
+        <div style="margin-left: 16px; margin-top: 8px">
+          <div style="font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--gray-lighter)">Sidebar</div>
+          <div class="option">
+            <label for="hideSidebarStations">
+              Hide play buttons
+              <input type="checkbox" id="hideSidebarStations" checked />
+            </label>
+          </div>
+          <div class="option">
+            <label for="hideSidebarProgress">
+              Hide progress
+              <input type="checkbox" id="hideSidebarProgress" checked />
+            </label>
+          </div>
+          <div class="option">
+            <label for="hideSidebarLabs">
+              Hide Labs
+              <input type="checkbox" id="hideSidebarLabs" checked />
+            </label>
+          </div>
         </div>
       </div>
       <hr />
@@ -232,6 +254,18 @@
           <label for="compactTags">
             Compact Tags
             <input type="checkbox" id="compactTags" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="hideDeletedShouts">
+            Hide deleted shouts
+            <input type="checkbox" id="hideDeletedShouts" />
+          </label>
+        </div>
+        <div class="option">
+          <label for="invertShoutActions">
+            Invert shout actions order (vote first)
+            <input type="checkbox" id="invertShoutActions" checked />
           </label>
         </div>
       </div>

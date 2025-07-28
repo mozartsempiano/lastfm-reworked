@@ -1,0 +1,29 @@
+v1.3.1
+New:
+- Rework das recomendações na home.
+- Substituídos diversos ícones por versões atualizadas em SVG.
+- CSS mais organizado para a seção "álbuns similares" e "álbuns" nas páginas de álbuns e artistas.
+- Adicionadas diversas novas animações pelo site.
+- Adicionada opção "Hide deleted shouts".
+- Adicionada opção "Invert shout actions order".
+- Adicionada opção "Compact buttons".
+- Adicionado feedback visual no contador de caracteres na caixa de texto da shoutbox.
+- Visual atualizado para as ações nos houts.
+Changes:
+- Trocadas as cores ao passar o cursor em listening reports no perfil do usuário.
+- Alteradas cores dos ícones das recomendações na home.
+- Levemente alteradas as cores das bordas dos ícones de redes sociais.
+- A opção "Hide sidebar content" agora foi dividida em três opções individuais: "Hide Labs", "Hide progress" e "Hide play buttons".
+- Subtituída variável de cor principal para --main-color, a fim de garantir maior organização do código.
+- Adicionada borda suave aos dropdowns.
+- Rework dos dropdowns de configuração.
+- Rework da página de configuração.
+- Cor cinza claro alterada levemente.
+Fixes:
+- Uniformização e correção da posição e altura das barras abaixo das abas selecionadas nas navbars em diferentes páginas.
+- Corrigido CSS do dropdown "Share this chart".
+- Corrigida cor dos botões circulares de play e de compra, uniformizando-os.
+- Corrigido CSS dos modals e adiciona animação fade-in quando são abertos.
+- Agora "rounded borders" afeta a preview de vídeo na página do artista.
+- Corrigidos mais erros de compatibilidade no Chrome.
+    - Cor de fundo das notificações.

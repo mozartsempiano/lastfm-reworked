@@ -1,0 +1,76 @@
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências (se usar Node.js futuramente)
+node_modules/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# Arquivos de build/distribuição
+dist/
+build/
+*.zip
+*.crx
+*.xpi
+
+# Arquivos de desenvolvimento
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos temporários do Git
+*.orig
+*.rej
+
+# Arquivos de backup
+*.bak
+*.tmp
+*.temp
+
+# Arquivos específicos do projeto
+# (descomente se necessário)
+# manifest-backup.json
+# test-files/
+# screenshots/
+
+# Arquivos de sistema Windows
+*.lnk
+ehthumbs.db
+
+# Arquivos de sistema macOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Arquivos de sistema Linux
+*~
+.nfs*
+
+# Arquivos de desenvolvimento web
+.sass-cache/
+*.css.map
+*.js.map
+
+# Arquivos de certificados e chaves (nunca versionar)
+*.key
+*.pem
+*.crt
+*.p12

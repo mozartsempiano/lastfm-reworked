@@ -5,7 +5,9 @@ const defaultSettings = {
   squareAvatars: true,
   hidePlayButtons: true,
   hideBuyButtons: true,
-  hideSidebarContent: true,
+  hideSidebarLabs: true,
+  hideSidebarProgress: true,
+  hideSidebarStations: true,
   hideUpsells: true,
   hideNavReports: false,
   hideNavPlaylists: false,
@@ -20,6 +22,9 @@ const defaultSettings = {
   useHelvetica: true,
   compactMode: true,
   compactTags: false,
+  compactButtons: true,
+  hideDeletedShouts: false,
+  invertShoutActions: true,
   mainColor: "default",
 };
 
@@ -29,6 +34,14 @@ document.querySelectorAll(".advert, .ad").forEach((el) => el.remove());
 // Observers
 let chartlistObserver = null;
 let bodyObserver = null;
+let shoutObserver = null;
+let bodyClassObserver = null;
+
+// Store current settings state
+let currentSettings = {
+  hideDeletedShouts: false,
+  invertShoutActions: true,
+};
 
 // ===================
 // Formatting and observation functions
@@ -73,9 +86,31 @@ function observeBodyForChartlist() {
 }
 
 function onPageChange() {
-  observeChartlist();
-  observeBodyForChartlist();
-  observeSecondaryNav();
+  try {
+    // Initialize all observers with error handling
+    observeChartlist();
+    observeBodyForChartlist();
+    observeSecondaryNav();
+    observeShoutChanges();
+    observeCharacterCount();
+
+    // Start body class protection
+    startBodyClassObserver();
+
+    // Ensure shout settings are applied after page change
+    setTimeout(() => {
+      reapplyShoutSettings();
+    }, 200);
+
+    // Additional safety check after longer delay
+    setTimeout(() => {
+      if (currentSettings.hideDeletedShouts || currentSettings.invertShoutActions) {
+        reapplyShoutSettings();
+      }
+    }, 1000);
+  } catch (error) {
+    console.warn("Error in onPageChange:", error);
+  }
 }
 
 // ===================
@@ -111,19 +146,22 @@ function setHideBuyButtons(enabled) {
   });
 }
 
-function setHideSidebarContent(enabled) {
-  document.querySelectorAll(".col-sidebar .stationlinks, .col-sidebar .your-progress, .col-sidebar .labs-cta").forEach((el) => {
+function setHideSidebarLabs(enabled) {
+  document.querySelectorAll(".col-sidebar .labs-cta").forEach((el) => {
     el.style.display = enabled ? "none" : "";
   });
+}
 
-  // Adiciona/remover margin-top: 0 para .mpu-subscription-upsell
-  // document.querySelectorAll(".mpu-subscription-upsell").forEach((el) => {
-  //   if (enabled) {
-  //     el.style.setProperty("margin-top", "0", "important");
-  //   } else {
-  //     el.style.removeProperty("margin-top");
-  //   }
-  // });
+function setHideSidebarProgress(enabled) {
+  document.querySelectorAll(".col-sidebar .your-progress").forEach((el) => {
+    el.style.display = enabled ? "none" : "";
+  });
+}
+
+function setHideSidebarStations(enabled) {
+  document.querySelectorAll(".col-sidebar .stationlinks").forEach((el) => {
+    el.style.display = enabled ? "none" : "";
+  });
 }
 
 function sethideUpsells(enabled) {
@@ -135,9 +173,14 @@ function sethideUpsells(enabled) {
       el.style.display = enabled ? "none" : "";
     });
 
-  // Also set margin-top: 0 !important for section.share-desktop only if hideSidebarContent is also enabled
-  browserAPI.storage.local.get({ hideSidebarContent: null }, (data) => {
-    if (data.hideSidebarContent !== null ? data.hideSidebarContent : true) {
+  // Set margin-top: 0 !important for section.share-desktop if any sidebar content is hidden
+  browserAPI.storage.local.get({ hideSidebarLabs: null, hideSidebarProgress: null, hideSidebarStations: null }, (data) => {
+    const anyHidden =
+      (data.hideSidebarLabs !== null ? data.hideSidebarLabs : true) ||
+      (data.hideSidebarProgress !== null ? data.hideSidebarProgress : true) ||
+      (data.hideSidebarStations !== null ? data.hideSidebarStations : true);
+
+    if (anyHidden) {
       document.querySelectorAll("section.share-desktop").forEach((el) => {
         if (enabled) {
           el.style.setProperty("margin-top", "0", "important");
@@ -146,7 +189,7 @@ function sethideUpsells(enabled) {
         }
       });
     } else {
-      // If hideSidebarContent is not enabled, always remove margin-top
+      // If no sidebar content is hidden, always remove margin-top
       document.querySelectorAll("section.share-desktop").forEach((el) => {
         el.style.removeProperty("margin-top");
       });
@@ -191,23 +234,47 @@ function setCompactMode(enabled) {
 function setMainColor(value) {
   const root = document.documentElement;
   switch (value) {
-    case "softer-red":
-      root.style.setProperty("--red", "#BE3144");
-      root.style.setProperty("--red-dark", "#872341");
+    default:
+      root.style.setProperty("--main-color", "#BE3144");
+      root.style.setProperty("--main-color-dark", "#872341");
+      break;
+    case "brighter-red":
+      root.style.setProperty("--main-color", "#BA0000");
+      root.style.setProperty("--main-color-dark", "#8E0000");
       break;
     case "blue":
-      root.style.setProperty("--red", "#5C809E");
-      root.style.setProperty("--red-dark", "#3282B8");
+      root.style.setProperty("--main-color", "#5C809E");
+      root.style.setProperty("--main-color-dark", "#3282B8");
       break;
-    default: // Default
-      root.style.setProperty("--red", "#BA0000");
-      root.style.setProperty("--red-dark", "#8E0000");
+    case "pink":
+      root.style.setProperty("--main-color", "#C562AF");
+      root.style.setProperty("--main-color-dark", "#B33791");
       break;
   }
 }
 
 function setCompactTags(enabled) {
   document.body.classList.toggle("compact-tags", enabled);
+}
+
+function setCompactButtons(enabled) {
+  document.body.classList.toggle("compact-buttons", enabled);
+}
+
+function setHideDeletedShouts(enabled) {
+  currentSettings.hideDeletedShouts = enabled;
+  document.body.classList.toggle("hide-deleted-shouts", enabled);
+
+  // Ensure body class observer is active to prevent unwanted removals
+  startBodyClassObserver();
+}
+
+function setInvertShoutActions(enabled) {
+  currentSettings.invertShoutActions = enabled;
+  document.body.classList.toggle("invert-shout-actions", enabled);
+
+  // Ensure body class observer is active to prevent unwanted removals
+  startBodyClassObserver();
 }
 
 // ===================
@@ -300,6 +367,256 @@ function observeSecondaryNav() {
 }
 
 // ===================
+// Shout settings reapplication and observation
+// ===================
+
+function reapplyShoutSettings() {
+  // Force reapplication of current settings to maintain state after DOM changes
+  try {
+    console.log("LastFM Reworked: Reapplying shout settings...", {
+      hideDeletedShouts: currentSettings.hideDeletedShouts,
+      invertShoutActions: currentSettings.invertShoutActions,
+    });
+
+    // Remove existing classes first to ensure clean state
+    document.body.classList.remove("hide-deleted-shouts", "invert-shout-actions");
+
+    // Reapply based on current settings
+    if (currentSettings.hideDeletedShouts) {
+      document.body.classList.add("hide-deleted-shouts");
+    }
+    if (currentSettings.invertShoutActions) {
+      document.body.classList.add("invert-shout-actions");
+    }
+
+    // Verify application and retry if needed
+    setTimeout(() => {
+      let retryNeeded = false;
+
+      if (currentSettings.hideDeletedShouts && !document.body.classList.contains("hide-deleted-shouts")) {
+        document.body.classList.add("hide-deleted-shouts");
+        retryNeeded = true;
+      }
+
+      if (currentSettings.invertShoutActions && !document.body.classList.contains("invert-shout-actions")) {
+        document.body.classList.add("invert-shout-actions");
+        retryNeeded = true;
+      }
+
+      if (retryNeeded) {
+        console.log("LastFM Reworked: Retry needed for shout settings application");
+
+        // Final verification after additional delay
+        setTimeout(() => {
+          if (currentSettings.hideDeletedShouts && !document.body.classList.contains("hide-deleted-shouts")) {
+            document.body.classList.add("hide-deleted-shouts");
+          }
+          if (currentSettings.invertShoutActions && !document.body.classList.contains("invert-shout-actions")) {
+            document.body.classList.add("invert-shout-actions");
+          }
+        }, 100);
+      }
+    }, 50);
+  } catch (error) {
+    console.warn("LastFM Reworked: Error reapplying shout settings:", error);
+
+    // Fallback retry
+    setTimeout(() => {
+      try {
+        if (currentSettings.hideDeletedShouts) {
+          document.body.classList.add("hide-deleted-shouts");
+        }
+        if (currentSettings.invertShoutActions) {
+          document.body.classList.add("invert-shout-actions");
+        }
+      } catch (fallbackError) {
+        console.warn("LastFM Reworked: Fallback retry also failed:", fallbackError);
+      }
+    }, 200);
+  }
+}
+
+function observeShoutChanges() {
+  // Stop existing observer if any
+  if (shoutObserver) {
+    shoutObserver.disconnect();
+    shoutObserver = null;
+  }
+
+  // Look for multiple possible shout containers
+  const possibleContainers = [
+    ".shout-list",
+    ".shoutbox",
+    "#shoutbox",
+    ".shout-container",
+    ".shoutbox-container",
+    "[data-shout-container]",
+    '[class*="shout"]',
+    ".js-shout-list",
+  ];
+
+  let shoutContainer = null;
+  for (const selector of possibleContainers) {
+    shoutContainer = document.querySelector(selector);
+    if (shoutContainer) {
+      console.log(`LastFM Reworked: Found shout container using selector: ${selector}`);
+      break;
+    }
+  }
+
+  // Fallback to document.body if no specific container found
+  if (!shoutContainer) {
+    shoutContainer = document.body;
+    console.log("LastFM Reworked: Using document.body as shout container fallback");
+  }
+
+  if (shoutContainer) {
+    let reapplyTimeout = null;
+    let lastMutationTime = Date.now();
+
+    shoutObserver = new MutationObserver((mutations) => {
+      let shouldReapply = false;
+      const currentTime = Date.now();
+
+      mutations.forEach((mutation) => {
+        // Check if shout-related elements were added, removed, or modified
+        if (mutation.type === "childList") {
+          // Check added nodes
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1) {
+              if (isShoutRelatedElement(node)) {
+                shouldReapply = true;
+                console.log("LastFM Reworked: Detected shout-related element added");
+              }
+            }
+          });
+
+          // Check removed nodes (might affect styling)
+          mutation.removedNodes.forEach((node) => {
+            if (node.nodeType === 1) {
+              if (isShoutRelatedElement(node)) {
+                shouldReapply = true;
+                console.log("LastFM Reworked: Detected shout-related element removed");
+              }
+            }
+          });
+        }
+
+        // Check attribute changes that might affect shout elements
+        if (mutation.type === "attributes" && mutation.target.nodeType === 1) {
+          if (
+            isShoutRelatedElement(mutation.target) ||
+            mutation.attributeName === "class" ||
+            mutation.attributeName === "data-shout-id"
+          ) {
+            shouldReapply = true;
+            console.log("LastFM Reworked: Detected shout-related attribute change");
+          }
+        }
+      });
+
+      if (shouldReapply && currentTime - lastMutationTime > 100) {
+        lastMutationTime = currentTime;
+
+        // Clear previous timeout to avoid multiple rapid reapplications
+        if (reapplyTimeout) {
+          clearTimeout(reapplyTimeout);
+        }
+
+        // Debounce reapplication to avoid performance issues
+        reapplyTimeout = setTimeout(() => {
+          console.log("LastFM Reworked: Reapplying shout settings due to DOM changes");
+          reapplyShoutSettings();
+          reapplyTimeout = null;
+        }, 100);
+      }
+    });
+
+    shoutObserver.observe(shoutContainer, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class", "data-shout-id", "style"],
+    });
+
+    console.log("LastFM Reworked: Shout observer started successfully");
+  }
+}
+
+function isShoutRelatedElement(element) {
+  if (!element || !element.classList) return false;
+
+  const shoutRelatedClasses = [
+    "shout",
+    "shout-list-item",
+    "shout-container",
+    "shout-actions",
+    "shout--deleted",
+    "vote-button-toggle",
+    "shout-more-actions",
+    "js-shout",
+    "shout-reply",
+    "shout-vote",
+  ];
+
+  // Check if element has shout-related classes
+  for (const className of shoutRelatedClasses) {
+    if (element.classList.contains(className)) {
+      return true;
+    }
+  }
+
+  // Check if element contains shout-related children
+  for (const className of shoutRelatedClasses) {
+    if (element.querySelector(`.${className}`)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function startBodyClassObserver() {
+  // Stop existing body class observer if any
+  if (bodyClassObserver) {
+    bodyClassObserver.disconnect();
+    bodyClassObserver = null;
+  }
+
+  // Create observer to monitor body class changes
+  bodyClassObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === "attributes" && mutation.attributeName === "class") {
+        // Check if our critical classes were removed
+        const bodyClasses = document.body.classList;
+
+        let needsReapplication = false;
+
+        if (currentSettings.hideDeletedShouts && !bodyClasses.contains("hide-deleted-shouts")) {
+          needsReapplication = true;
+        }
+
+        if (currentSettings.invertShoutActions && !bodyClasses.contains("invert-shout-actions")) {
+          needsReapplication = true;
+        }
+
+        if (needsReapplication) {
+          // Reapply settings immediately
+          setTimeout(() => {
+            reapplyShoutSettings();
+          }, 10);
+        }
+      }
+    });
+  });
+
+  bodyClassObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+}
+
+// ===================
 // Function to apply all main hides
 // ===================
 
@@ -308,13 +625,17 @@ function applyAllHides() {
     {
       hidePlayButtons: null,
       hideBuyButtons: null,
-      hideSidebarContent: null,
+      hideSidebarLabs: null,
+      hideSidebarProgress: null,
+      hideSidebarStations: null,
       hideUpsells: null,
     },
     (localData) => {
       setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
       setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-      setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
+      setHideSidebarLabs(localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true);
+      setHideSidebarProgress(localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true);
+      setHideSidebarStations(localData.hideSidebarStations !== null ? localData.hideSidebarStations : true);
       sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
     }
   );
@@ -329,7 +650,9 @@ browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
   if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
   if (msg.type === "setHideBuyButtons") setHideBuyButtons(msg.enabled);
-  if (msg.type === "setHideSidebarContent") setHideSidebarContent(msg.enabled);
+  if (msg.type === "setHideSidebarLabs") setHideSidebarLabs(msg.enabled);
+  if (msg.type === "setHideSidebarProgress") setHideSidebarProgress(msg.enabled);
+  if (msg.type === "setHideSidebarStations") setHideSidebarStations(msg.enabled);
   if (msg.type === "sethideUpsells") sethideUpsells(msg.enabled);
   if (msg.type === "setHideNavReports") setHideNavReports(msg.enabled);
   if (msg.type === "setHideNavPlaylists") setHideNavPlaylists(msg.enabled);
@@ -345,6 +668,9 @@ browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setCompactMode") setCompactMode(msg.enabled);
   if (msg.type === "setMainColor") setMainColor(msg.value);
   if (msg.type === "setCompactTags") setCompactTags(msg.enabled);
+  if (msg.type === "setCompactButtons") setCompactButtons(msg.enabled);
+  if (msg.type === "setHideDeletedShouts") setHideDeletedShouts(msg.enabled);
+  if (msg.type === "setInvertShoutActions") setInvertShoutActions(msg.enabled);
 });
 
 // ===================
@@ -374,7 +700,9 @@ function applyAllSettings() {
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
-      hideSidebarContent: null,
+      hideSidebarLabs: null,
+      hideSidebarProgress: null,
+      hideSidebarStations: null,
       hideUpsells: null,
       hideNavReports: null,
       hideNavPlaylists: null,
@@ -390,40 +718,297 @@ function applyAllSettings() {
       compactMode: null,
       compactTags: null,
       mainColor: "default",
+      compactButtons: null,
+      hideDeletedShouts: null,
+      invertShoutActions: null,
     },
     (localData) => {
-      setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
-      setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
-      setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
-      setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
-      setHideSidebarContent(localData.hideSidebarContent !== null ? localData.hideSidebarContent : true);
-      sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
-      setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
-      setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
-      setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
-      setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
-      setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
-      setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
-      setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
-      setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
-      setHideActions(localData.hideActions !== null ? localData.hideActions : false);
-      setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
-      setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
-      setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
-      setMainColor(localData.mainColor || "default");
-      setCompactTags(localData.compactTags !== null ? localData.compactTags : true);
+      try {
+        setRoundedBorders(localData.roundedBorders !== null ? localData.roundedBorders : true);
+        setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
+        setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
+        setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+        setHideSidebarLabs(localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true);
+        setHideSidebarProgress(localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true);
+        setHideSidebarStations(localData.hideSidebarStations !== null ? localData.hideSidebarStations : true);
+        sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
+        setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
+        setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
+        setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
+        setHideNavObsessions(localData.hideNavObsessions !== null ? localData.hideNavObsessions : false);
+        setHideNavEvents(localData.hideNavEvents !== null ? localData.hideNavEvents : false);
+        setHideNavNeighbours(localData.hideNavNeighbours !== null ? localData.hideNavNeighbours : false);
+        setHideNavTags(localData.hideNavTags !== null ? localData.hideNavTags : false);
+        setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
+        setHideActions(localData.hideActions !== null ? localData.hideActions : false);
+        setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
+        setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
+        setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
+        setMainColor(localData.mainColor || "default");
+        setCompactTags(localData.compactTags !== null ? localData.compactTags : false);
+        setCompactButtons(localData.compactButtons !== null ? localData.compactButtons : true);
+
+        // Apply shout settings and update current state
+        const hideDeletedShouts = localData.hideDeletedShouts !== null ? localData.hideDeletedShouts : false;
+        const invertShoutActions = localData.invertShoutActions !== null ? localData.invertShoutActions : true;
+
+        setHideDeletedShouts(hideDeletedShouts);
+        setInvertShoutActions(invertShoutActions);
+      } catch (error) {
+        console.warn("Error applying settings:", error);
+      }
     }
   );
+}
+
+// Function to handle .text-18 elements with only whitespace
+function handleEmptyText18Elements() {
+  document.querySelectorAll(".text-18").forEach((element) => {
+    const hasRealContent = element.textContent.trim().length > 0 || element.children.length > 0;
+
+    if (hasRealContent) {
+      element.classList.add("has-content");
+    } else {
+      element.classList.remove("has-content");
+    }
+  });
+}
+
+// Function to handle character count coloring in comment forms
+function handleCharacterCountColors() {
+  try {
+    const helpTexts = document.querySelectorAll(".form-row-help-text.js-field-help-text");
+
+    helpTexts.forEach((helpText) => {
+      const charCountSpan = helpText.querySelector(".js-char-count");
+
+      if (charCountSpan) {
+        const charCount = parseInt(charCountSpan.textContent) || 0;
+
+        // Remove existing classes
+        helpText.classList.remove("char-count-warning", "char-count-danger");
+
+        // Apply color based on character count
+        if (charCount >= 1000) {
+          helpText.classList.add("char-count-danger");
+          console.log(`LastFM Reworked: Character count at danger level: ${charCount}`);
+        } else if (charCount >= 750) {
+          helpText.classList.add("char-count-warning");
+          console.log(`LastFM Reworked: Character count at warning level: ${charCount}`);
+        }
+        // Default gray-light color applies when no classes are added
+      }
+    });
+  } catch (error) {
+    console.warn("LastFM Reworked: Error in handleCharacterCountColors:", error);
+  }
+}
+
+// Observer for character count changes
+let charCountObserver = null;
+
+function observeCharacterCount() {
+  // Stop existing observer if any
+  if (charCountObserver) {
+    charCountObserver.disconnect();
+    charCountObserver = null;
+  }
+
+  // Look for comment form containers and character count elements specifically
+  const targets = [
+    ...document.querySelectorAll('.shout-form, .js-shout-form, [class*="shout-form"]'),
+    ...document.querySelectorAll(".form-row-help-text, .js-field-help-text"),
+    ...document.querySelectorAll(".js-char-count"),
+    document.body, // Fallback to body if specific elements not found
+  ].filter(Boolean);
+
+  if (targets.length > 0) {
+    charCountObserver = new MutationObserver((mutations) => {
+      let shouldUpdate = false;
+
+      mutations.forEach((mutation) => {
+        // Check if character count elements were modified
+        if (mutation.type === "childList" || mutation.type === "characterData") {
+          const target = mutation.target;
+
+          // Check if the mutation affects character count elements
+          if (
+            target.classList?.contains("js-char-count") ||
+            target.closest?.(".js-char-count") ||
+            target.closest?.(".form-row-help-text") ||
+            target.querySelector?.(".js-char-count") ||
+            (mutation.addedNodes &&
+              Array.from(mutation.addedNodes).some(
+                (node) =>
+                  node.nodeType === 1 && (node.classList?.contains("js-char-count") || node.querySelector?.(".js-char-count"))
+              ))
+          ) {
+            shouldUpdate = true;
+          }
+        }
+
+        // Also check for attribute changes on relevant elements
+        if (
+          mutation.type === "attributes" &&
+          (mutation.target.classList?.contains("js-char-count") || mutation.target.closest?.(".form-row-help-text"))
+        ) {
+          shouldUpdate = true;
+        }
+      });
+
+      if (shouldUpdate) {
+        // Small delay to ensure DOM is updated
+        setTimeout(handleCharacterCountColors, 25);
+      }
+    });
+
+    // Observe each target
+    targets.forEach((target) => {
+      if (target && target.nodeType === 1) {
+        charCountObserver.observe(target, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+          attributes: true,
+          attributeFilter: ["class", "data-count", "value"],
+        });
+      }
+    });
+
+    // Initial color application
+    setTimeout(handleCharacterCountColors, 100);
+
+    console.log("LastFM Reworked: Character count observer started");
+  }
 }
 
 // Function to monitor DOM changes
 function observeDOMChanges() {
   const observer = new MutationObserver(() => {
     applyAllSettings(); // Reapply settings whenever the DOM changes
+    handleEmptyText18Elements(); // Handle .text-18 elements
+    handleCharacterCountColors(); // Handle character count colors
   });
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+// Periodic check to ensure settings remain applied
+function startPeriodicCheck() {
+  setInterval(() => {
+    try {
+      // Check if critical classes are still applied
+      const bodyClasses = document.body.classList;
+      let needsReapplication = false;
+
+      if (currentSettings.hideDeletedShouts && !bodyClasses.contains("hide-deleted-shouts")) {
+        needsReapplication = true;
+      }
+
+      if (currentSettings.invertShoutActions && !bodyClasses.contains("invert-shout-actions")) {
+        needsReapplication = true;
+      }
+
+      if (needsReapplication) {
+        console.log("LastFM Reworked: Reapplying shout settings due to periodic check");
+        reapplyShoutSettings();
+      }
+
+      // Additional check: verify if shout containers exist and apply settings
+      const shoutContainers = document.querySelectorAll('.shout-list, .shoutbox, .shout-container, [class*="shout"]');
+      if (shoutContainers.length > 0 && (currentSettings.hideDeletedShouts || currentSettings.invertShoutActions)) {
+        // Force reapplication on containers
+        setTimeout(() => {
+          reapplyShoutSettings();
+        }, 100);
+      }
+    } catch (error) {
+      console.warn("LastFM Reworked: Error in periodic check:", error);
+    }
+  }, 1500); // Check every 1.5 seconds for more responsiveness
+}
+
+// Enhanced initialization function
+function initializeExtension() {
+  try {
+    // Apply all settings first
+    applyAllSettings();
+
+    // Handle text elements
+    handleEmptyText18Elements();
+
+    // Handle character count colors
+    handleCharacterCountColors();
+
+    // Start DOM monitoring
+    observeDOMChanges();
+
+    // Start page change monitoring
+    onPageChange();
+
+    // Start periodic verification
+    startPeriodicCheck();
+
+    // Add window focus event listeners to reapply settings
+    window.addEventListener("focus", () => {
+      setTimeout(() => {
+        if (currentSettings.hideDeletedShouts || currentSettings.invertShoutActions) {
+          reapplyShoutSettings();
+        }
+        handleCharacterCountColors();
+      }, 100);
+    });
+
+    // Add visibility change listener
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        setTimeout(() => {
+          if (currentSettings.hideDeletedShouts || currentSettings.invertShoutActions) {
+            reapplyShoutSettings();
+          }
+          handleCharacterCountColors();
+        }, 100);
+      }
+    });
+
+    // Add input event listeners for character count monitoring
+    document.addEventListener("input", (event) => {
+      if (event.target.matches('textarea, input[type="text"]')) {
+        // Check if this input is related to a form with character counting
+        const form = event.target.closest("form, .shout-form, .js-shout-form");
+        if (form && form.querySelector(".js-char-count")) {
+          setTimeout(handleCharacterCountColors, 10);
+        }
+      }
+    });
+
+    // Add keyup event listener as backup
+    document.addEventListener("keyup", (event) => {
+      if (event.target.matches('textarea, input[type="text"]')) {
+        const form = event.target.closest("form, .shout-form, .js-shout-form");
+        if (form && form.querySelector(".js-char-count")) {
+          setTimeout(handleCharacterCountColors, 10);
+        }
+      }
+    });
+
+    // Additional initialization after DOM is ready
+    setTimeout(() => {
+      applyAllSettings();
+      reapplyShoutSettings();
+    }, 500);
+
+    // Final safety check after longer delay
+    setTimeout(() => {
+      if (currentSettings.hideDeletedShouts || currentSettings.invertShoutActions) {
+        reapplyShoutSettings();
+      }
+    }, 2000);
+
+    console.log("LastFM Reworked: Extension initialized successfully");
+  } catch (error) {
+    console.warn("LastFM Reworked: Error during extension initialization:", error);
+  }
+}
+
 // Initialization
-applyAllSettings(); // Apply settings when the page loads
-observeDOMChanges(); // Monitor DOM changes
+initializeExtension();

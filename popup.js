@@ -2,10 +2,13 @@ const browserAPI = typeof chrome !== "undefined" ? chrome : browser;
 
 document.addEventListener("DOMContentLoaded", () => {
   const roundedCheckbox = document.getElementById("roundedBorders");
+  const compactButtons = document.getElementById("compactButtons");
   const squareCheckbox = document.getElementById("squareAvatars");
   const hidePlayButtons = document.getElementById("hidePlayButtons");
   const hideBuyButtons = document.getElementById("hideBuyButtons");
-  const hideSidebarContent = document.getElementById("hideSidebarContent");
+  const hideSidebarLabs = document.getElementById("hideSidebarLabs");
+  const hideSidebarProgress = document.getElementById("hideSidebarProgress");
+  const hideSidebarStations = document.getElementById("hideSidebarStations");
   const hideUpsells = document.getElementById("hideUpsells");
   const hideNavReports = document.getElementById("hideNavReports");
   const hideNavPlaylists = document.getElementById("hideNavPlaylists");
@@ -20,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const useHelvetica = document.getElementById("useHelvetica");
   const compactMode = document.getElementById("compactMode");
   const compactTags = document.getElementById("compactTags");
+  const hideDeletedShouts = document.getElementById("hideDeletedShouts");
+  const invertShoutActions = document.getElementById("invertShoutActions");
   const mainColor = document.getElementById("mainColor");
 
   browserAPI.storage.local.get(
@@ -28,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
-      hideSidebarContent: null,
+      hideSidebarLabs: null,
+      hideSidebarProgress: null,
+      hideSidebarStations: null,
       hideUpsells: null,
       hideNavReports: null,
       hideNavPlaylists: null,
@@ -43,14 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
       useHelvetica: null,
       compactMode: null,
       compactTags: null,
+      hideDeletedShouts: null,
+      invertShoutActions: null,
       mainColor: "default",
+      compactButtons: null,
     },
     (localData) => {
       roundedCheckbox.checked = localData.roundedBorders !== null ? localData.roundedBorders : true;
       squareCheckbox.checked = localData.squareAvatars !== null ? localData.squareAvatars : true;
       hidePlayButtons.checked = localData.hidePlayButtons !== null ? localData.hidePlayButtons : true;
       hideBuyButtons.checked = localData.hideBuyButtons !== null ? localData.hideBuyButtons : true;
-      hideSidebarContent.checked = localData.hideSidebarContent !== null ? localData.hideSidebarContent : true;
+      hideSidebarLabs.checked = localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true;
+      hideSidebarProgress.checked = localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true;
+      hideSidebarStations.checked = localData.hideSidebarStations !== null ? localData.hideSidebarStations : true;
       hideUpsells.checked = localData.hideUpsells !== null ? localData.hideUpsells : true;
       hideNavReports.checked = localData.hideNavReports !== null ? localData.hideNavReports : false;
       hideNavPlaylists.checked = localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false;
@@ -65,6 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
       useHelvetica.checked = localData.useHelvetica !== null ? localData.useHelvetica : true;
       compactMode.checked = localData.compactMode !== null ? localData.compactMode : true;
       compactTags.checked = localData.compactTags !== null ? localData.compactTags : false;
+      compactButtons.checked = localData.compactButtons !== null ? localData.compactButtons : true;
+      hideDeletedShouts.checked = localData.hideDeletedShouts !== null ? localData.hideDeletedShouts : false;
+      invertShoutActions.checked = localData.invertShoutActions !== null ? localData.invertShoutActions : true;
       mainColor.value = localData.mainColor || "default";
     }
   );
@@ -76,7 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
       squareAvatars: squareCheckbox.checked,
       hidePlayButtons: hidePlayButtons.checked,
       hideBuyButtons: hideBuyButtons.checked,
-      hideSidebarContent: hideSidebarContent.checked,
+      hideSidebarLabs: hideSidebarLabs.checked,
+      hideSidebarProgress: hideSidebarProgress.checked,
+      hideSidebarStations: hideSidebarStations.checked,
       hideUpsells: hideUpsells.checked,
       hideNavReports: hideNavReports.checked,
       hideNavPlaylists: hideNavPlaylists.checked,
@@ -91,7 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
       useHelvetica: useHelvetica.checked,
       compactMode: compactMode.checked,
       compactTags: compactTags.checked,
+      hideDeletedShouts: hideDeletedShouts.checked,
+      invertShoutActions: invertShoutActions.checked,
       mainColor: mainColor.value,
+      compactButtons: compactButtons.checked,
     };
     console.log("Options data:", data);
     browserAPI.storage.local.set(data);
@@ -116,8 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: hideBuyButtons.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
-          type: "setHideSidebarContent",
-          enabled: hideSidebarContent.checked,
+          type: "setHideSidebarLabs",
+          enabled: hideSidebarLabs.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setHideSidebarProgress",
+          enabled: hideSidebarProgress.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setHideSidebarStations",
+          enabled: hideSidebarStations.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "sethideUpsells",
@@ -176,18 +204,33 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: compactTags.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setHideDeletedShouts",
+          enabled: hideDeletedShouts.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setInvertShoutActions",
+          enabled: invertShoutActions.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setMainColor",
           value: mainColor.value,
         });
       }
+      browserAPI.tabs.sendMessage(tabs[0].id, {
+        type: "setCompactButtons",
+        enabled: compactButtons.checked,
+      });
     });
   }
 
   roundedCheckbox.addEventListener("change", saveOptions);
+  compactButtons.addEventListener("change", saveOptions);
   squareCheckbox.addEventListener("change", saveOptions);
   hidePlayButtons.addEventListener("change", saveOptions);
   hideBuyButtons.addEventListener("change", saveOptions);
-  hideSidebarContent.addEventListener("change", saveOptions);
+  hideSidebarLabs.addEventListener("change", saveOptions);
+  hideSidebarProgress.addEventListener("change", saveOptions);
+  hideSidebarStations.addEventListener("change", saveOptions);
   hideUpsells.addEventListener("change", saveOptions);
   hideNavReports.addEventListener("change", saveOptions);
   hideNavPlaylists.addEventListener("change", saveOptions);
@@ -202,6 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
   useHelvetica.addEventListener("change", saveOptions);
   compactMode.addEventListener("change", saveOptions);
   compactTags.addEventListener("change", saveOptions);
+  hideDeletedShouts.addEventListener("change", saveOptions);
+  invertShoutActions.addEventListener("change", saveOptions);
   mainColor.addEventListener("change", () => {
     const data = {
       mainColor: mainColor.value,
