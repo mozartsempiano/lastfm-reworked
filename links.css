@@ -1,0 +1,162 @@
+/* ===================
+   LINKS
+   =================== */
+
+a {
+  text-decoration: none !important;
+}
+
+.link-block--hover * {
+  text-decoration: none !important;
+}
+
+a:not([class]),
+/* :not(.footer) a,
+:not(.navlist) a, */
+p a,
+.context a,
+.view-full-wiki a,
+.charts-nav-item a,
+a.artist-similar-sidebar-more,
+div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki,
+button.more-items,
+div.form-group--location div p button.mimic-link {
+  color: var(--blue-link) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+a:not([class]):hover,
+/* :not(.footer) a:hover,
+:not(.masthead-nav-wrap) a:hover, */
+p a:hover,
+.context a:hover,
+.view-full-wiki a:hover,
+.charts-nav-item a:hover,
+a.artist-similar-sidebar-more:hover,
+div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki:hover,
+button.more-items:hover,
+div.form-group--location div p button.mimic-link:hover {
+  color: var(--blue-link-hover) !important;
+}
+div.navlist-more-wrap div.navlist-hidden-list-wrap ul.navlist-hidden-list li a {
+  transition: none !important;
+}
+
+.chartlist-name a,
+.header-metadata-display a,
+.header-title a,
+.featured-item-details a,
+.footer a,
+.masthead-nav-wrap a,
+.navlist a,
+.chartlist-now-scrobbling a,
+.js-playlink-station,
+.listeners-section-track a,
+a.user-list-link,
+.grid-items-item .grid-items-item-details a,
+.recs-feed-inner-wrap a,
+div.recs-feed-cover-image-wrap h3.recs-feed-title a.link-block-target,
+.recs-feed-cover-link a,
+div.big-artist-list-item h3.big-artist-list-title a.link-block-target,
+h3.shout-user a.link-block-target,
+div.about-artist div div.about-artist-info h3.about-artist-name a,
+div.trending-tracks-item h3.trending-tracks-item-name a.link-block-target,
+div.trending-tracks-item p.trending-tracks-item-artist span a,
+div.similar-albums-item h3.similar-albums-item-name a.link-block-target,
+div.track-similar-tracks-item h3.track-similar-tracks-item-name a.link-block-target,
+div.listeners-section-item h3.listeners-section-item-name a,
+div.artist-top-albums-item h3.artist-top-albums-item-name a.link-block-target,
+div.artist-header-featured-items-item h3.artist-header-featured-items-item-name a.link-block-target,
+div.artist-similar-artists-sidebar-item h3.artist-similar-artists-sidebar-item-name a.link-block-target,
+div.catalogue-overview-similar-artists-item h3.catalogue-overview-similar-artists-item-name a.link-block-target,
+div.section-controls button.section-playlink,
+tr.events-list-item div.events-list-item-event--title a.link-block-target,
+tr.events-list-item td.events-list-item-attendees a.events-list-item-attendees-count,
+div.attendee-summary-user-inner-wrap a.link-block-target,
+div.resource-list--sidebar-item h3.resource-list--sidebar-item-name a.link-block-target,
+/* section.charts table.globalchart a.link-block-target, */
+section.charts table.globalchart a,
+div.music-more-artists-item h3.music-more-artists-item-name a.link-block-target,
+div.music-releases-item h3.music-releases-item-name a.link-block-target,
+div.music-featured-tag-item h4.music-featured-tag-item-name a.link-block-target,
+div.music-tags-featured a.music-featured-item-heading-link h3.music-featured-item-heading,
+div.music-featured-item p a.music-featured-tag-featured-artist-link,
+section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a,
+div.source-album-details h4.source-album-name a.link-block-target,
+table.events-list-sidebar a.events-list-item-event-name {
+  color: var(--white) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+div.track-similar-tracks-item p.track-similar-tracks-item-artist span a,
+div.similar-albums-item p.similar-albums-item-artist span a,
+div.source-album div.source-album-details p.source-album-artist span a,
+div.resource-list--sidebar-item p.resource-list--sidebar-item-artist span a,
+div.music-releases-item p.music-releases-item-artist span a {
+  color: var(--gray-light) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+.chartlist-name a:hover,
+.header-metadata-display a:hover,
+.header-title a:hover,
+.featured-item-details a:hover,
+.footer a:hover,
+.chartlist-now-scrobbling a:hover,
+.js-playlink-station:hover,
+.listeners-section-track a:hover,
+a.user-list-link:hover,
+.grid-items-item .grid-items-item-details a:hover,
+.recs-feed-inner-wrap a:hover,
+div.recs-feed-cover-image-wrap h3.recs-feed-title:hover a.link-block-target,
+.recs-feed-cover-link a:hover,
+div.big-artist-list-item h3.big-artist-list-title a.link-block-target:hover,
+h3.shout-user a.link-block-target:hover,
+div.about-artist div div.about-artist-info h3.about-artist-name a:hover,
+div.trending-tracks-item h3.trending-tracks-item-name a.link-block-target:hover,
+div.trending-tracks-item p.trending-tracks-item-artist span a:hover,
+div.track-similar-tracks-item p.track-similar-tracks-item-artist span a:hover,
+div.similar-albums-item p.similar-albums-item-artist span a:hover,
+div.similar-albums-item h3.similar-albums-item-name a.link-block-target:hover,
+div.track-similar-tracks-item h3.track-similar-tracks-item-name a.link-block-target:hover,
+div.source-album div.source-album-details p.source-album-artist span a:hover,
+div.listeners-section-item h3.listeners-section-item-name a:hover,
+div.artist-top-albums-item h3.artist-top-albums-item-name a.link-block-target:hover,
+div.artist-header-featured-items-item h3.artist-header-featured-items-item-name a.link-block-target:hover,
+div.artist-similar-artists-sidebar-item h3.artist-similar-artists-sidebar-item-name a.link-block-target:hover,
+div.catalogue-overview-similar-artists-item h3.catalogue-overview-similar-artists-item-name a.link-block-target:hover,
+div.section-controls button.section-playlink:hover,
+tr.events-list-item div.events-list-item-event--title a.link-block-target:hover,
+tr.events-list-item td.events-list-item-attendees a.events-list-item-attendees-count:hover,
+div.attendee-summary-user-inner-wrap a.link-block-target:hover,
+div.resource-list--sidebar-item h3.resource-list--sidebar-item-name a.link-block-target:hover,
+div.resource-list--sidebar-item p.resource-list--sidebar-item-artist span a:hover,
+section.charts table.globalchart a:hover,
+div.music-more-artists-item h3.music-more-artists-item-name a.link-block-target:hover,
+div.music-releases-item h3.music-releases-item-name a.link-block-target:hover,
+div.music-releases-item p.music-releases-item-artist span a:hover,
+div.music-featured-tag-item h4.music-featured-tag-item-name a.link-block-target:hover,
+div.music-tags-featured a.music-featured-item-heading-link:hover h3.music-featured-item-heading,
+div.music-featured-item p a.music-featured-tag-featured-artist-link:hover,
+section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a:hover,
+div.source-album-details h4.source-album-name a.link-block-target:hover,
+table.events-list-sidebar a.events-list-item-event-name:hover {
+  color: var(--blue-link) !important;
+}
+
+.masthead-nav-wrap a:hover,
+.navlist a {
+  color: var(--white) !important;
+}
+
+h2 a.text-colour-link,
+a.tags-view-all,
+a.shout-more-replies-before {
+  color: var(--main-color) !important;
+  transition: color 0.2s ease !important;
+}
+h2 a.text-colour-link:hover,
+a.tags-view-all:hover,
+a.shout-more-replies-before:hover {
+  color: var(--main-color-dark) !important;
+}

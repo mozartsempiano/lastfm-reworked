@@ -9,6 +9,8 @@ New:
 - Adicionada opção "Compact buttons".
 - Adicionado feedback visual no contador de caracteres na caixa de texto da shoutbox.
 - Visual atualizado para as ações nos houts.
+- Roda de loading padrão substituída por uma atualizada.
+- Alterado visual da página Line-up em Eventos.
 Changes:
 - Trocadas as cores ao passar o cursor em listening reports no perfil do usuário.
 - Alteradas cores dos ícones das recomendações na home.
@@ -19,6 +21,11 @@ Changes:
 - Rework dos dropdowns de configuração.
 - Rework da página de configuração.
 - Cor cinza claro alterada levemente.
+- Cor dos links comuns alterada.
+- Rework da shoutbox.
+- Alterada fonte.
+- Leves alterações na master header a fim de garantir maior consistência com o tema.
+- Leve alteração na aparência da sessão "Featured on" na página da música.
 Fixes:
 - Uniformização e correção da posição e altura das barras abaixo das abas selecionadas nas navbars em diferentes páginas.
 - Corrigido CSS do dropdown "Share this chart".

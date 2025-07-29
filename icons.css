@@ -1,0 +1,667 @@
+/* ========== ICONS ========== */
+
+/* ===================
+   SHARED ICON STYLES
+   =================== */
+
+/* Common styles for all platform icons (music + social) - See CREDITS.md for icon attribution */
+.play-this-track-playlink::before,
+.play-this-track-playlink--spotify::before,
+.play-this-track-playlink--itunes::before,
+.resource-external-link::before {
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  margin-top: calc(var(--icon-size-half) * -1) !important;
+  background-image: none !important;
+  background-color: var(--main-color) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  left: 0 !important;
+  right: auto !important;
+  top: 50% !important;
+}
+
+/* Common styles for all control icons - See CREDITS.md for icon attribution */
+.header-new-playlink::before,
+.header-new-love-button::before,
+.header-new-bookmark-button::before,
+.header-new-more-button::before,
+.shout-more-actions::before,
+.chartlist-more-button::before,
+td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before,
+.navlist-more::after,
+.button.chartlist-love-button::before,
+.library-header-ctas .library-header-love-form .love-button::before {
+  height: 24px !important;
+  width: 24px !important;
+  margin: 0 !important;
+  background-image: none !important;
+  background-color: var(--white) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  left: 50% !important;
+  top: 50% !important;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.content-form .form-group .source-icon-list label[data-affiliate="youtube"]::after,
+.content-form .form-group .source-icon-list label[data-affiliate="spotify"]::after {
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  margin-top: calc(var(--icon-size-half) * -1) !important;
+  background-image: none !important;
+  background-color: var(--gray-light) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  left: 28px !important;
+  /* right: auto !important; */
+  top: 50% !important;
+}
+
+/* ===================
+    ICON BASE STYLES
+    =================== */
+[class*="playlink"]::before,
+.chartlist-play-button::before,
+.recs-feed .recs-feed-playlink::before,
+.header-new-playlink::before,
+.trending-tracks-item-playlink::before,
+.stationlink-list .stationlink::before,
+.stationlink::before,
+.section-playlink::before,
+.artist-top-albums-item-playlink::before,
+.similar-albums-item-playlink::before,
+.track-similar-tracks-item-playlink::before,
+.source-album-art .image-overlay-playlink-link::before,
+.artist-header-featured-items-item-video .image-overlay-playlink-link::before,
+.artist-header-featured-items-item-playlink::before,
+.image-overlay-playlink-link::before,
+.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link::before,
+div.featured-item-art a.image-overlay-playlink-link::before {
+  mask: url("icons/play-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/play-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+.chartlist-play-button::before,
+.recs-feed .recs-feed-playlink::before,
+.header-new-playlink::before,
+.trending-tracks-item-playlink::before,
+.track-overview-video-column .video-preview-playlink .image-overlay-playlink-link::before,
+div.featured-item-art a.image-overlay-playlink-link {
+  background-color: var(--white) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+}
+
+.header-new-playlink::before {
+  left: 18% !important;
+}
+
+.image-upload-remove::before,
+.library-header-ctas .library-header-cta-item.delete-icon::before {
+  mask: url("icons/delete-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/delete-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  background-color: var(--white) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  position: absolute;
+}
+
+.image-upload-remove::before {
+  left: 0;
+  top: 42%;
+  transform: translateY(-50%);
+}
+
+.library-header-ctas .library-header-cta-item.delete-icon::before {
+  left: auto;
+  top: auto;
+}
+
+/* ===================
+    MUSIC PLATFORM ICONS
+    =================== */
+.play-this-track-playlink::before,
+.content-form .form-group .source-icon-list label[data-affiliate="youtube"]::after {
+  mask: url("icons/youtube-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/youtube-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+.play-this-track-playlink--spotify::before,
+.content-form .form-group .source-icon-list label[data-affiliate="spotify"]::after {
+  mask: url("icons/spotify-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/spotify-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+.play-this-track-playlink--itunes::before,
+.resource-external-link--apple-music::before {
+  mask: url("icons/apple-music-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/apple-music-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* ===================
+    SOCIAL PLATFORM ICONS
+    =================== */
+.resource-external-link--homepage::before {
+  mask: url("icons/homepage-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/homepage-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+.resource-external-link--twitter::before {
+  mask: url("icons/twitter-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/twitter-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+.resource-external-link--facebook::before {
+  mask: url("icons/facebook-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/facebook-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+.resource-external-link--instagram::before {
+  mask: url("icons/instagram-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/instagram-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+.resource-external-link--soundcloud::before {
+  mask: url("icons/soundcloud-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/soundcloud-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* ===================
+    CONTROL ICONS
+    =================== */
+.header-new-love-button::before,
+.button.chartlist-love-button::before,
+.library-header-ctas .library-header-love-form .love-button::before {
+  mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+.library-header-ctas .library-header-love-form .love-button::before {
+  margin-top: 0 !important;
+}
+
+/* Love button states */
+.header-new-love-button[data-analytics-action="UnloveTrack"]::before,
+.button.chartlist-love-button[data-analytics-action="UnloveTrack"]::before,
+.library-header-ctas .library-header-love-form .love-button[data-analytics-action="UnloveTrack"]::before,
+[data-toggle-button-current-state="loved"] .chartlist-love-button::before,
+a.chartlist-love-button[data-analytics-action="UnloveTrack"]::before,
+button.chartlist-love-button[data-analytics-action="UnloveTrack"]::before {
+  mask: url("icons/heart-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/heart-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  background-color: var(--main-color) !important;
+}
+.header-new-love-button[data-analytics-action="LoveTrack"]::before,
+.button.chartlist-love-button[data-analytics-action="LoveTrack"]::before,
+.library-header-ctas .library-header-love-form .love-button[data-analytics-action="LoveTrack"]::before {
+  background-color: var(--white) !important;
+}
+
+/* Bookmark Button */
+.header-new-bookmark-button::before {
+  mask: url("icons/bookmark-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/bookmark-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* Bookmark button states */
+.header-new-bookmark-button[data-analytics-action="UnbookmarkTrack"]::before,
+.header-new-bookmark-button[data-analytics-action="UnbookmarkAlbum"]::before {
+  background-color: var(--main-color) !important;
+}
+.header-new-bookmark-button[data-analytics-action="BookmarkTrack"]::before,
+.header-new-bookmark-button[data-analytics-action="BookmarkAlbum"]::before {
+  background-color: var(--white) !important;
+}
+
+/* More/Options Button */
+.header-new-more-button::before,
+.shout-more-actions::before,
+.chartlist-more-button::before,
+.navlist-more::after {
+  mask: url("icons/more-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/more-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* Buy Button */
+.artist-top-albums-item .lazy-buylinks-toggle::before,
+.similar-albums-item .lazy-buylinks-toggle::before,
+.grid-items-item .lazy-buylinks-toggle::before,
+td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before {
+  mask: url("icons/buy-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/buy-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  background-color: var(--white) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  position: absolute !important;
+  top: 45% !important;
+  left: 50% !important;
+}
+
+/* ===================
+    DROPDOWN MENU ICONS
+    =================== */
+.buylinks-dropdown-menu .buylink::before {
+  margin-left: 0 !important;
+}
+
+.more-item--obsession::before,
+.more-item--play::before,
+.more-item--artist-link::before,
+.more-item--report::before,
+.more-item--delete::before,
+.more-item--track::before,
+.more-item--album::before,
+.more-item--artist::before,
+.more-item--edit-old::before,
+.buylink.buylink--amazon::before,
+.buylink.buylink--itunes::before {
+  height: 20px !important;
+  width: 20px !important;
+  margin-top: 12px !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  left: 5% !important;
+  right: auto !important;
+  top: -15% !important;
+  position: absolute;
+}
+.navlist-more::after {
+  left: 30% !important;
+  top: 32% !important;
+}
+
+/* Dropdown menu icon colors */
+.dropdown-menu-clickable-item::before {
+  background-color: var(--gray-light) !important;
+}
+body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:hover::before,
+body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:focus::before,
+.dropdown-menu-clickable-item:active::before {
+  background-color: var(--black) !important;
+}
+
+/* Dropdown menu icon masks */
+.more-item--play::before {
+  mask: url("icons/play-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/play-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--obsession::before {
+  mask: url("icons/pin-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/pin-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--artist-link::before,
+.more-item--artist::before {
+  mask: url("icons/music-house-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/music-house-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--report::before {
+  mask: url("icons/report-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/report-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--delete::before {
+  mask: url("icons/delete-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/delete-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--track::before {
+  mask: url("icons/music-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/music-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--edit-old::before {
+  mask: url("icons/edit-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/edit-icon.svg") center/18px 18px no-repeat !important;
+}
+.more-item--album::before {
+  mask: url("icons/disc-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/disc-icon.svg") center/18px 18px no-repeat !important;
+}
+.buylink.buylink--amazon::before {
+  mask: url("icons/amazon-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/amazon-icon.svg") center/18px 18px no-repeat !important;
+}
+.buylink.buylink--itunes::before {
+  mask: url("icons/itunes-icon.svg") center/18px 18px no-repeat !important;
+  -webkit-mask: url("icons/itunes-icon.svg") center/18px 18px no-repeat !important;
+}
+
+/* ===================
+    UTILITY ICONS
+    =================== */
+.catalogue-tags .tags-add::before,
+a.btn-add-sm::before,
+.inline-add-icon::before {
+  background-image: none !important;
+  mask: url("icons/plus-icon.svg") center/16px 16px no-repeat !important;
+  -webkit-mask: url("icons/plus-icon.svg") center/16px 16px no-repeat !important;
+}
+
+.catalogue-tags .tags-add::before {
+  background-color: var(--main-color) !important;
+}
+a.btn-add-sm::before {
+  background-color: var(--white) !important;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  content: "";
+  height: 16px;
+  width: 16px;
+  margin-top: -8px;
+  position: absolute;
+  right: auto;
+  left: none !important;
+  top: 50%;
+}
+.compact-buttons a.btn-add-sm::before {
+  left: 7px !important;
+}
+.inline-add-icon::before {
+  background-color: var(--blue-link) !important;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  content: "";
+  height: 12px;
+  width: 12px;
+}
+
+/* Info Toggle Button */
+.scrobble-stats-info-toggle::before {
+  mask: url("icons/info-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/info-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  background-color: var(--gray-light) !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  margin-top: calc(var(--icon-size-half) * -1.1) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  right: auto !important;
+  top: 50% !important;
+  transition: background-color 0.2s ease !important;
+}
+.scrobble-stats-info-toggle:hover::before {
+  background-color: var(--white) !important;
+}
+
+/* Date Range Picker Button */
+.js .date-range-picker-button::before,
+.js .date-picker-button::before {
+  mask: url("icons/calendar-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/calendar-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  background-color: currentColor !important;
+  /* fallback for browsers that don't support currentColor */
+  background-color: var(--main-color) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+  top: 12px !important;
+}
+
+.section-settings-toggle::before,
+.share-chart .share-button-profile::before {
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: var(--gray-light) !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+}
+.section-settings-toggle::before {
+  mask: url("icons/settings-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/settings-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+.share-chart .share-button-profile::before {
+  mask: url("icons/share-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/share-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* ===================
+    DROPDOWN MASTHEAD ICONS
+    =================== */
+.auth-dropdown-menu-link img {
+  display: none !important;
+}
+
+.auth-dropdown-menu-link[href="/inbox/notifications"]::before,
+.auth-dropdown-menu-link[href="/inbox"]::before,
+.auth-dropdown-menu-link[href="/music/+bookmarks"]::before,
+.auth-dropdown-menu-link[href="/settings"]::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  background-color: var(--gray-light);
+  margin-right: 6px;
+}
+
+.header .header-message-user::before {
+  background-image: none !important;
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  background-color: var(--gray-light) !important;
+  margin-right: 6px;
+  transition: background-color 0.2s ease !important;
+}
+.header .header-message-user:hover::before {
+  background-color: var(--main-color) !important;
+}
+.auth-dropdown-menu-link[href="/inbox/notifications"]::before {
+  mask: url("icons/notification-icon.svg") center/contain no-repeat;
+  -webkit-mask: url("icons/notification-icon.svg") center/contain no-repeat;
+}
+.auth-dropdown-menu-link[href="/inbox"]::before,
+.header .header-message-user::before {
+  mask: url("icons/inbox-icon.svg") center/contain no-repeat;
+  -webkit-mask: url("icons/inbox-icon.svg") center/contain no-repeat;
+}
+.auth-dropdown-menu-link[href="/music/+bookmarks"]::before {
+  mask: url("icons/bookmark-icon.svg") center/contain no-repeat;
+  -webkit-mask: url("icons/bookmark-icon.svg") center/contain no-repeat;
+}
+.auth-dropdown-menu-link[href="/settings"]::before {
+  mask: url("icons/settings-icon.svg") center/contain no-repeat;
+  -webkit-mask: url("icons/settings-icon.svg") center/contain no-repeat;
+}
+
+/* Navigation More Button */
+.navlist-more::after {
+  background-color: var(--white);
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease !important;
+}
+.navlist-more:hover::after {
+  background-color: var(--main-color) !important;
+}
+
+/* ===================
+    COMMENT SECTION ICONS
+    =================== */
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action {
+  background-color: transparent !important;
+  color: var(--gray-light) !important;
+  font-size: 0.9em !important;
+  padding: 0 10px !important;
+  border-radius: var(--borda-arredondada) !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+  text-decoration: none !important;
+}
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:hover,
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:focus,
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:active,
+div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:has(a.js-shout-reply.shout-reply.shout-reply--open),
+div.shout.js-shout.js-link-block ul.shout-actions li.shout-action a.js-shout-reply.shout-reply.shout-reply--open {
+  background-color: var(--black) !important;
+  color: var(--white) !important;
+}
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:hover a,
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:focus a,
+div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:active a {
+  color: var(--white) !important;
+}
+
+.shout-reply::before,
+.shout .vote-button::before {
+  background-color: var(--gray-light) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+}
+.shout-reply::before {
+  mask: url("icons/reply-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/reply-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  margin-top: calc(var(--icon-size-half) * -1.1) !important;
+}
+.shout .vote-button::before {
+  mask: url("icons/like-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/like-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  margin-top: calc(var(--icon-size-half) * -1) !important;
+}
+.shout .vote-button.vote-button--voted::before {
+  background-color: var(--green) !important;
+  mask: url("icons/like-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/like-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+}
+
+/* ===================
+    UTILITY MESSAGES
+    =================== */
+div.container.page-content div.row div.col-main p.no-data-message {
+  color: var(--gray-light) !important;
+  font-size: 0.92em !important;
+  border: 1px solid var(--gray) !important;
+  padding: 14px !important;
+  border-radius: var(--borda-arredondada) !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 !important;
+  margin-top: 20px !important;
+}
+
+/* ===================
+    RESPONSIVE OVERRIDES
+    =================== */
+@media (min-width: 768px) {
+  a.chartlist-love-button::before,
+  button.chartlist-love-button::before,
+  [data-toggle-button-current-state="loved"] .chartlist-love-button::before {
+    background-image: none !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+    -webkit-mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+    background-color: var(--white) !important;
+    content: "" !important;
+    height: var(--icon-size) !important;
+    width: var(--icon-size) !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin-left: calc(var(--icon-size-half) * -1) !important;
+    margin-top: calc(var(--icon-size-half) * -1) !important;
+    position: absolute !important;
+    right: auto !important;
+  }
+}
+
+/* ===================
+    ANIMATIONS (commented)
+    =================== */
+/*
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.header-new-love-button:active::before,
+.button.chartlist-love-button:active::before,
+.library-header-ctas .library-header-love-form .love-button:active::before,
+.header-new-love-button[data-analytics-action="LoveTrack"]:active::before,
+.header-new-love-button[data-analytics-action="UnloveTrack"]:active::before,
+.button.chartlist-love-button[data-analytics-action="LoveTrack"]:active::before,
+.button.chartlist-love-button[data-analytics-action="UnloveTrack"]:active::before,
+.library-header-ctas .library-header-love-form .love-button[data-analytics-action="LoveTrack"]:active::before,
+.library-header-ctas .library-header-love-form .love-button[data-analytics-action="UnloveTrack"]:active::before {
+  animation: heartbeat 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: forwards;
+}
+*/
+
+/* ===================
+    EVENTS
+    =================== */
+
+.shout-reply::before,
+.shout .vote-button::before {
+  background-color: var(--gray-light) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+}
+.shout-reply::before {
+  mask: url("icons/reply-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  -webkit-mask: url("icons/reply-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
+  margin-top: calc(var(--icon-size-half) * -1.1) !important;
+}
+
+.event-detail-heading-date::before,
+.event-detail-heading-location::before,
+.event-detail-heading-link::before {
+  background-color: var(--gray-light) !important;
+  background-image: none !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  content: "" !important;
+  height: 24px !important;
+  width: 24px !important;
+  margin-left: calc(12px * -1) !important;
+  margin-top: calc(12px * -1) !important;
+  position: absolute !important;
+  right: auto !important;
+  left: -105% !important;
+  top: 50% !important;
+}
+.event-detail-heading-date::before {
+  mask: url("icons/calendar-icon.svg") center/24px 24px no-repeat !important;
+  -webkit-mask: url("icons/calendar-icon.svg") center/24px 24px no-repeat !important;
+  margin-top: calc(12px * -1.1) !important;
+}
+.event-detail-heading-location::before {
+  mask: url("icons/location-icon-2.svg") center/24px 24px no-repeat !important;
+  -webkit-mask: url("icons/location-icon-2.svg") center/24px 24px no-repeat !important;
+  margin-top: calc(12px * -1.1) !important;
+}
+.event-detail-heading-link::before {
+  mask: url("icons/link-icon.svg") center/24px 24px no-repeat !important;
+  -webkit-mask: url("icons/link-icon.svg") center/24px 24px no-repeat !important;
+  margin-top: calc(12px * -1.1) !important;
+}

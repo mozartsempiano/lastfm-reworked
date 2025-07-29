@@ -48,6 +48,10 @@ Inbox https://www.svgrepo.com/svg/510062/mail - MIT
 
 Bell https://www.svgrepo.com/svg/437502/bell - MIT
 
+Location https://www.svgrepo.com/svg/509148/location-pin - MIT
+
+Edit https://www.svgrepo.com/svg/505365/edit-1 - MIT
+
 ### Public Domain Icons
 
 - **YouTube Icon**: [Source] - Public Domain
@@ -79,6 +83,10 @@ Music Icon https://www.svgrepo.com/svg/512531/music-1004 - PD
 Settings Icon https://www.svgrepo.com/svg/380706/settings - PD
 
 Share Icon https://www.svgrepo.com/svg/535620/share-nodes - PD
+
+Link https://www.svgrepo.com/svg/502745/link-3 - PD
+
+Location 2 https://www.svgrepo.com/svg/326218/geo-location - PD
 
 ---
 

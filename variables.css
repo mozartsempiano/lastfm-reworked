@@ -2,16 +2,19 @@
   --black: #0c0c0e;
   --white: #f0efea;
   --white-rgb: 255, 255, 255;
-  --gray-dark: #121214;
   --gray: #181818;
-  /* --gray-light: #666; */
+  /* --gray-dark: #121214; */
+  /* --gray-dark: #151516; */
+  --gray-dark: #101012;
   --gray-light: #757575;
+  /* --gray-light: #666; */
   /* --color-link: #b90000;
   --color-link-hover: #ff0000; */
   --red: #be3144;
   --red-dark: #872341;
   --blue: #0077b6;
   --blue-link: #13b0d4;
+  --blue-link-hover: #0e7a9c;
   /* --green: #00545a;
   --green: #06923e; */
   --green: #5f8b4c;
@@ -29,7 +32,15 @@
 
   /*Light mode
   --white: #fafafa;
-  --gray-light: ##fafafa;
+  --gray-light: #fafafa;
   --gray: #8e8e8e;
   --black: #212121; */
 }
+
+/* Fontes */
+/* @font-face {
+  font-family: "Outfit";
+  src: url("fonts/Outfit-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+} */
