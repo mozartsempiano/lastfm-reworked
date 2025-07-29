@@ -1,4 +1,4 @@
-v1.3.1
+v1.4
 New:
 - Rework das recomendações na home.
 - Substituídos diversos ícones por versões atualizadas em SVG.
@@ -26,11 +26,13 @@ Changes:
 - Alterada fonte.
 - Leves alterações na master header a fim de garantir maior consistência com o tema.
 - Leve alteração na aparência da sessão "Featured on" na página da música.
+- Leve alteração no CSS da página "Following/Followers".
 Fixes:
 - Uniformização e correção da posição e altura das barras abaixo das abas selecionadas nas navbars em diferentes páginas.
 - Corrigido CSS do dropdown "Share this chart".
 - Corrigida cor dos botões circulares de play e de compra, uniformizando-os.
 - Corrigido CSS dos modals e adiciona animação fade-in quando são abertos.
 - Agora "rounded borders" afeta a preview de vídeo na página do artista.
+- Corrigido CSS na página de inbox.
 - Corrigidos mais erros de compatibilidade no Chrome.
     - Cor de fundo das notificações.

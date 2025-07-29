@@ -246,7 +246,9 @@ div.col-main header.library-header a.text-colour-link {
 .no-radius .artist-top-albums-item-image img,
 .no-radius .artist-header-featured-items-item-video,
 .no-radius .media-item .artist-similar-artists-sidebar-item-image,
-.no-radius .media-item .catalogue-overview-similar-artists-full-width-item-image {
+.no-radius .media-item .catalogue-overview-similar-artists-full-width-item-image,
+.no-radius a.inbox-compose-button,
+.no-radius button.inbox-delete-button {
   border-radius: 0 !important;
 }
 
@@ -591,6 +593,9 @@ div.popup_content div.content-form.form-section form div.form-group.form-group--
 div.form-group div.form-submit {
   margin-top: 12px !important;
 }
+.namespace--inbox_notifications div.form-group div.form-submit {
+  margin-top: -10px !important;
+}
 
 .lfm-form-radio input[type="radio"] + label::before {
   background-color: var(--gray);
@@ -737,7 +742,9 @@ select {
 .api-session-disconnect,
 .no-data-message-button,
 a.btn-add-sm,
-.clipboard-button {
+.clipboard-button,
+a.inbox-compose-button,
+button.inbox-delete-button {
   border-radius: var(--borda-arredondada) !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
   /* padding: 4px 12px !important;
@@ -760,7 +767,9 @@ a.btn-add-sm,
 .compact-buttons .api-session-disconnect,
 .compact-buttons .no-data-message-button,
 .compact-buttons a.btn-add-sm,
-.compact-buttons .clipboard-button {
+.compact-buttons .clipboard-button,
+.compact-buttons .inbox-compose-button,
+.compact-buttons .inbox-delete-button {
   padding: 4px 12px !important;
   line-height: 16px !important;
   min-height: 28px !important;
@@ -775,7 +784,9 @@ a.btn-add-sm,
 .api-session-disconnect,
 .no-data-message-button,
 a.btn-add-sm,
-.clipboard-button {
+.clipboard-button,
+a.inbox-compose-button,
+button.inbox-delete-button {
   vertical-align: middle !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -792,7 +803,8 @@ a.btn-add-sm,
 .header--with-avatar .header-follower-btn,
 a.btn-add-sm,
 .attendance-btn--turn-off,
-.clipboard-button {
+.clipboard-button,
+a.inbox-compose-button {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.2) !important;
   letter-spacing: 0.075em !important;
 }
@@ -803,7 +815,8 @@ a.btn-add-sm,
 .masthead-search-submit,
 .recommended-next-button,
 a.btn-add-sm,
-.clipboard-button {
+.clipboard-button,
+a.inbox-compose-button {
   background-color: var(--main-color) !important;
   color: var(--white) !important;
   /* padding: 8px 16px !important; */
@@ -814,7 +827,8 @@ a.btn-add-sm,
 .masthead-search-submit:hover,
 .recommended-next-button:hover,
 a.btn-add-sm:hover,
-.clipboard-button:hover {
+.clipboard-button:hover,
+a.inbox-compose-button:hover {
   background-color: var(--main-color-dark) !important;
   color: var(--white) !important;
 }
@@ -823,7 +837,8 @@ a.btn-add-sm:hover,
 .btn-secondary,
 .labs-cta .btn-primary,
 .api-session-disconnect,
-.no-data-message-button {
+.no-data-message-button,
+button.inbox-delete-button {
   background-color: var(--black) !important;
   color: var(--white) !important;
   border: 1px solid var(--gray-light) !important;
@@ -831,7 +846,8 @@ a.btn-add-sm:hover,
 .btn-secondary:hover,
 .labs-cta .btn-primary:hover,
 .api-session-disconnect:hover,
-.no-data-message-button:hover {
+.no-data-message-button:hover,
+button.inbox-delete-button:hover {
   background-color: var(--gray-dark) !important;
   color: var(--white) !important;
   border-color: var(--gray-light) !important;
@@ -2842,12 +2858,35 @@ table.table tr:nth-child(2n) td {
 }
 
 /* ========== MESSAGES ========== */
+.inbox .inbox-table td,
+.inbox .inbox-table th {
+  box-shadow: inset 0 -1px var(--gray) !important;
+  padding: 6px 10px;
+}
+
+section.inbox a.inbox-message-sender-name {
+  font-weight: bold !important;
+  font-size: 1em !important;
+}
+
+.inbox .inbox-message-timestamp {
+  color: var(--gray-light) !important;
+  font-size: 0.92em !important;
+}
+
 .inbox-notifications .inbox-notifications__item {
   color: var(--white);
 }
 
-.inbox-notifications .inbox-notifications__item--highlight {
+.inbox-notifications .inbox-notifications__item--highlight,
+.inbox-notifications .inbox-notifications__item--hover:active,
+body:not([data-whatinput="touch"]) .inbox-notifications .inbox-notifications__item--hover:focus,
+body:not([data-whatinput="touch"]) .inbox-notifications .inbox-notifications__item--hover:hover {
   background-color: var(--gray) !important;
+}
+
+.inbox-notifications li.inbox-notifications__item a.inbox-notifications__item-link:hover {
+  background-color: var(--gray-dark) !important;
 }
 
 .inbox-notifications__item--highlight-hover:hover {
@@ -3049,6 +3088,11 @@ tspan {
 /* ========== FOLLOWING ========== */
 .user-list-name {
   color: var(--white);
+}
+
+.user-list-about-me {
+  font-size: 0.9em !important;
+  color: var(--gray-light) !important;
 }
 
 /* ========== BOOKMARKS ========== */

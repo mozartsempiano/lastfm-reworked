@@ -83,7 +83,8 @@ div.music-tags-featured a.music-featured-item-heading-link h3.music-featured-ite
 div.music-featured-item p a.music-featured-tag-featured-artist-link,
 section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a,
 div.source-album-details h4.source-album-name a.link-block-target,
-table.events-list-sidebar a.events-list-item-event-name {
+table.events-list-sidebar a.events-list-item-event-name,
+section.inbox a.inbox-message-sender-name {
   color: var(--white) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
@@ -140,7 +141,8 @@ div.music-tags-featured a.music-featured-item-heading-link:hover h3.music-featur
 div.music-featured-item p a.music-featured-tag-featured-artist-link:hover,
 section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a:hover,
 div.source-album-details h4.source-album-name a.link-block-target:hover,
-table.events-list-sidebar a.events-list-item-event-name:hover {
+table.events-list-sidebar a.events-list-item-event-name:hover,
+section.inbox a.inbox-message-sender-name:hover {
   color: var(--blue-link) !important;
 }
 
