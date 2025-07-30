@@ -29,7 +29,7 @@ const defaultSettings = {
   hideNavShouts: false,
   hideActions: false,
   largerStats: false,
-  useHelvetica: true,
+  useCustomFont: true,
   compactMode: true,
   compactTags: false,
   compactButtons: true,
@@ -233,7 +233,7 @@ function setLargerStats(enabled) {
   });
 }
 
-function setUseHelvetica(enabled) {
+function setUseCustomFont(enabled) {
   document.body.classList.toggle("use-helvetica", enabled);
 }
 
@@ -674,7 +674,7 @@ browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setHideNavShouts") setHideNavShouts(msg.enabled);
   if (msg.type === "setHideActions") setHideActions(msg.enabled);
   if (msg.type === "setLargerStats") setLargerStats(msg.enabled);
-  if (msg.type === "setUseHelvetica") setUseHelvetica(msg.enabled);
+  if (msg.type === "setUseCustomFont") setUseCustomFont(msg.enabled);
   if (msg.type === "setCompactMode") setCompactMode(msg.enabled);
   if (msg.type === "setMainColor") setMainColor(msg.value);
   if (msg.type === "setCompactTags") setCompactTags(msg.enabled);
@@ -724,7 +724,7 @@ function applyAllSettings() {
       hideNavShouts: null,
       hideActions: null,
       largerStats: null,
-      useHelvetica: null,
+      useCustomFont: null,
       compactMode: null,
       compactTags: null,
       mainColor: "default",
@@ -752,7 +752,7 @@ function applyAllSettings() {
         setHideNavShouts(localData.hideNavShouts !== null ? localData.hideNavShouts : false);
         setHideActions(localData.hideActions !== null ? localData.hideActions : false);
         setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
-        setUseHelvetica(localData.useHelvetica !== null ? localData.useHelvetica : true);
+        setUseCustomFont(localData.useCustomFont !== null ? localData.useCustomFont : true);
         setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
         setMainColor(localData.mainColor || "default");
         setCompactTags(localData.compactTags !== null ? localData.compactTags : false);

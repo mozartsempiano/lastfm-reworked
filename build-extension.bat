@@ -27,6 +27,9 @@ copy popup.js build\chrome-mv3\
 copy variables.css build\chrome-mv3\
 copy LICENSE build\chrome-mv3\
 copy README.md build\chrome-mv3\
+copy icons.css build\chrome-mv3\
+copy links.css build\chrome-mv3\
+copy CREDITS.md build\chrome-mv3\
 powershell -Command "Copy-Item -Path 'icons' -Destination 'build\chrome-mv3\icons' -Recurse"
 copy manifest.mv3.json build\chrome-mv3\manifest.json
 
@@ -39,6 +42,9 @@ copy popup.js build\firefox-mv2\
 copy variables.css build\firefox-mv2\
 copy LICENSE build\firefox-mv2\
 copy README.md build\firefox-mv2\
+copy icons.css build\firefox-mv2\
+copy links.css build\firefox-mv2\
+copy CREDITS.md build\firefox-mv2\
 powershell -Command "Copy-Item -Path 'icons' -Destination 'build\firefox-mv2\icons' -Recurse"
 copy manifest.mv2.json build\firefox-mv2\manifest.json
 

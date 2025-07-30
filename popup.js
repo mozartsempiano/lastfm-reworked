@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hideNavShouts = document.getElementById("hideNavShouts");
   const hideActions = document.getElementById("hideActions");
   const largerStats = document.getElementById("largerStats");
-  const useHelvetica = document.getElementById("useHelvetica");
+  const useCustomFont = document.getElementById("useCustomFont");
   const compactMode = document.getElementById("compactMode");
   const compactTags = document.getElementById("compactTags");
   const hideDeletedShouts = document.getElementById("hideDeletedShouts");
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavShouts: null,
       hideActions: null,
       largerStats: null,
-      useHelvetica: null,
+      useCustomFont: null,
       compactMode: null,
       compactTags: null,
       hideDeletedShouts: null,
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavShouts.checked = localData.hideNavShouts !== null ? localData.hideNavShouts : false;
       hideActions.checked = localData.hideActions !== null ? localData.hideActions : false;
       largerStats.checked = localData.largerStats !== null ? localData.largerStats : false;
-      useHelvetica.checked = localData.useHelvetica !== null ? localData.useHelvetica : true;
+      useCustomFont.checked = localData.useCustomFont !== null ? localData.useCustomFont : true;
       compactMode.checked = localData.compactMode !== null ? localData.compactMode : true;
       compactTags.checked = localData.compactTags !== null ? localData.compactTags : false;
       compactButtons.checked = localData.compactButtons !== null ? localData.compactButtons : true;
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hideNavShouts: hideNavShouts.checked,
       hideActions: hideActions.checked,
       largerStats: largerStats.checked,
-      useHelvetica: useHelvetica.checked,
+      useCustomFont: useCustomFont.checked,
       compactMode: compactMode.checked,
       compactTags: compactTags.checked,
       hideDeletedShouts: hideDeletedShouts.checked,
@@ -192,8 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: largerStats.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
-          type: "setUseHelvetica",
-          enabled: useHelvetica.checked,
+          type: "setUseCustomFont",
+          enabled: useCustomFont.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setCompactMode",
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   hideNavShouts.addEventListener("change", saveOptions);
   hideActions.addEventListener("change", saveOptions);
   largerStats.addEventListener("change", saveOptions);
-  useHelvetica.addEventListener("change", saveOptions);
+  useCustomFont.addEventListener("change", saveOptions);
   compactMode.addEventListener("change", saveOptions);
   compactTags.addEventListener("change", saveOptions);
   hideDeletedShouts.addEventListener("change", saveOptions);
