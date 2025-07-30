@@ -1,3 +1,13 @@
+// Import custom font (Outfit)
+(function injectGoogleFonts() {
+  if (!document.querySelector('link[href*="fonts.googleapis.com/css2?family=Outfit"]')) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap";
+    document.head.appendChild(link);
+  }
+})();
+
 const browserAPI = typeof chrome !== "undefined" ? chrome : browser;
 
 const defaultSettings = {

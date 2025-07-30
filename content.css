@@ -5,7 +5,7 @@
 @import url("variables.css");
 @import url("icons.css");
 @import url("links.css");
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"); */
 
 /* ========== RESET & BASE ========== */
 *,
@@ -623,9 +623,9 @@ select {
 .image-upload-remove,
 .image-upload-remove:focus,
 .image-upload-remove:hover {
-  position: relative;
-  padding-left: 28px; /* espaço para o ícone */
-  display: inline-block;
+  position: relative !important;
+  padding-left: 28px !important; /* espaço para o ícone */
+  display: inline-block !important;
   text-decoration: none !important;
 }
 .image-upload-remove,
@@ -1504,16 +1504,16 @@ nav.masthead ul.site-auth li.site-auth-item a.site-auth-control::after {
   transition: box-shadow ease 0.2s, background-color ease 0.2s, color ease 0.2s !important;
   background: var(--clr-gray-a20) !important;
   color: var(--clr-white-a0) !important;
-  display: block;
-  font-size: 0.82em;
+  display: block !important;
+  font-size: 0.82em !important;
   font-weight: bold !important;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.4px !important;
   line-height: 21px; /* Size of button */
-  min-height: 21px;
-  min-width: 80px;
+  min-height: 21px !important;
+  min-width: 80px !important;
   padding: 9px 20px 10px !important;
-  text-transform: uppercase;
-  width: 100%;
+  text-transform: uppercase !important;
+  width: 100% !important;
 }
 .compact-buttons .site-auth.v2 .auth-dropdown-menu-footer .auth-logout-cta {
   padding: 6px 20px 7px !important;
@@ -2055,10 +2055,10 @@ div.event-summary-with-poster div.event-poster div.event-poster-inner-wrap:hover
 .event-detail-heading-date,
 .event-detail-heading-link,
 .event-detail-heading-location {
-  left: 0;
-  margin: 0;
-  margin-top: 0px;
-  position: relative;
+  left: 0 !important;
+  margin: 0 !important;
+  margin-top: 0px !important;
+  position: relative !important;
   vertical-align: top !important;
   font: inherit !important;
   font-size: 1.2em !important;
@@ -2213,6 +2213,14 @@ div.big-artist-list-item h3.big-artist-list-title {
 
 #shoutbox .avatar:not(.big-artist-list-avatar-desktop) img {
   border: 1px solid var(--clr-black-a0) !important;
+}
+
+div.shout.shout--deleted {
+  background-color: var(--clr-gray-a10) !important;
+  color: var(--clr-gray-a40) !important;
+}
+div.shout.shout--deleted p {
+  color: var(--clr-gray-a40) !important;
 }
 
 /* ========== FEATURES ========== */
@@ -2376,27 +2384,6 @@ li.artist-top-albums-item-wrap div.artist-top-albums-item.js-link-block.link-blo
   }
 }
 
-body:not(.js-focus-visible)
-  body:not([data-whatinput="touch"])
-  [data-toggle-button-current-state="unfollowed"]
-  .user-list-follower-btn:focus,
-body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn .focus-visible,
-body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:hover,
-body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:focus,
-[data-toggle-button-current-state="unfollowed"] .header-follower-btn::before,
-body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover:hover,
-body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:focus,
-[data-toggle-button-current-state="unfollowed"] .user-list-follower-btn {
-  background-color: var(--clr-main) !important;
-  color: var(--clr-white-a0) !important;
-}
-[data-toggle-button-current-state="followed"] .user-list-follower-btn,
-[data-toggle-button-current-state="followed"] .user-list-follower-btn:focus,
-.modal-dialog .big-modal-alert.alert-success::before {
-  background-color: var(--clr-green-a10) !important;
-  color: var(--clr-white-a0) !important;
-}
-
 .dropdown-menu-clickable-item:hover,
 .buylinks-dropdown-menu .buylink:hover {
   color: var(--clr-gray-a20);
@@ -2484,31 +2471,52 @@ div.listeners-section-item h3.listeners-section-item-name {
   .header--with-avatar .header-follower-btn,
   .header--with-avatar .header-follower-btn:focus,
   .header--with-avatar .header-follower-btn:hover {
-    margin-left: -103px;
-    margin-top: -16px;
-    border-radius: var(--radius);
+    margin-left: -103px !important;
+    margin-top: -16px !important;
+    border-radius: var(--radius) !important;
     box-shadow: none !important;
     /* border: 1px solid var(--clr-gray-a40); */
-    color: var(--clr-white-a0);
-    font-size: 0.8em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    line-height: 26px;
-    padding: 0px 0px;
+    color: var(--clr-white-a0) !important;
+    font-size: 0.8em !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    line-height: 26px !important;
+    padding: 0px 0px !important;
     background-color: var(--clr-gray-a20);
-    color: var(--clr-white-a0);
-    width: 96px;
-    transition: background-color 0.2s ease, color 0.2s ease, filter 0.2s ease;
+    color: var(--clr-white-a0) !important;
+    width: 96px !important;
+    transition: background-color 0.2s ease, color 0.2s ease, filter 0.2s ease !important;
   }
 
   .header--with-avatar .header-follower-btn:hover {
-    filter: brightness(1.2);
+    filter: brightness(1.2) !important;
   }
 
   [data-toggle-button-current-state="unfollowed"] .header-follower-btn {
     background-color: var(--clr-main) !important;
     color: var(--clr-white-a0) !important;
   }
+}
+
+body:not(.js-focus-visible)
+  body:not([data-whatinput="touch"])
+  [data-toggle-button-current-state="unfollowed"]
+  .user-list-follower-btn:focus,
+body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn .focus-visible,
+body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:hover,
+body:not([data-whatinput="touch"]) [data-toggle-button-current-state="unfollowed"] .user-list-follower-btn:focus,
+[data-toggle-button-current-state="unfollowed"] .header-follower-btn::before,
+body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:hover:hover,
+body:not([data-whatinput="touch"]) [data-toggle-button-current-state="followed"] .user-list-follower-btn:focus,
+[data-toggle-button-current-state="unfollowed"] .user-list-follower-btn {
+  background-color: var(--clr-main) !important;
+  color: var(--clr-white-a0) !important;
+}
+[data-toggle-button-current-state="followed"] .user-list-follower-btn,
+[data-toggle-button-current-state="followed"] .user-list-follower-btn:focus,
+.modal-dialog .big-modal-alert.alert-success::before {
+  background-color: var(--clr-green-a10) !important;
+  color: var(--clr-white-a0) !important;
 }
 
 .tasteometer-donut-base {

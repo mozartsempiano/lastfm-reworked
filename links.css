@@ -20,7 +20,8 @@ p a,
 a.artist-similar-sidebar-more,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki,
 button.more-items,
-div.form-group--location div p button.mimic-link {
+div.form-group--location div p button.mimic-link,
+p.form-row-help-text button.mimic-link {
   color: var(--clr-blue-link-a0) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
@@ -35,7 +36,8 @@ p a:hover,
 a.artist-similar-sidebar-more:hover,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki:hover,
 button.more-items:hover,
-div.form-group--location div p button.mimic-link:hover {
+div.form-group--location div p button.mimic-link:hover,
+p.form-row-help-text button.mimic-link:hover {
   color: var(--clr-blue-link-hover-a0) !important;
 }
 div.navlist-more-wrap div.navlist-hidden-list-wrap ul.navlist-hidden-list li a {
