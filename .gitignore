@@ -18,6 +18,7 @@ yarn.lock
 # Arquivos de build/distribuição
 dist/
 build/
+builds/
 *.zip
 *.crx
 *.xpi

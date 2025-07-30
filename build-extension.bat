@@ -12,7 +12,7 @@ set VERSION=%VERSION:,=%
 :: Allow override via command line
 if not "%1"=="" set VERSION=%1
 
-echo Building Last.fm Reworked v%VERSION%...
+echo Building Last.fm Reworked v%VERSION% with 7-Zip...
 
 :: Create build directory
 if exist build rmdir /s /q build
@@ -27,7 +27,7 @@ copy popup.js build\chrome-mv3\
 copy variables.css build\chrome-mv3\
 copy LICENSE build\chrome-mv3\
 copy README.md build\chrome-mv3\
-powershell -Command "Copy-Item -Path 'icons' -Destination 'build/chrome-mv3/icons' -Recurse"
+powershell -Command "Copy-Item -Path 'icons' -Destination 'build\chrome-mv3\icons' -Recurse"
 copy manifest.mv3.json build\chrome-mv3\manifest.json
 
 :: Build Firefox (MV2)
@@ -39,23 +39,32 @@ copy popup.js build\firefox-mv2\
 copy variables.css build\firefox-mv2\
 copy LICENSE build\firefox-mv2\
 copy README.md build\firefox-mv2\
-powershell -Command "Copy-Item -Path 'icons' -Destination 'build/firefox-mv2/icons' -Recurse"
+powershell -Command "Copy-Item -Path 'icons' -Destination 'build\firefox-mv2\icons' -Recurse"
 copy manifest.mv2.json build\firefox-mv2\manifest.json
 
-:: Create ZIP files using Windows native compression
-if exist "lastfm-reworked-v%VERSION%.mv3.zip" del "lastfm-reworked-v%VERSION%.mv3.zip"
-if exist "lastfm-reworked-v%VERSION%.mv2.zip" del "lastfm-reworked-v%VERSION%.mv2.zip"
+:: Create builds directory if it doesn't exist
+if not exist builds mkdir builds
 
-:: Create Chrome ZIP using Windows Shell
-powershell -Command "Compress-Archive -Path 'build/chrome-mv3/*' -DestinationPath 'lastfm-reworked-v%VERSION%.mv3.zip' -CompressionLevel Optimal"
+:: Create ZIP files using 7-Zip (more compatible)
+if exist "builds\lastfm-reworked-v%VERSION%.mv3.zip" del "builds\lastfm-reworked-v%VERSION%.mv3.zip"
+if exist "builds\lastfm-reworked-v%VERSION%.mv2.zip" del "builds\lastfm-reworked-v%VERSION%.mv2.zip"
 
-:: Create Firefox ZIP using Windows Shell 
-powershell -Command "Compress-Archive -Path 'build/firefox-mv2/*' -DestinationPath 'lastfm-reworked-v%VERSION%.mv2.zip' -CompressionLevel Optimal"
+:: Try 7-Zip first, fallback to PowerShell
+where 7z >nul 2>&1
+if %errorlevel% == 0 (
+    echo Using 7-Zip...
+    7z a -tzip "builds\lastfm-reworked-v%VERSION%.mv3.zip" ".\build\chrome-mv3\*" -r
+    7z a -tzip "builds\lastfm-reworked-v%VERSION%.mv2.zip" ".\build\firefox-mv2\*" -r
+) else (
+    echo 7-Zip not found, using PowerShell...
+    powershell -Command "Compress-Archive -Path 'build\chrome-mv3\*' -DestinationPath 'builds\lastfm-reworked-v%VERSION%.mv3.zip' -CompressionLevel Optimal"
+    powershell -Command "Compress-Archive -Path 'build\firefox-mv2\*' -DestinationPath 'builds\lastfm-reworked-v%VERSION%.mv2.zip' -CompressionLevel Optimal"
+)
 
 :: Cleanup
 rmdir /s /q build
 
 echo.
 echo Build completed!
-echo Chrome (MV3): lastfm-reworked-v%VERSION%.mv3.zip
-echo Firefox (MV2): lastfm-reworked-v%VERSION%.mv2.zip
+echo Chrome (MV3): builds\lastfm-reworked-v%VERSION%.mv3.zip
+echo Firefox (MV2): builds\lastfm-reworked-v%VERSION%.mv2.zip
