@@ -19,7 +19,7 @@
 - Dark mode.
 - Rounded or square borders for avatars and elements.
 - Compact mode for a cleaner layout.
-- Option to use Helvetica font.
+- Option to use a custom font.
 - Customizable main color themes.
 
 ### Content Management
