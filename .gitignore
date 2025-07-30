@@ -77,5 +77,6 @@ ehthumbs.db
 *.p12
 
 # Outros
+patchnotes.txt
 svg-normalizer/
 *.bat
