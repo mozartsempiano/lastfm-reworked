@@ -13,7 +13,7 @@
   width: var(--icon-size) !important;
   margin-top: calc(var(--icon-size-half) * -1) !important;
   background-image: none !important;
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   content: "" !important;
@@ -37,7 +37,7 @@ td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before,
   width: 24px !important;
   margin: 0 !important;
   background-image: none !important;
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   content: "" !important;
@@ -56,7 +56,7 @@ td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before,
   width: var(--icon-size) !important;
   margin-top: calc(var(--icon-size-half) * -1) !important;
   background-image: none !important;
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   content: "" !important;
@@ -95,7 +95,7 @@ div.featured-item-art a.image-overlay-playlink-link::before {
 .trending-tracks-item-playlink::before,
 .track-overview-video-column .video-preview-playlink .image-overlay-playlink-link::before,
 div.featured-item-art a.image-overlay-playlink-link {
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -110,7 +110,7 @@ div.featured-item-art a.image-overlay-playlink-link {
 .library-header-ctas .library-header-cta-item.delete-icon::before {
   mask: url("icons/delete-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   -webkit-mask: url("icons/delete-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -199,12 +199,12 @@ a.chartlist-love-button[data-analytics-action="UnloveTrack"]::before,
 button.chartlist-love-button[data-analytics-action="UnloveTrack"]::before {
   mask: url("icons/heart-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   -webkit-mask: url("icons/heart-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
 }
 .header-new-love-button[data-analytics-action="LoveTrack"]::before,
 .button.chartlist-love-button[data-analytics-action="LoveTrack"]::before,
 .library-header-ctas .library-header-love-form .love-button[data-analytics-action="LoveTrack"]::before {
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
 }
 
 /* Bookmark Button */
@@ -216,11 +216,11 @@ button.chartlist-love-button[data-analytics-action="UnloveTrack"]::before {
 /* Bookmark button states */
 .header-new-bookmark-button[data-analytics-action="UnbookmarkTrack"]::before,
 .header-new-bookmark-button[data-analytics-action="UnbookmarkAlbum"]::before {
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
 }
 .header-new-bookmark-button[data-analytics-action="BookmarkTrack"]::before,
 .header-new-bookmark-button[data-analytics-action="BookmarkAlbum"]::before {
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
 }
 
 /* More/Options Button */
@@ -239,7 +239,7 @@ button.chartlist-love-button[data-analytics-action="UnloveTrack"]::before {
 td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before {
   mask: url("icons/buy-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   -webkit-mask: url("icons/buy-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -288,12 +288,12 @@ td.chartlist-buylinks div.lazy-buylinks button.lazy-buylinks-toggle::before {
 
 /* Dropdown menu icon colors */
 .dropdown-menu-clickable-item::before {
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
 }
 body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:hover::before,
 body:not([data-whatinput="touch"]) .dropdown-menu-clickable-item:focus::before,
 .dropdown-menu-clickable-item:active::before {
-  background-color: var(--black) !important;
+  background-color: var(--clr-black-a0) !important;
 }
 
 /* Dropdown menu icon masks */
@@ -351,10 +351,10 @@ a.btn-add-sm::before,
 }
 
 .catalogue-tags .tags-add::before {
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
 }
 a.btn-add-sm::before {
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
   background-position: 0 0;
   background-repeat: no-repeat;
   content: "";
@@ -370,7 +370,7 @@ a.btn-add-sm::before {
   left: 7px !important;
 }
 .inline-add-icon::before {
-  background-color: var(--blue-link) !important;
+  background-color: var(--clr-blue-link-a0) !important;
   background-position: 0 0;
   background-repeat: no-repeat;
   content: "";
@@ -382,7 +382,7 @@ a.btn-add-sm::before {
 .scrobble-stats-info-toggle::before {
   mask: url("icons/info-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   -webkit-mask: url("icons/info-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   height: var(--icon-size) !important;
   width: var(--icon-size) !important;
   margin-top: calc(var(--icon-size-half) * -1.1) !important;
@@ -395,7 +395,7 @@ a.btn-add-sm::before {
   transition: background-color 0.2s ease !important;
 }
 .scrobble-stats-info-toggle:hover::before {
-  background-color: var(--white) !important;
+  background-color: var(--clr-white-a0) !important;
 }
 
 /* Date Range Picker Button */
@@ -405,7 +405,7 @@ a.btn-add-sm::before {
   -webkit-mask: url("icons/calendar-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   background-color: currentColor !important;
   /* fallback for browsers that don't support currentColor */
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -420,7 +420,7 @@ a.btn-add-sm::before {
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   content: "" !important;
   height: var(--icon-size) !important;
   width: var(--icon-size) !important;
@@ -450,7 +450,7 @@ a.btn-add-sm::before {
   width: 18px;
   height: 18px;
   vertical-align: middle;
-  background-color: var(--gray-light);
+  background-color: var(--clr-gray-a40);
   margin-right: 6px;
 }
 
@@ -461,12 +461,12 @@ a.btn-add-sm::before {
   width: 36px;
   height: 36px;
   vertical-align: middle;
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   margin-right: 6px;
   transition: background-color 0.2s ease !important;
 }
 .header .header-message-user:hover::before {
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
 }
 .auth-dropdown-menu-link[href="/inbox/notifications"]::before {
   mask: url("icons/notification-icon.svg") center/contain no-repeat;
@@ -488,12 +488,12 @@ a.btn-add-sm::before {
 
 /* Navigation More Button */
 .navlist-more::after {
-  background-color: var(--white);
+  background-color: var(--clr-white-a0);
   transform: translateY(-50%);
   transition: background-color 0.2s ease !important;
 }
 .navlist-more:hover::after {
-  background-color: var(--main-color) !important;
+  background-color: var(--clr-main) !important;
 }
 
 /* ===================
@@ -501,10 +501,10 @@ a.btn-add-sm::before {
     =================== */
 div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action {
   background-color: transparent !important;
-  color: var(--gray-light) !important;
+  color: var(--clr-gray-a40) !important;
   font-size: 0.9em !important;
   padding: 0 10px !important;
-  border-radius: var(--borda-arredondada) !important;
+  border-radius: var(--radius) !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
   text-decoration: none !important;
 }
@@ -513,18 +513,18 @@ div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-a
 div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:active,
 div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:has(a.js-shout-reply.shout-reply.shout-reply--open),
 div.shout.js-shout.js-link-block ul.shout-actions li.shout-action a.js-shout-reply.shout-reply.shout-reply--open {
-  background-color: var(--black) !important;
-  color: var(--white) !important;
+  background-color: var(--clr-black-a0) !important;
+  color: var(--clr-white-a0) !important;
 }
 div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:hover a,
 div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:focus a,
 div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-action:active a {
-  color: var(--white) !important;
+  color: var(--clr-white-a0) !important;
 }
 
 .shout-reply::before,
 .shout .vote-button::before {
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -543,7 +543,7 @@ div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-a
   margin-top: calc(var(--icon-size-half) * -1) !important;
 }
 .shout .vote-button.vote-button--voted::before {
-  background-color: var(--green) !important;
+  background-color: var(--clr-green-a10) !important;
   mask: url("icons/like-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
   -webkit-mask: url("icons/like-solid-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
 }
@@ -552,11 +552,11 @@ div.shout-container div.shout.js-shout.js-link-block ul.shout-actions li.shout-a
     UTILITY MESSAGES
     =================== */
 div.container.page-content div.row div.col-main p.no-data-message {
-  color: var(--gray-light) !important;
+  color: var(--clr-gray-a40) !important;
   font-size: 0.92em !important;
-  border: 1px solid var(--gray) !important;
+  border: 1px solid var(--clr-gray-a20) !important;
   padding: 14px !important;
-  border-radius: var(--borda-arredondada) !important;
+  border-radius: var(--radius) !important;
   width: 100% !important;
   text-align: center !important;
   margin: 0 !important;
@@ -575,7 +575,7 @@ div.container.page-content div.row div.col-main p.no-data-message {
     background-repeat: no-repeat !important;
     mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
     -webkit-mask: url("icons/heart-icon.svg") center/var(--icon-size) var(--icon-size) no-repeat !important;
-    background-color: var(--white) !important;
+    background-color: var(--clr-white-a0) !important;
     content: "" !important;
     height: var(--icon-size) !important;
     width: var(--icon-size) !important;
@@ -619,7 +619,7 @@ div.container.page-content div.row div.col-main p.no-data-message {
 
 .shout-reply::before,
 .shout .vote-button::before {
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -636,7 +636,7 @@ div.container.page-content div.row div.col-main p.no-data-message {
 .event-detail-heading-date::before,
 .event-detail-heading-location::before,
 .event-detail-heading-link::before {
-  background-color: var(--gray-light) !important;
+  background-color: var(--clr-gray-a40) !important;
   background-image: none !important;
   background-position: center !important;
   background-repeat: no-repeat !important;

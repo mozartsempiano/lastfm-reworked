@@ -2,100 +2,48 @@
 
 ## Icons
 
-Icons used in this project are licensed under MIT License or Public Domain.
-
-### SVGRepo (MIT License)
-
-- **Plus Icon**: [SVGRepo](https://www.svgrepo.com/svg/510136/plus) - MIT License
-
-  - Used in: Tags add button (`.catalogue-tags .tags-add::before`)
-  - File: `icons/plus-icon.svg`
-
-- **Apple Music Icon**: [SVGRepo](https://www.svgrepo.com/svg/393994/apple-music) - MIT License
-
-  - Used in: Apple Music play button (`.play-this-track-playlink--itunes::before`)
-  - File: `icons/apple-music-icon.svg`
-
-- **Facebook Icon**: [SVGRepo](https://www.svgrepo.com/svg/503338/facebook) - MIT License
-
-- **Globe Icon**: [SVGRepo](https://www.svgrepo.com/svg/509124/globe) - MIT License
-
-- **More Icon** [SVGRepo](https://www.svgrepo.com/svg/506665/more) - MIT License
-
-- **Pin Icon** [SVGRepo](https://www.svgrepo.com/svg/455421/pin) - MIT License
-
-- **Music House Icon** [SVGRepo](https://www.svgrepo.com/svg/436823/music-house-fill) - MIT License
-
-- **Amazon Icon** [SVGRepo](https://www.svgrepo.com/svg/503156/amazon-1) - MIT License
-
-iTunes https://www.svgrepo.com/svg/314219/itunes-note - MIT
-
-Reply https://www.svgrepo.com/svg/501335/reply-2 - MIT
-
-Megaphone https://www.svgrepo.com/svg/353202/megaphone - CC Attribution License, No changed were made.
-
-Disc https://www.svgrepo.com/svg/327736/disc - MIT
-
-Like https://www.svgrepo.com/svg/488268/like - MIT
-
-Like Solid https://www.svgrepo.com/svg/487521/like - MIT
-
-Heart https://www.svgrepo.com/svg/506499/heart - MIT
-
-Heart Full https://www.svgrepo.com/svg/506502/heart-fill - MIT
-
-Inbox https://www.svgrepo.com/svg/510062/mail - MIT
-
-Bell https://www.svgrepo.com/svg/437502/bell - MIT
-
-Location https://www.svgrepo.com/svg/509148/location-pin - MIT
-
-Edit https://www.svgrepo.com/svg/505365/edit-1 - MIT
-
-### Public Domain Icons
-
-- **YouTube Icon**: [Source] - Public Domain
-
-  - Used in: YouTube play button (`.play-this-track-playlink::before`)
-  - File: `icons/youtube-icon.svg`
-
-- **Spotify Icon**: [Source] - Public Domain
-
-  - Used in: Spotify play button (`.play-this-track-playlink--spotify::before`)
-  - File: `icons/spotify-icon.svg`
-
-- **Twitter Icon**: [SVGRepo](https://www.svgrepo.com/svg/513008/twitter-154) - Public Domain
-
-- **Instagram Icon**: [SVGRepo](https://www.svgrepo.com/svg/512399/instagram-167) - Public Domain
-
-- **Play Icon**: [SVGRepo](https://www.svgrepo.com/svg/512674/play-1003) - Public Domain
-
-- **Accessibility Icon** [SVGRepo](https://www.svgrepo.com/svg/535118/accessibility) - Public Domain
-
-Trash Icon https://www.svgrepo.com/svg/490254/trash-can - Public Domain
-
-Calendar Icon https://www.svgrepo.com/svg/490039/calendar-blank - PD
-
-Mic ICON https://www.svgrepo.com/svg/348752/music-artist - PD
-
-Music Icon https://www.svgrepo.com/svg/512531/music-1004 - PD
-
-Settings Icon https://www.svgrepo.com/svg/380706/settings - PD
-
-Share Icon https://www.svgrepo.com/svg/535620/share-nodes - PD
-
-Link https://www.svgrepo.com/svg/502745/link-3 - PD
-
-Location 2 https://www.svgrepo.com/svg/326218/geo-location - PD
+Icons used in this project are licensed under the MIT License or are in the Public Domain.
 
 ---
 
-## License Information
-
 ### MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+- [Amazon Icon](https://www.svgrepo.com/svg/503156/amazon-1)
+- [Apple Music Icon](https://www.svgrepo.com/svg/393994/apple-music)
+- [Bell Icon](https://www.svgrepo.com/svg/437502/bell)
+- [Disc Icon](https://www.svgrepo.com/svg/327736/disc)
+- [Edit Icon](https://www.svgrepo.com/svg/505365/edit-1)
+- [Facebook Icon](https://www.svgrepo.com/svg/503338/facebook)
+- [Globe Icon](https://www.svgrepo.com/svg/509124/globe)
+- [Heart Icon](https://www.svgrepo.com/svg/506499/heart)
+- [Heart Full Icon](https://www.svgrepo.com/svg/506502/heart-fill)
+- [Inbox Icon](https://www.svgrepo.com/svg/510062/mail)
+- [iTunes Icon](https://www.svgrepo.com/svg/314219/itunes-note)
+- [Like Icon](https://www.svgrepo.com/svg/488268/like)
+- [Like Solid Icon](https://www.svgrepo.com/svg/487521/like)
+- [Location Icon](https://www.svgrepo.com/svg/509148/location-pin)
+- [Megaphone Icon](https://www.svgrepo.com/svg/353202/megaphone) _(CC Attribution License, no changes were made)_
+- [More Icon](https://www.svgrepo.com/svg/506665/more)
+- [Music House Icon](https://www.svgrepo.com/svg/436823/music-house-fill)
+- [Pin Icon](https://www.svgrepo.com/svg/455421/pin)
+- [Plus Icon](https://www.svgrepo.com/svg/510136/plus)
+- [Reply Icon](https://www.svgrepo.com/svg/501335/reply-2)
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+### Public Domain
+
+- [Accessibility Icon](https://www.svgrepo.com/svg/535118/accessibility)
+- [Calendar Icon](https://www.svgrepo.com/svg/490039/calendar-blank)
+- [Instagram Icon](https://www.svgrepo.com/svg/512399/instagram-167)
+- [Link Icon](https://www.svgrepo.com/svg/502745/link-3)
+- [Location 2 Icon](https://www.svgrepo.com/svg/326218/geo-location)
+- [Mic Icon](https://www.svgrepo.com/svg/348752/music-artist)
+- [Music Icon](https://www.svgrepo.com/svg/512531/music-1004)
+- [Play Icon](https://www.svgrepo.com/svg/512674/play-1003)
+- [Settings Icon](https://www.svgrepo.com/svg/380706/settings)
+- [Share Icon](https://www.svgrepo.com/svg/535620/share-nodes)
+- [Spotify Icon](https://www.svgrepo.com/svg/512499/spotify-167)
+- [Trash Icon](https://www.svgrepo.com/svg/490254/trash-can)
+- [Twitter Icon](https://www.svgrepo.com/svg/513008/twitter-154)
+- [YouTube Icon](https://www.svgrepo.com/svg/512501/youtube-168)

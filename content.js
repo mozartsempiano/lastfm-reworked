@@ -235,20 +235,20 @@ function setMainColor(value) {
   const root = document.documentElement;
   switch (value) {
     default:
-      root.style.setProperty("--main-color", "#BE3144");
-      root.style.setProperty("--main-color-dark", "#872341");
+      root.style.setProperty("--clr-main", "#BE3144");
+      root.style.setProperty("--clr-main-dark", "#872341");
       break;
     case "brighter-red":
-      root.style.setProperty("--main-color", "#BA0000");
-      root.style.setProperty("--main-color-dark", "#8E0000");
+      root.style.setProperty("--clr-main", "#BA0000");
+      root.style.setProperty("--clr-main-dark", "#8E0000");
       break;
     case "blue":
-      root.style.setProperty("--main-color", "#5C809E");
-      root.style.setProperty("--main-color-dark", "#3282B8");
+      root.style.setProperty("--clr-main", "#5C809E");
+      root.style.setProperty("--clr-main-dark", "#3282B8");
       break;
     case "pink":
-      root.style.setProperty("--main-color", "#C562AF");
-      root.style.setProperty("--main-color-dark", "#B33791");
+      root.style.setProperty("--clr-main", "#C562AF");
+      root.style.setProperty("--clr-main-dark", "#B33791");
       break;
   }
 }

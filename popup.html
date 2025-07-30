@@ -7,14 +7,14 @@
       @import url("variables.css");
 
       :root {
-        --gray-lighter: #aaa;
+        --clr-gray-a40er: #aaa;
         --light-blue: #13b0d4;
       }
 
       body {
         font-family: Helvetica, sans-serif !important;
-        background: var(--black);
-        color: var(--white);
+        background: var(--clr-black-a0);
+        color: var(--clr-white-a0);
         margin: 0;
         padding: 0;
         width: 360px; /* Largura fixa para o popup */
@@ -35,7 +35,7 @@
         font-weight: bold;
         margin-bottom: 8px;
         margin-top: 0;
-        color: var(--white);
+        color: var(--clr-white-a0);
       }
 
       .option {
@@ -51,14 +51,14 @@
         width: 100%; /* Faz o label ocupar toda a linha */
         padding: 4px 8px; /* Adiciona espaço interno para facilitar o clique */
         cursor: pointer; /* Exibe o cursor pointer em toda a linha */
-        color: var(--gray-lighter);
+        color: var(--clr-gray-a40er);
         font-size: 14px;
       }
 
       .option input[type="checkbox"] {
         margin-left: 12px; /* Espaço entre o texto e a checkbox */
         flex-shrink: 0; /* Garante que a checkbox não encolha */
-        accent-color: var(--red);
+        accent-color: var(--clr-primary-a10);
       }
 
       input[type="checkbox"],
@@ -67,14 +67,14 @@
       }
 
       select {
-        background-color: var(--black);
-        color: var(--white);
-        border: 1px solid var(--gray-lighter);
+        background-color: var(--clr-black-a0);
+        color: var(--clr-white-a0);
+        border: 1px solid var(--clr-gray-a40er);
         padding: 4px 8px;
         border-radius: 4px;
       }
       select:hover {
-        background-color: var(--gray);
+        background-color: var(--clr-gray-a20);
       }
 
       hr {
@@ -160,7 +160,7 @@
           </label>
         </div>
         <div style="margin-left: 16px; margin-top: 8px">
-          <div style="font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--gray-lighter)">Sidebar</div>
+          <div style="font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--clr-gray-a40er)">Sidebar</div>
           <div class="option">
             <label for="hideSidebarStations">
               Hide play buttons

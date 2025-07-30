@@ -21,7 +21,7 @@ a.artist-similar-sidebar-more,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki,
 button.more-items,
 div.form-group--location div p button.mimic-link {
-  color: var(--blue-link) !important;
+  color: var(--clr-blue-link-a0) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
 }
@@ -36,7 +36,7 @@ a.artist-similar-sidebar-more:hover,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki:hover,
 button.more-items:hover,
 div.form-group--location div p button.mimic-link:hover {
-  color: var(--blue-link-hover) !important;
+  color: var(--clr-blue-link-hover-a0) !important;
 }
 div.navlist-more-wrap div.navlist-hidden-list-wrap ul.navlist-hidden-list li a {
   transition: none !important;
@@ -85,7 +85,7 @@ section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a,
 div.source-album-details h4.source-album-name a.link-block-target,
 table.events-list-sidebar a.events-list-item-event-name,
 section.inbox a.inbox-message-sender-name {
-  color: var(--white) !important;
+  color: var(--clr-white-a0) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
 }
@@ -94,7 +94,7 @@ div.similar-albums-item p.similar-albums-item-artist span a,
 div.source-album div.source-album-details p.source-album-artist span a,
 div.resource-list--sidebar-item p.resource-list--sidebar-item-artist span a,
 div.music-releases-item p.music-releases-item-artist span a {
-  color: var(--gray-light) !important;
+  color: var(--clr-gray-a40) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
 }
@@ -143,22 +143,22 @@ section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a:hover
 div.source-album-details h4.source-album-name a.link-block-target:hover,
 table.events-list-sidebar a.events-list-item-event-name:hover,
 section.inbox a.inbox-message-sender-name:hover {
-  color: var(--blue-link) !important;
+  color: var(--clr-blue-link-a0) !important;
 }
 
 .masthead-nav-wrap a:hover,
 .navlist a {
-  color: var(--white) !important;
+  color: var(--clr-white-a0) !important;
 }
 
 h2 a.text-colour-link,
 a.tags-view-all,
 a.shout-more-replies-before {
-  color: var(--main-color) !important;
+  color: var(--clr-main) !important;
   transition: color 0.2s ease !important;
 }
 h2 a.text-colour-link:hover,
 a.tags-view-all:hover,
 a.shout-more-replies-before:hover {
-  color: var(--main-color-dark) !important;
+  color: var(--clr-main-dark) !important;
 }
