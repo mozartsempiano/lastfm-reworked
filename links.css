@@ -14,6 +14,7 @@ a:not([class]),
 /* :not(.footer) a,
 :not(.navlist) a, */
 p a,
+a.cta-link,
 .context a,
 .view-full-wiki a,
 .charts-nav-item a,
@@ -21,7 +22,8 @@ a.artist-similar-sidebar-more,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki,
 button.more-items,
 div.form-group--location div p button.mimic-link,
-p.form-row-help-text button.mimic-link {
+p.form-row-help-text button.mimic-link,
+.listeners-section-track a {
   color: var(--clr-blue-link-a0) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
@@ -30,6 +32,7 @@ a:not([class]):hover,
 /* :not(.footer) a:hover,
 :not(.masthead-nav-wrap) a:hover, */
 p a:hover,
+a.cta-link:hover,
 .context a:hover,
 .view-full-wiki a:hover,
 .charts-nav-item a:hover,
@@ -37,7 +40,8 @@ a.artist-similar-sidebar-more:hover,
 div.wiki-block-inner div.wiki-block-inner-2 a.view-full-wiki:hover,
 button.more-items:hover,
 div.form-group--location div p button.mimic-link:hover,
-p.form-row-help-text button.mimic-link:hover {
+p.form-row-help-text button.mimic-link:hover,
+.listeners-section-track a:hover {
   color: var(--clr-blue-link-hover-a0) !important;
 }
 div.navlist-more-wrap div.navlist-hidden-list-wrap ul.navlist-hidden-list li a {
@@ -53,7 +57,6 @@ div.navlist-more-wrap div.navlist-hidden-list-wrap ul.navlist-hidden-list li a {
 .navlist a,
 .chartlist-now-scrobbling a,
 .js-playlink-station,
-.listeners-section-track a,
 a.user-list-link,
 .grid-items-item .grid-items-item-details a,
 .recs-feed-inner-wrap a,
@@ -86,7 +89,8 @@ div.music-featured-item p a.music-featured-tag-featured-artist-link,
 section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a,
 div.source-album-details h4.source-album-name a.link-block-target,
 table.events-list-sidebar a.events-list-item-event-name,
-section.inbox a.inbox-message-sender-name {
+section.inbox a.inbox-message-sender-name,
+div.shout h3.shout-user span.currently-playing-box span.currently-playing-text a {
   color: var(--clr-white-a0) !important;
   text-decoration: none !important;
   transition: color 0.2s ease !important;
@@ -107,7 +111,6 @@ div.music-releases-item p.music-releases-item-artist span a {
 .footer a:hover,
 .chartlist-now-scrobbling a:hover,
 .js-playlink-station:hover,
-.listeners-section-track a:hover,
 a.user-list-link:hover,
 .grid-items-item .grid-items-item-details a:hover,
 .recs-feed-inner-wrap a:hover,
@@ -144,7 +147,8 @@ div.music-featured-item p a.music-featured-tag-featured-artist-link:hover,
 section.music-featured-artist-tags ul.tags-list.tags-list--global li.tag a:hover,
 div.source-album-details h4.source-album-name a.link-block-target:hover,
 table.events-list-sidebar a.events-list-item-event-name:hover,
-section.inbox a.inbox-message-sender-name:hover {
+section.inbox a.inbox-message-sender-name:hover,
+div.shout h3.shout-user span.currently-playing-box span.currently-playing-text a:hover {
   color: var(--clr-blue-link-a0) !important;
 }
 
@@ -163,4 +167,13 @@ h2 a.text-colour-link:hover,
 a.tags-view-all:hover,
 a.shout-more-replies-before:hover {
   color: var(--clr-main-dark) !important;
+}
+
+a.replace-playlink {
+  color: var(--clr-gray-a40) !important;
+  transition: color 0.2s ease !important;
+}
+
+a.replace-playlink:hover {
+  color: var(--clr-gray-a50) !important;
 }

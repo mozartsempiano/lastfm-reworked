@@ -8,6 +8,15 @@
   }
 })();
 
+// Bootstrap
+// const link = document.createElement("link");
+// link.rel = "stylesheet";
+// link.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css";
+// document.head.appendChild(link);
+// const script = document.createElement("script");
+// script.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js";
+// document.head.appendChild(script);
+
 const browserAPI = typeof chrome !== "undefined" ? chrome : browser;
 
 const defaultSettings = {
@@ -15,6 +24,7 @@ const defaultSettings = {
   squareAvatars: true,
   hidePlayButtons: true,
   hideBuyButtons: true,
+  hideDetailsGrid: false,
   hideSidebarLabs: true,
   hideSidebarProgress: true,
   hideSidebarStations: true,
@@ -65,7 +75,8 @@ function formatArtistTrackRows() {
     if (!artist || !name) continue;
     if (!row.classList.contains("debloat-artist-first")) {
       name.innerHTML = `${artist.innerHTML} – ${name.innerHTML}`;
-      artist.remove();
+      // artist.remove();
+      artist.style.display = "none"; // Hide the artist element instead of removing it
       row.classList.add("debloat-artist-first");
     }
   }
@@ -156,6 +167,36 @@ function setHideBuyButtons(enabled) {
   });
 }
 
+function setHideDetailsGrid(enabled) {
+  // Hide details if enabled, otherwise show
+  document.querySelectorAll(".grid-items-item-details").forEach((el) => {
+    el.style.opacity = enabled ? "0" : "1";
+    el.style.visibility = enabled ? "hidden" : "visible";
+  });
+
+  // Remove any previous style tag we injected
+  const prevStyle = document.getElementById("hide-details-grid-style");
+  if (prevStyle) prevStyle.remove();
+
+  // Use CSS :hover instead of JS events for better performance and no flicker
+  if (enabled) {
+    const style = document.createElement("style");
+    style.id = "hide-details-grid-style";
+    style.textContent = `
+      .grid-items-item-details {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 2s ease, visibility 2s ease !important;
+      }
+      .grid-items-item:hover .grid-items-item-details {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 function setHideSidebarLabs(enabled) {
   document.querySelectorAll(".col-sidebar .labs-cta").forEach((el) => {
     el.style.display = enabled ? "none" : "";
@@ -174,7 +215,7 @@ function setHideSidebarStations(enabled) {
   });
 }
 
-function sethideUpsells(enabled) {
+function setHideUpsells(enabled) {
   document
     .querySelectorAll(
       ".subscribe-cta, .auth-upgrade-cta, .mpu-subscription-upsell, .mpu-subscription-upsell--mpu, .lazy-features-footer, .user-dashboard-history-subscribe-banner-cta, .buffer-2, .music-section-rediscover-subscribe-banner-cta, .listening-report-row--upsell"
@@ -184,27 +225,34 @@ function sethideUpsells(enabled) {
     });
 
   // Set margin-top: 0 !important for section.share-desktop if any sidebar content is hidden
-  browserAPI.storage.local.get({ hideSidebarLabs: null, hideSidebarProgress: null, hideSidebarStations: null }, (data) => {
-    const anyHidden =
-      (data.hideSidebarLabs !== null ? data.hideSidebarLabs : true) ||
-      (data.hideSidebarProgress !== null ? data.hideSidebarProgress : true) ||
-      (data.hideSidebarStations !== null ? data.hideSidebarStations : true);
+  browserAPI.storage.local.get(
+    {
+      hideSidebarLabs: null,
+      hideSidebarProgress: null,
+      hideSidebarStations: null,
+    },
+    (data) => {
+      const anyHidden =
+        (data.hideSidebarLabs !== null ? data.hideSidebarLabs : true) ||
+        (data.hideSidebarProgress !== null ? data.hideSidebarProgress : true) ||
+        (data.hideSidebarStations !== null ? data.hideSidebarStations : true);
 
-    if (anyHidden) {
-      document.querySelectorAll("section.share-desktop").forEach((el) => {
-        if (enabled) {
-          el.style.setProperty("margin-top", "0", "important");
-        } else {
+      if (anyHidden) {
+        document.querySelectorAll("section.share-desktop").forEach((el) => {
+          if (enabled) {
+            el.style.setProperty("margin-top", "0", "important");
+          } else {
+            el.style.removeProperty("margin-top");
+          }
+        });
+      } else {
+        // If no sidebar content is hidden, always remove margin-top
+        document.querySelectorAll("section.share-desktop").forEach((el) => {
           el.style.removeProperty("margin-top");
-        }
-      });
-    } else {
-      // If no sidebar content is hidden, always remove margin-top
-      document.querySelectorAll("section.share-desktop").forEach((el) => {
-        el.style.removeProperty("margin-top");
-      });
+        });
+      }
     }
-  });
+  );
 }
 
 function setHideActions(enabled) {
@@ -253,8 +301,10 @@ function setMainColor(value) {
       root.style.setProperty("--clr-main-dark", "#8E0000");
       break;
     case "blue":
-      root.style.setProperty("--clr-main", "#5C809E");
-      root.style.setProperty("--clr-main-dark", "#3282B8");
+      // root.style.setProperty("--clr-main", "#5C809E");
+      // root.style.setProperty("--clr-main-dark", "#3282B8");
+      root.style.setProperty("--clr-main", "#3282B8");
+      root.style.setProperty("--clr-main-dark", "#00AAFF");
       break;
     case "pink":
       root.style.setProperty("--clr-main", "#C562AF");
@@ -383,11 +433,6 @@ function observeSecondaryNav() {
 function reapplyShoutSettings() {
   // Force reapplication of current settings to maintain state after DOM changes
   try {
-    console.log("LastFM Reworked: Reapplying shout settings...", {
-      hideDeletedShouts: currentSettings.hideDeletedShouts,
-      invertShoutActions: currentSettings.invertShoutActions,
-    });
-
     // Remove existing classes first to ensure clean state
     document.body.classList.remove("hide-deleted-shouts", "invert-shout-actions");
 
@@ -414,8 +459,6 @@ function reapplyShoutSettings() {
       }
 
       if (retryNeeded) {
-        console.log("LastFM Reworked: Retry needed for shout settings application");
-
         // Final verification after additional delay
         setTimeout(() => {
           if (currentSettings.hideDeletedShouts && !document.body.classList.contains("hide-deleted-shouts")) {
@@ -469,7 +512,7 @@ function observeShoutChanges() {
   for (const selector of possibleContainers) {
     shoutContainer = document.querySelector(selector);
     if (shoutContainer) {
-      console.log(`LastFM Reworked: Found shout container using selector: ${selector}`);
+      // console.log(`LastFM Reworked: Found shout container using selector: ${selector}`);
       break;
     }
   }
@@ -477,7 +520,7 @@ function observeShoutChanges() {
   // Fallback to document.body if no specific container found
   if (!shoutContainer) {
     shoutContainer = document.body;
-    console.log("LastFM Reworked: Using document.body as shout container fallback");
+    // console.log("LastFM Reworked: Using document.body as shout container fallback");
   }
 
   if (shoutContainer) {
@@ -496,7 +539,7 @@ function observeShoutChanges() {
             if (node.nodeType === 1) {
               if (isShoutRelatedElement(node)) {
                 shouldReapply = true;
-                console.log("LastFM Reworked: Detected shout-related element added");
+                // console.log("LastFM Reworked: Detected shout-related element added");
               }
             }
           });
@@ -506,7 +549,7 @@ function observeShoutChanges() {
             if (node.nodeType === 1) {
               if (isShoutRelatedElement(node)) {
                 shouldReapply = true;
-                console.log("LastFM Reworked: Detected shout-related element removed");
+                // console.log("LastFM Reworked: Detected shout-related element removed");
               }
             }
           });
@@ -514,13 +557,9 @@ function observeShoutChanges() {
 
         // Check attribute changes that might affect shout elements
         if (mutation.type === "attributes" && mutation.target.nodeType === 1) {
-          if (
-            isShoutRelatedElement(mutation.target) ||
-            mutation.attributeName === "class" ||
-            mutation.attributeName === "data-shout-id"
-          ) {
+          if (isShoutRelatedElement(mutation.target) || mutation.attributeName === "class" || mutation.attributeName === "data-shout-id") {
             shouldReapply = true;
-            console.log("LastFM Reworked: Detected shout-related attribute change");
+            // console.log("LastFM Reworked: Detected shout-related attribute change");
           }
         }
       });
@@ -535,7 +574,7 @@ function observeShoutChanges() {
 
         // Debounce reapplication to avoid performance issues
         reapplyTimeout = setTimeout(() => {
-          console.log("LastFM Reworked: Reapplying shout settings due to DOM changes");
+          // console.log("LastFM Reworked: Reapplying shout settings due to DOM changes");
           reapplyShoutSettings();
           reapplyTimeout = null;
         }, 100);
@@ -548,8 +587,7 @@ function observeShoutChanges() {
       attributes: true,
       attributeFilter: ["class", "data-shout-id", "style"],
     });
-
-    console.log("LastFM Reworked: Shout observer started successfully");
+    // console.log("LastFM Reworked: Shout observer started successfully");
   }
 }
 
@@ -635,6 +673,7 @@ function applyAllHides() {
     {
       hidePlayButtons: null,
       hideBuyButtons: null,
+      hideDetailsGrid: null,
       hideSidebarLabs: null,
       hideSidebarProgress: null,
       hideSidebarStations: null,
@@ -643,10 +682,11 @@ function applyAllHides() {
     (localData) => {
       setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
       setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+      setHideDetailsGrid(localData.hideDetailsGrid !== null ? localData.hideDetailsGrid : false);
       setHideSidebarLabs(localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true);
       setHideSidebarProgress(localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true);
       setHideSidebarStations(localData.hideSidebarStations !== null ? localData.hideSidebarStations : true);
-      sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
+      setHideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
     }
   );
 }
@@ -660,10 +700,11 @@ browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setRoundedBorders") setRoundedBorders(msg.enabled);
   if (msg.type === "setHidePlayButtons") setHidePlayButtons(msg.enabled);
   if (msg.type === "setHideBuyButtons") setHideBuyButtons(msg.enabled);
+  if (msg.type === "setHideDetailsGrid") setHideDetailsGrid(msg.enabled);
   if (msg.type === "setHideSidebarLabs") setHideSidebarLabs(msg.enabled);
   if (msg.type === "setHideSidebarProgress") setHideSidebarProgress(msg.enabled);
   if (msg.type === "setHideSidebarStations") setHideSidebarStations(msg.enabled);
-  if (msg.type === "sethideUpsells") sethideUpsells(msg.enabled);
+  if (msg.type === "setHideUpsells") setHideUpsells(msg.enabled);
   if (msg.type === "setHideNavReports") setHideNavReports(msg.enabled);
   if (msg.type === "setHideNavPlaylists") setHideNavPlaylists(msg.enabled);
   if (msg.type === "setHideNavLoved") setHideNavLoved(msg.enabled);
@@ -676,12 +717,165 @@ browserAPI.runtime.onMessage.addListener((msg) => {
   if (msg.type === "setLargerStats") setLargerStats(msg.enabled);
   if (msg.type === "setUseCustomFont") setUseCustomFont(msg.enabled);
   if (msg.type === "setCompactMode") setCompactMode(msg.enabled);
-  if (msg.type === "setMainColor") setMainColor(msg.value);
   if (msg.type === "setCompactTags") setCompactTags(msg.enabled);
   if (msg.type === "setCompactButtons") setCompactButtons(msg.enabled);
   if (msg.type === "setHideDeletedShouts") setHideDeletedShouts(msg.enabled);
   if (msg.type === "setInvertShoutActions") setInvertShoutActions(msg.enabled);
+  if (msg.type === "setMainColor") setMainColor(msg.value);
 });
+
+function observeShoutUserChanges() {
+  const targetNode = document.body;
+  const userCache = new Map(); // Cache para armazenar informações de "currently playing"
+  const pendingRequests = new Set(); // Rastrear usuários com requisições pendentes
+  let requestTimeout = null; // Controlar intervalo entre requisições
+
+  // Função para criar ou reaplicar o span
+  function ensureCurrentlyPlayingSpan(shoutUserH3, { artist, song, artistLink, songLink }) {
+    if (shoutUserH3.querySelector(".currently-playing-box")) {
+      return; // Se o span já existe, não faz nada
+    }
+
+    const span = document.createElement("span");
+    span.className = "currently-playing-box";
+    span.title = `${artist} - ${song}`;
+
+    const innerSpan = document.createElement("span");
+    innerSpan.className = "currently-playing-text";
+
+    const artistAnchor = document.createElement("a");
+    artistAnchor.href = artistLink;
+    artistAnchor.textContent = artist;
+    // artistAnchor.target = "_blank";
+    artistAnchor.rel = "noopener noreferrer";
+
+    const separator = document.createTextNode(" - ");
+
+    const songAnchor = document.createElement("a");
+    songAnchor.href = songLink;
+    songAnchor.textContent = song;
+    // songAnchor.target = "_blank";
+    songAnchor.rel = "noopener noreferrer";
+
+    innerSpan.appendChild(artistAnchor);
+    innerSpan.appendChild(separator);
+    innerSpan.appendChild(songAnchor);
+
+    span.appendChild(innerSpan);
+    shoutUserH3.appendChild(span);
+  }
+
+  // Função para carregar dados de "currently playing"
+  async function fetchCurrentlyPlaying(username) {
+    try {
+      const profileResponse = await fetch(`https://www.last.fm/user/${username}`);
+      if (!profileResponse.ok) {
+        throw new Error(`Erro ao acessar o perfil do usuário: ${profileResponse.status}`);
+      }
+
+      const profileText = await profileResponse.text();
+      const parser = new DOMParser();
+      const profileDoc = parser.parseFromString(profileText, "text/html");
+      const nowPlayingRow = profileDoc.querySelector("tr.chartlist-row--now-scrobbling");
+
+      if (nowPlayingRow) {
+        const artistElement = nowPlayingRow.querySelector("td.chartlist-artist a");
+        const songElement = nowPlayingRow.querySelector("td.chartlist-name a[href*='/_/']");
+
+        if (artistElement && songElement) {
+          return {
+            artist: artistElement.textContent.trim(),
+            song: songElement.textContent.trim(),
+            artistLink: artistElement.href,
+            songLink: songElement.href,
+          };
+        }
+      }
+    } catch (error) {
+      console.error(`Erro ao buscar faixa atual para o usuário ${username}:`, error);
+    }
+    return null;
+  }
+
+  // Carregar todos os usuários na shoutbox
+  async function loadShoutboxUsers() {
+    const shoutUsers = document.querySelectorAll("h3.shout-user");
+    const newRequests = [];
+
+    for (const shoutUserH3 of shoutUsers) {
+      const usernameElement = shoutUserH3.querySelector("a.link-block-target");
+      const username = usernameElement ? usernameElement.textContent.trim() : null;
+
+      if (username && !pendingRequests.has(username)) {
+        if (userCache.has(username)) {
+          // Reaplicar span se já temos os dados no cache
+          ensureCurrentlyPlayingSpan(shoutUserH3, userCache.get(username));
+        } else {
+          // Adicionar à lista de novas requisições
+          newRequests.push({ shoutUserH3, username });
+          pendingRequests.add(username);
+        }
+      }
+    }
+
+    if (newRequests.length > 0) {
+      // Realizar requisições em paralelo
+      await Promise.all(
+        newRequests.map(async ({ shoutUserH3, username }) => {
+          try {
+            const currentlyPlaying = await fetchCurrentlyPlaying(username);
+            if (currentlyPlaying) {
+              userCache.set(username, currentlyPlaying);
+              ensureCurrentlyPlayingSpan(shoutUserH3, currentlyPlaying);
+            }
+          } catch (error) {
+            console.error(`Erro ao processar usuário ${username}:`, error);
+          } finally {
+            pendingRequests.delete(username); // Remover dos pendentes
+          }
+        })
+      );
+    }
+  }
+
+  // Observar mudanças na shoutbox
+  const observer = new MutationObserver(() => {
+    loadShoutboxUsers();
+  });
+
+  observer.observe(targetNode, { childList: true, subtree: true });
+
+  // Carregar usuários iniciais
+  loadShoutboxUsers();
+
+  // Reaplicar o observador em mudanças de página
+  function handlePageChange() {
+    console.log("Verificando novamente após mudança de URL...");
+    userCache.clear(); // Limpar cache para a nova página
+    pendingRequests.clear(); // Limpar requisições pendentes
+
+    // Adicionar um atraso antes de carregar os usuários
+    setTimeout(() => {
+      loadShoutboxUsers(); // Recarregar usuários na nova página
+    }, 500); // Atraso de 500ms (ajustável conforme necessário)
+  }
+
+  window.addEventListener("popstate", handlePageChange);
+
+  ["pushState", "replaceState"].forEach((type) => {
+    const original = history[type];
+    history[type] = function (...args) {
+      const result = original.apply(this, args);
+      window.dispatchEvent(new Event("pagechange")); // Disparar evento personalizado
+      return result;
+    };
+  });
+
+  // Adicionar listener para o evento personalizado
+  window.addEventListener("pagechange", handlePageChange);
+}
+
+observeShoutUserChanges();
 
 // ===================
 // Intercept pushState and replaceState
@@ -710,6 +904,7 @@ function applyAllSettings() {
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
+      hideDetailsGrid: null,
       hideSidebarLabs: null,
       hideSidebarProgress: null,
       hideSidebarStations: null,
@@ -727,10 +922,10 @@ function applyAllSettings() {
       useCustomFont: null,
       compactMode: null,
       compactTags: null,
-      mainColor: "default",
       compactButtons: null,
       hideDeletedShouts: null,
       invertShoutActions: null,
+      mainColor: "default",
     },
     (localData) => {
       try {
@@ -738,10 +933,11 @@ function applyAllSettings() {
         setSquareAvatars(localData.squareAvatars !== null ? localData.squareAvatars : true);
         setHidePlayButtons(localData.hidePlayButtons !== null ? localData.hidePlayButtons : true);
         setHideBuyButtons(localData.hideBuyButtons !== null ? localData.hideBuyButtons : true);
+        setHideDetailsGrid(localData.hideDetailsGrid !== null ? localData.hideDetailsGrid : false);
         setHideSidebarLabs(localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true);
         setHideSidebarProgress(localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true);
         setHideSidebarStations(localData.hideSidebarStations !== null ? localData.hideSidebarStations : true);
-        sethideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
+        setHideUpsells(localData.hideUpsells !== null ? localData.hideUpsells : true);
         setHideNavReports(localData.hideNavReports !== null ? localData.hideNavReports : false);
         setHideNavPlaylists(localData.hideNavPlaylists !== null ? localData.hideNavPlaylists : false);
         setHideNavLoved(localData.hideNavLoved !== null ? localData.hideNavLoved : false);
@@ -754,9 +950,9 @@ function applyAllSettings() {
         setLargerStats(localData.largerStats !== null ? localData.largerStats : false);
         setUseCustomFont(localData.useCustomFont !== null ? localData.useCustomFont : true);
         setCompactMode(localData.compactMode !== null ? localData.compactMode : true);
-        setMainColor(localData.mainColor || "default");
         setCompactTags(localData.compactTags !== null ? localData.compactTags : false);
         setCompactButtons(localData.compactButtons !== null ? localData.compactButtons : true);
+        setMainColor(localData.mainColor || "default");
 
         // Apply shout settings and update current state
         const hideDeletedShouts = localData.hideDeletedShouts !== null ? localData.hideDeletedShouts : false;
@@ -770,6 +966,14 @@ function applyAllSettings() {
     }
   );
 }
+
+// document.querySelectorAll(".library-controls").forEach((el) => {
+//   const parent = el.parentNode;
+//   while (el.firstChild) {
+//     parent.insertBefore(el.firstChild, el);
+//   }
+//   el.remove();
+// });
 
 // Function to handle .text-18 elements with only whitespace
 function handleEmptyText18Elements() {
@@ -849,8 +1053,7 @@ function observeCharacterCount() {
             target.querySelector?.(".js-char-count") ||
             (mutation.addedNodes &&
               Array.from(mutation.addedNodes).some(
-                (node) =>
-                  node.nodeType === 1 && (node.classList?.contains("js-char-count") || node.querySelector?.(".js-char-count"))
+                (node) => node.nodeType === 1 && (node.classList?.contains("js-char-count") || node.querySelector?.(".js-char-count"))
               ))
           ) {
             shouldUpdate = true;
@@ -858,10 +1061,7 @@ function observeCharacterCount() {
         }
 
         // Also check for attribute changes on relevant elements
-        if (
-          mutation.type === "attributes" &&
-          (mutation.target.classList?.contains("js-char-count") || mutation.target.closest?.(".form-row-help-text"))
-        ) {
+        if (mutation.type === "attributes" && (mutation.target.classList?.contains("js-char-count") || mutation.target.closest?.(".form-row-help-text"))) {
           shouldUpdate = true;
         }
       });
@@ -891,6 +1091,43 @@ function observeCharacterCount() {
     console.log("LastFM Reworked: Character count observer started");
   }
 }
+
+// Scroll fade header
+let lastScroll = 0;
+const topBar = document.querySelector(".top-bar");
+const masthead = document.querySelector(".masthead");
+const mastheadHeight = masthead.offsetHeight;
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > mastheadHeight) {
+    if (currentScroll > lastScroll) {
+      // scroll pra baixo → esconde
+      topBar.style.top = `-${topBar.offsetHeight}px`;
+      masthead.style.top = `-${masthead.offsetHeight}px`;
+    } else {
+      // scroll pra cima → mostra
+      topBar.style.top = "0";
+      masthead.style.top = "0";
+    }
+  } else {
+    // se estiver antes da altura da masthead, sempre mostra
+    topBar.style.top = "0";
+    masthead.style.top = "0";
+  }
+
+  lastScroll = currentScroll;
+});
+
+//
+//
+//
+//
+//
+//
+//
+//
 
 // Function to monitor DOM changes
 function observeDOMChanges() {

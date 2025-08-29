@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const squareCheckbox = document.getElementById("squareAvatars");
   const hidePlayButtons = document.getElementById("hidePlayButtons");
   const hideBuyButtons = document.getElementById("hideBuyButtons");
+  const hideDetailsGrid = document.getElementById("hideDetailsGrid");
   const hideSidebarLabs = document.getElementById("hideSidebarLabs");
   const hideSidebarProgress = document.getElementById("hideSidebarProgress");
   const hideSidebarStations = document.getElementById("hideSidebarStations");
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       squareAvatars: null,
       hidePlayButtons: null,
       hideBuyButtons: null,
+      hideDetailsGrid: null,
       hideSidebarLabs: null,
       hideSidebarProgress: null,
       hideSidebarStations: null,
@@ -52,14 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
       compactTags: null,
       hideDeletedShouts: null,
       invertShoutActions: null,
-      mainColor: "default",
       compactButtons: null,
+      mainColor: "default",
     },
     (localData) => {
       roundedCheckbox.checked = localData.roundedBorders !== null ? localData.roundedBorders : true;
       squareCheckbox.checked = localData.squareAvatars !== null ? localData.squareAvatars : true;
       hidePlayButtons.checked = localData.hidePlayButtons !== null ? localData.hidePlayButtons : true;
       hideBuyButtons.checked = localData.hideBuyButtons !== null ? localData.hideBuyButtons : true;
+      hideDetailsGrid.checked = localData.hideDetailsGrid !== null ? localData.hideDetailsGrid : false;
       hideSidebarLabs.checked = localData.hideSidebarLabs !== null ? localData.hideSidebarLabs : true;
       hideSidebarProgress.checked = localData.hideSidebarProgress !== null ? localData.hideSidebarProgress : true;
       hideSidebarStations.checked = localData.hideSidebarStations !== null ? localData.hideSidebarStations : true;
@@ -91,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       squareAvatars: squareCheckbox.checked,
       hidePlayButtons: hidePlayButtons.checked,
       hideBuyButtons: hideBuyButtons.checked,
+      hideDetailsGrid: hideDetailsGrid.checked,
       hideSidebarLabs: hideSidebarLabs.checked,
       hideSidebarProgress: hideSidebarProgress.checked,
       hideSidebarStations: hideSidebarStations.checked,
@@ -136,6 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: hideBuyButtons.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setHideDetailsGrid",
+          enabled: hideDetailsGrid.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setHideSidebarLabs",
           enabled: hideSidebarLabs.checked,
         });
@@ -148,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: hideSidebarStations.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
-          type: "sethideUpsells",
+          type: "setHideUpsells",
           enabled: hideUpsells.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
@@ -212,14 +220,14 @@ document.addEventListener("DOMContentLoaded", () => {
           enabled: invertShoutActions.checked,
         });
         browserAPI.tabs.sendMessage(tabs[0].id, {
+          type: "setCompactButtons",
+          enabled: compactButtons.checked,
+        });
+        browserAPI.tabs.sendMessage(tabs[0].id, {
           type: "setMainColor",
           value: mainColor.value,
         });
       }
-      browserAPI.tabs.sendMessage(tabs[0].id, {
-        type: "setCompactButtons",
-        enabled: compactButtons.checked,
-      });
     });
   }
 
@@ -228,6 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
   squareCheckbox.addEventListener("change", saveOptions);
   hidePlayButtons.addEventListener("change", saveOptions);
   hideBuyButtons.addEventListener("change", saveOptions);
+  hideDetailsGrid.addEventListener("change", saveOptions);
   hideSidebarLabs.addEventListener("change", saveOptions);
   hideSidebarProgress.addEventListener("change", saveOptions);
   hideSidebarStations.addEventListener("change", saveOptions);

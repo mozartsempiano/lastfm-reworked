@@ -2,11 +2,11 @@
   --clr-black-a0: #0c0c0e;
   --clr-white-a0: #f0efea;
   --clr-white-a0-rgb: 255, 255, 255;
-  --clr-gray-a0: #101012; /* Gray dark */
+  --clr-gray-a0: #101012;
   --clr-gray-a10: #141415;
-  --clr-gray-a20: #181818; /* Gray */
+  --clr-gray-a20: #181818;
   --clr-gray-a30: #23232a;
-  --clr-gray-a40: #757575; /* Gray light */
+  --clr-gray-a40: #757575;
   --clr-gray-a50: #b0b0b0;
 
   /* Red */
@@ -43,16 +43,10 @@
   --clr-main: var(--clr-primary-a10);
   --clr-main-dark: var(--clr-primary-a0);
 
-  --radius: 8px;
-  --radius-small: 4px;
+  --radius: 6px;
+  --radius-small: 3px;
 
   /* Icon sizes */
   --icon-size: 18px;
   --icon-size-half: 9px; /* For margin-top calculation */
-
-  /*Light mode
-  --clr-white-a0: #fafafa;
-  --clr-gray-a40: #fafafa;
-  --clr-gray-a20: #8e8e8e;
-  --clr-black-a0: #212121; */
 }
