@@ -1,6 +1,6 @@
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/V7V81FVVVI)
-
 # Last.fm Reworked
+
+![Last.fm Reworked](https://raw.githubusercontent.com/mozartsempiano/lastfm-reworked/refs/heads/main/icons/icon128.png)
 
 **Last.fm Reworked** is a browser extension that enhances the Last.fm layout and user interface. It provides customization options to improve usability and aesthetics, making your experience more enjoyable.
 
@@ -9,8 +9,8 @@
 
 ## Installation
 
-- [Firefox Extension](https://addons.mozilla.org/firefox/addon/last-fm-reworked/)
-- [Chrome Extension](https://chromewebstore.google.com/detail/lastfm-reworked/jihcknccokongmfklnodojmpkjdgihlf)
+[![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox_48x48.png)](https://addons.mozilla.org/firefox/addon/last-fm-reworked/)
+[![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_48x48.png)](https://chromewebstore.google.com/detail/lastfm-reworked/jihcknccokongmfklnodojmpkjdgihlf)
 
 ## Features
 
@@ -70,12 +70,6 @@ Contributions are welcome! To contribute:
    ```
 
 5. Open a Pull Request.
-
-## Contact
-
-- [mozartmt@protonmail.com](mailto:mozartmt@protonmail.com)
-- Twitter: [@mozartsempiano](https://twitter.com/mozartsempiano)
-- Bluesky: [@mozartsempiano.bsky.social](https://bsky.app/profile/mozartsempiano.bsky.social)
 
 ## License
 
